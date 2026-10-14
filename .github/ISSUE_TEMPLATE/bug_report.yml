@@ -89,7 +89,10 @@ body:
     id: logs
     attributes:
       label: Error messages or companion.log
-      description: Paste any error text, and the lines from companion.log around the time it happened. It is formatted as code automatically. Leave out anything private such as emails or beta codes.
+      description: >-
+        Paste only the error lines from companion.log, not the whole file. This page is public, and the full log
+        shows your Windows user name (in file paths) and other drivers' names. If the full log is needed, email it
+        to support.gridcentral@gmail.com instead. Never paste emails or beta codes here.
       render: text
   - type: textarea
     id: screenshots
