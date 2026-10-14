@@ -30,7 +30,7 @@ This chapter covers everything Grid Central does for the people watching you rac
 
 | Control | What it does | Default |
 |---|---|---|
-| **Preview ↗** | Opens the design in a browser tab, as OBS sees it. On Rookie, with the companion running, it shows only the core widgets (**Relative**, **Standings** and **Flags**), while OBS shows nothing. | – |
+| **Preview ↗** | Opens the design in a browser tab, as OBS sees it. On Rookie, it shows only the core widgets (**Relative**, **Standings** and **Flags**), while OBS shows only a note. | – |
 | **Copy OBS link** | Copies this design's link for an OBS Browser source. (Driver) | – |
 | **Add to OBS** | Puts the design you're editing into OBS's current scene as the "Grid Central Overlay" source, in one click (OBS must be connected). The source keeps that design until you press it again on another one. (Broadcast add-on) | – |
 | **OVERLAY** | Which design you're editing. The design the "Grid Central Overlay" source in OBS shows is marked **· OBS**. Opening another design here doesn't change OBS. | Minimal HUD |
@@ -173,7 +173,7 @@ When the companion is running but you're not in an iRacing session, the data wid
 
 **Where to find it.** **Race overlay → Add to OBS** or **Copy OBS link**, or **Broadcast → Add Grid Central overlay to scene**.
 
-OBS overlays are part of Driver: on Rookie, OBS shows nothing. The one-click way uses OBS control, which is part of the Broadcast add-on. With Driver alone, use **Copy OBS link** (see "Doing it yourself").
+OBS overlays are part of Driver: on Rookie, OBS shows only a small note, "GRID CENTRAL · OBS OVERLAYS ARE PART OF DRIVER". The one-click way uses OBS control, which is part of the Broadcast add-on. With Driver alone, use **Copy OBS link** (see "Doing it yourself").
 
 ### The one-click way (Broadcast add-on)
 
@@ -199,14 +199,14 @@ The source keeps that design while you open and edit others. To show a different
 - **Different overlays in different scenes** (say, a "Starting soon" design): press **Copy OBS link** on each design and add your own Browser source for each (see "Doing it yourself").
 - When Grid Central connects to OBS, it reads which design an existing Grid Central Overlay source shows, so the **· OBS** mark is right even for a source added by an older version or changed in OBS. It then gives the source that design's size.
 - If the companion stops while OBS is showing the overlay, OBS shows sample data tagged "SAMPLE DATA · START GRID CENTRAL FOR LIVE DATA" until it's back. OBS can only load the overlay while the companion is running, so a source added or refreshed without it stays blank.
-- **Rookie:** OBS shows nothing, because OBS overlays are part of Driver. **Preview ↗** still shows your design in a browser, with the core widgets only (**Relative**, **Standings** and **Flags**) while the companion is running.
+- **Rookie:** OBS shows only the note "GRID CENTRAL · OBS OVERLAYS ARE PART OF DRIVER". **Preview ↗** still shows your design in a browser, with the core widgets only (**Relative**, **Standings** and **Flags**).
 
 ### If it doesn't work
 
 | Problem | Fix |
 |---|---|
 | "Connect OBS first (Settings → Connections → OBS Studio)…" | Connect OBS under Settings → Connections → OBS Studio. |
-| Blank in OBS | Start the companion and get in a session. Right-click the source → **Refresh**. On Rookie, OBS stays blank once the companion is running: OBS overlays are part of Driver. |
+| Blank in OBS | Start the companion and get in a session. Right-click the source → **Refresh**. On Rookie, OBS shows only "GRID CENTRAL · OBS OVERLAYS ARE PART OF DRIVER": OBS overlays are part of Driver. |
 | Sample data during a race | The companion isn't running. Start it and refresh the source. |
 | Wrong size or cut off | The **Grid Central Overlay** source takes its design's size whenever Grid Central is connected to OBS. For a Browser source you added yourself, set **Width** and **Height** to the design's size (see "Doing it yourself"). Then right-click the source → **Transform → Fit to screen**. |
 | Edits don't reach OBS | Designs reach OBS through the companion: start it and press **Save**. If you used **Add to OBS**, check you're editing the design marked **· OBS**. |
@@ -239,7 +239,7 @@ The source keeps that design while you open and edit others. To show a different
 |---|---|
 | "The in-game overlay is opened by the companion. Start it first…" | Start the companion and press **Show on screen** again. |
 | ON SCREEN but nothing visible | Run iRacing windowed or borderless, check **SCREEN**, press your shortcut in case it's hidden. |
-| Nothing shows on Rookie | On Rookie only **Relative**, **Standings** and **Flags** are drawn. The **Minimal HUD** design has none of them, so add one in the **Add** tab. They show only while you're in an iRacing session. |
+| Nothing shows on Rookie | On Rookie only **Relative**, **Standings** and **Flags** are drawn. A design with none of them (such as **Minimal HUD**) shows them in their usual places. They show only while you're in an iRacing session. |
 | Only logo and text show | You're not in an iRacing session yet. |
 | "Couldn't serve the overlay page (is port 8767 in use?)." | Close the program using port 8767, or restart the PC. |
 | "The in-game overlay files are missing from this Grid Central folder." | Reinstall Grid Central. |
