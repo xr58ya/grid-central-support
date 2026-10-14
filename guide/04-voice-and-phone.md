@@ -4,7 +4,7 @@ This chapter covers the features you hear and the ones you hold in your hand. **
 
 Everything here runs on your own PC. Speech recognition, the commentary voices and the phone connection all stay on your computer and your home network. The internet is only needed once, to download the speech model and the natural voices.
 
-All four features are part of **Grid Central Pro**. In free mode the Talkback, Commentary and Phone panels are covered with a PRO cover and their controls can't be used. Only the spotter keeps talking.
+Talkback, separate voices and the phone pit wall are part of Driver. Commentary and its natural voices are part of the Broadcast add-on, which comes on top of Driver or Race Team, and so is controlling OBS from your phone. Talking to your crew by voice and view-only phone links are part of Race Team. On Rookie, the free plan, the **Talkback** and **Phone** panels have a **DRIVER** cover and their controls can't be used, and only the spotter keeps talking. Without the add-on, the **Broadcast** page has a **BROADCAST · Commentary and OBS control** cover. During the beta everything is unlocked.
 
 ---
 
@@ -114,7 +114,7 @@ Fuel is spoken in your units (litres or US gallons, from Settings → Appearance
 | "Incidents?" | Your incident count (and the team's in team races). |
 | "Any flags?", "Caution?", "Safety car?" | The current flags, or "Green flag. Track's clear." |
 | "Weather?", "Is it raining?", "Track temp?" | Track wetness, rain, any wets or slicks advice, and track and air temperatures. |
-| "Stint?", "Who's next?", "Driver change?" | Your stint time, time left in the stint and the next driver (team races only). |
+| "Stint?", "Who's next?", "Driver change?" | Your stint time, time left in the stint and the next driver (team races only, with Race Team). |
 | "Am I clear?", "Anyone alongside?" | "Car left", "Car right", "Three wide", or "Clear all round." (Spotter's voice.) |
 
 **Car health and handling**
@@ -195,14 +195,14 @@ With no number it's one click. The most is ten clicks at a time ("That's more th
 | "What alerts do I have?" | Lists them. |
 | "Cancel my alerts", "Stop the gap calls", "Clear my reminders" | Clears all of them, or just that kind. |
 
-**The crew** (needs a phone pit wall or the team hub connected)
+**The crew** (part of Race Team, and needs a phone pit wall or the team hub connected)
 
 | Say something like | What happens |
 |---|---|
 | "Tell the crew I'm boxing next lap", "Crew, the rears are gone" | Your words, as you said them, appear on the crew's radio. |
 | "Yes" or "No" after the crew asks something ("Box this lap?", "Everything OK?") | Your answer goes to their radio. You have 45 seconds to answer. |
 
-Everything you say and every answer also appears on the crew's radio.
+Everything you say and every answer also appears on the crew's radio. That part works on Driver too, with a phone connected.
 
 **Questions that work without iRacing running:** radio check, repeat, thanks, help, quiet, resume, the coaching questions and the crew messages. Anything else, with iRacing closed, gets "I've no data from the car. Is iRacing running?"
 
@@ -233,7 +233,7 @@ The things you can teach it are: How's my fuel?, When should I pit?, Gap to the 
 | Problem | Fix |
 |---|---|
 | Chip says **COMPANION NOT RUNNING** | Start the companion (the small GridCentral window). |
-| Chip stays **OFF** with the switch on | You're in free mode. Talkback is part of Pro. |
+| Chip stays **OFF** with the switch on | You're on Rookie, the free plan. Talkback is part of Driver. |
 | **Set button** says "Start the companion first, it reads your wheel buttons." | Start the companion, then try again. |
 | "No button pressed. Press Set button and try again." | You have 10 seconds after pressing **Set button**. Press a button you weren't already holding. |
 | **ERROR**: "Couldn't download the speech model" | You need the internet the first time. Switch Talkback off and on again to retry. A half-finished download is thrown away and starts again. |
@@ -247,6 +247,7 @@ The things you can teach it are: How's my fuel?, When should I pit?, Gap to the 
 | "That didn't change the brake bias. Check its key in Settings is the same as in iRacing." | The key in Grid Central doesn't match your iRacing binding (Options → Controls). |
 | "Windows blocked the key press." | Windows refused the simulated key press. Try again with iRacing focused. If it keeps happening, check that iRacing and Grid Central are started the same way (both normally, or both as administrator). |
 | "There's no crew connected. Open the phone pit wall or the team hub first." | Connect a phone or the team hub before using "tell the crew". |
+| "Talking to the crew is part of Grid Central Race Team." or "Team races are part of Grid Central Race Team." | Telling the crew something, answering the crew's questions and asking about stints need Race Team. |
 
 ---
 
@@ -257,7 +258,7 @@ The things you can teach it are: How's my fuel?, When should I pit?, Gap to the 
 Grid Central uses two kinds of voice.
 
 1. **Your race team on the radio** (spotter, engineer and coach, including Talkback answers) speaks with the **voices installed in Windows**. Voices whose name includes "Natural" or "Neural" (Microsoft's natural online voices) are marked **★ natural** in the list and are put first. They sound the most like a real engineer. A natural voice in your language is picked for you if there is one.
-2. **The stream commentary** can use Grid Central's own **Natural voices**. These come from an offline AI voice model made on your PC (see Commentary below). They are only used for the commentary, never for your race team.
+2. **The stream commentary** can use Grid Central's own **Natural voices**. These come from an offline AI voice model made on your PC (see Commentary below). They are only used for the commentary, never for your race team. Like the commentary, they're part of the Broadcast add-on.
 
 ### Where to find it
 
@@ -278,7 +279,7 @@ Grid Central uses two kinds of voice.
 |---|---|---|
 | **Voice** (Voice & radio) | The main voice for spotter, engineer and coach. | System default, or the best ★ natural voice for your language |
 | **Speaking style** | Calm, Concise or Enthusiastic: how quickly calls are read. | Calm |
-| **Voice** (Spotter / Engineer / Coach) | That role's own voice. Separate voices are part of Pro. | Same as main voice |
+| **Voice** (Spotter / Engineer / Coach) | That role's own voice. Separate voices are part of Driver. | Same as main voice |
 | **Volume** (each role) | How loud that role is, including its Talkback answers. | 100% |
 
 **Adding more Windows voices:** Windows Settings → Time & language → Speech → add voices. A Spanish or German Windows voice is needed for the race team to speak those languages naturally.
@@ -306,7 +307,7 @@ Grid Central uses two kinds of voice.
 | Problem | Fix |
 |---|---|
 | No voice at all, and a message says the browser blocked the spoken call | Click anywhere in Grid Central once. Browsers block speech until the page has been clicked. |
-| Only the spotter talks | You're in free mode. The engineer and coach are part of Pro. Also check the role switches on the **Engineer** and **Coach** panels. |
+| Only the spotter talks | You're on Rookie, the free plan. The engineer and coach are part of Driver. Also check the role switches on the **Engineer** and **Coach** panels. |
 | The voice speaks English after switching language | Add a voice in that language in Windows (Settings → Time & language → Speech), then pick it. |
 
 ---
@@ -328,7 +329,7 @@ The commentary is written by Grid Central, so **Grid Central must be open**. The
 
 ### Where to find it
 
-The **Broadcast** page → the **Commentary** panel (eyebrow "ON YOUR STREAM ONLY"), with its own on/off switch at the top right.
+The **Broadcast** page → the **Commentary** panel (eyebrow "ON YOUR STREAM ONLY"), with its own on/off switch at the top right. The **Broadcast** page is part of the Broadcast add-on.
 
 ### Setting it up with OBS step by step
 
@@ -394,7 +395,7 @@ Exciting lead calls are said a little faster and louder. The analyst's quiet-spe
 | "There's no Spanish (or German) voice in Windows yet…" | Add one in Windows: Settings → Time & language → Speech. |
 | "No Windows voices were found." | Add a voice in Windows Speech settings, or use Natural voices. |
 | "The natural voices don't speak German yet, so German commentary uses your Windows voices." | That's expected. Add a German Windows voice. |
-| No commentary during the race | Grid Central must be open on the PC, not just the companion. Commentary is part of Pro. |
+| No commentary during the race | Grid Central must be open on the PC, not just the companion. Commentary is part of the Broadcast add-on. |
 
 ---
 
@@ -410,6 +411,8 @@ There are two kinds of link:
 - **View only** links show everything, but can't change the pit menu, send radio calls or messages, or use remote control. For friends and viewers.
 
 **What needs what:** live data, the relative, standings, the map, the Car tab and the session summary only need the **companion** running. The race strategy, the radio, lap history and remote control also need **Grid Central open** on your PC.
+
+**Which plan:** the phone pit wall is part of Driver. **View only** links are part of Race Team, and controlling OBS from the phone is part of the Broadcast add-on. On Rookie, phones can't connect.
 
 ### Where to find it
 
@@ -433,7 +436,7 @@ No camera? Press **Copy link** on the PC and send the link to your phone, or typ
 |---|---|---|
 | Status chip | **COMPANION NOT RUNNING**, **OFF**, **COULDN'T START**, **ON · WAITING FOR A PHONE**, or **ON · 1 CREW · 2 VIEW ONLY** (how many of each are connected). | OFF |
 | **Let my phone connect** | Lets phones with the pairing code connect over your network. | Off |
-| **Crew** / **View only** | Which link and QR code to show. | Crew |
+| **Crew** / **View only** | Which link and QR code to show. Without Race Team, **View only** has a **RACE TEAM** tag and only the crew link can be shown. | Crew |
 | QR code and link | Scan it, or copy it. | — |
 | **Copy link** | Copies the link shown. | — |
 | **New pairing code** | Makes a new code for the link shown. Phones that used that link before must scan again. The other link keeps working. | — |
@@ -442,7 +445,7 @@ The phone page follows Grid Central's language and units (litres or gallons, °C
 
 ### The phone screens
 
-Six tabs run along the bottom: **Race**, **Car**, **Pit wall**, **Laps**, **Radio** and **More**. A chip at the top shows **CONNECTING**, **CONNECTED**, **WAITING FOR IRACING**, **LIVE** (or **LIVE · DEMO**), **OFFLINE** or **NOT PAIRED**. Under it are your car, track and session. A **full-width banner** shows flags (RED FLAG, BLACK FLAG, MEATBALL · PIT FOR REPAIRS, CHEQUERED FLAG, CAUTION, YELLOW FLAG, WHITE FLAG · LAST LAP, BLUE FLAG, DEBRIS), then **BOX THIS LAP** or **BOX NEXT LAP**.
+Six tabs run along the bottom: **Race**, **Car**, **Pit wall**, **Laps**, **Radio** and **More**. A chip at the top shows **CONNECTING**, **CONNECTED**, **WAITING FOR IRACING**, **LIVE** (or **LIVE · DEMO**), **OFFLINE**, **NOT PAIRED** or **NOT INCLUDED**. Under it are your car, track and session. A **full-width banner** shows flags (RED FLAG, BLACK FLAG, MEATBALL · PIT FOR REPAIRS, CHEQUERED FLAG, CAUTION, YELLOW FLAG, WHITE FLAG · LAST LAP, BLUE FLAG, DEBRIS), then **BOX THIS LAP** or **BOX NEXT LAP**.
 
 **Race**
 
@@ -499,8 +502,8 @@ A fuel amount set from the phone stays until your stop, like one set by voice. i
 | Item | What it does |
 |---|---|
 | Radio log | Race calls, your talkback questions (DRIVER), the engineer's answers (ENGINEER) and crew messages (CREW), with times. A red dot on the tab means new messages. |
-| **Message to the driver** + **Send** | Read out on the PC in the engineer's voice. End it with a question mark ("Box this lap?") and the driver can answer yes or no by talkback. The answer shows here. Crew only. |
-| **Quick calls** | Box this lap, Box next lap, Push now, push, Save fuel, Gap is closing behind, defend, Hold position. Bring it home, Great lap, keep it up, Box this lap?, Everything OK? The last two are questions the driver can answer yes or no. Crew only. |
+| **Message to the driver** + **Send** | Read out on the PC in the engineer's voice. End it with a question mark ("Box this lap?") and, with Race Team, the driver can answer yes or no by talkback. The answer shows here. Crew only. |
+| **Quick calls** | Box this lap, Box next lap, Push now, push, Save fuel, Gap is closing behind, defend, Hold position. Bring it home, Great lap, keep it up, Box this lap?, Everything OK? The last two are questions the driver can answer yes or no, with Race Team. Crew only. |
 
 If Grid Central isn't open on the PC, sending says "Grid Central isn't open on your PC, so nobody heard that."
 
@@ -508,7 +511,7 @@ If Grid Central isn't open on the PC, sending says "Grid Central isn't open on y
 
 | Item | What it does | Default |
 |---|---|---|
-| **Remote control → OBS** | **Start/Stop recording**, **Start/Stop streaming** (asks to confirm before going live), and **Scene**. Needs OBS connected in Grid Central. Crew only. | — |
+| **Remote control → OBS** | **Start/Stop recording**, **Start/Stop streaming** (asks to confirm before going live), and **Scene**. Needs OBS connected in Grid Central. Crew only. Part of the Broadcast add-on: without it, the buttons and **Scene** are hidden and it says "OBS control is part of the Broadcast add-on." | — |
 | **Remote control → In-game overlay** | Pick a **Design**, then **Show on screen** or **Hide from screen**. Crew only. | — |
 | **Car alongside** | A short buzz for a car next to you (two for the right, three for both sides). | On |
 | **Flags** | Yellow, blue, black, meatball, red, white and chequered. | On |
@@ -526,7 +529,7 @@ The alert switches are saved on each phone.
 ### Tips
 
 - Mount the phone where you can glance at it, turn on **Keep the screen on**, and leave it on the **Race** or **Pit wall** tab.
-- Give your crew chief the **Crew** link and your stream viewers the **View only** link.
+- Give your crew chief the **Crew** link and, with Race Team, your stream viewers the **View only** link.
 - If someone shouldn't have your link any more, press **New pairing code** for that link.
 - iPhones can't vibrate from a web page, so they only beep. Turn the ringer volume up.
 
@@ -534,11 +537,12 @@ The alert switches are saved on each phone.
 
 | Problem | Fix |
 |---|---|
-| Phone says **OFFLINE**: "Can't reach your PC…" | Check the companion is running, **Let my phone connect** is on, and the phone is on the same Wi-Fi (not mobile data or a guest network). |
+| Phone says **OFFLINE**: "Can't reach your PC…" | Check the companion is running, **Let my phone connect** is on, and the phone is on the same Wi-Fi (not mobile data or a guest network). On Rookie, phones can't connect: the phone pit wall is part of Driver. |
 | Nothing loads at all | In Windows Settings → Network & internet, set your network to **Private**. Windows blocks phones on public networks. Allow Grid Central through the firewall on private networks. |
 | **NOT PAIRED**: "This phone's pairing code is out of date…" | Someone pressed **New pairing code**. Scan the QR code again. |
-| "Phone access was turned off on your PC." | Switch **Let my phone connect** back on. |
-| PC chip says **COULDN'T START** | Another program may be using the ports (8768 and 8769). Close it, or restart the PC, then switch phone access off and on. |
+| "Phone access was turned off on your PC." | Switch **Let my phone connect** back on. On Rookie, phone access stays off: the phone pit wall is part of Driver. |
+| **NOT INCLUDED**: "This view-only link needs Grid Central Race Team on the driver's PC. A crew link still works." | **View only** links are part of Race Team. Use the **Crew** link. |
+| PC chip says **COULDN'T START** | Another program may be using the ports (8768 and 8769). Close it, or restart the PC, then switch phone access off and on. On Rookie, the chip also says this while **Let my phone connect** is on, because the phone pit wall is part of Driver. |
 | "This PC doesn't seem to be on a home network…" | Connect the PC to your router (Wi-Fi or cable), then switch phone access off and on. |
 | Worked yesterday, not today | Your PC's address may have changed (after a router restart, for example). Scan the QR code again. |
 | No QR code ("the companion is missing the segno package") | Type or copy the link instead. |

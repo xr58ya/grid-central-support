@@ -6,7 +6,7 @@ This chapter covers everything Grid Central does for the people watching you rac
 
 - Most of these features run through the **companion**, the small GridCentral window that opens with Grid Central. If you see "COMPANION NOT RUNNING", press **▶ Start companion** in Settings → Connections → iRacing.
 - When you close Grid Central, the companion closes a few seconds later, **unless an overlay in OBS is still connected**. Then it keeps running for OBS. To keep the in-game overlay and the team hub running after you close the app, turn off **Close with Grid Central** in the same place.
-- Features marked **PRO** in free mode: the Broadcast page and OBS control, the in-game overlay, most overlay widgets and extra designs, Discord, the League room and the team hub. The hosted team hub needs the **Team** plan. Click a PRO label to see what unlocks it.
+- The plans, once Grid Central goes on sale (during the beta everything is unlocked): on **Rookie**, the free plan, you can design your overlay, show it in-game with the core widgets (**Relative**, **Standings** and **Flags**) and show your Discord status. **Driver** adds every widget, more designs, other screen shapes, OBS overlays and Discord posts. **Race Team** adds the League room, the league bot, driver-change posts and the team hub. The **Broadcast add-on**, on top of Driver or Race Team, adds the Broadcast page (commentary and OBS control), **Add to OBS** and going-live posts. A locked feature shows a **DRIVER**, **RACE TEAM** or **BROADCAST** label; click it to see which plan it's part of.
 
 ---
 
@@ -19,7 +19,7 @@ This chapter covers everything Grid Central does for the people watching you rac
 ### Your first overlay
 
 1. Open **Race overlay**. You start with a design called **Minimal HUD**.
-2. For a different look, press **+ New from template** and pick a card in **Choose a template**.
+2. For a different look, press **+ New from template** (Driver) and pick a card in **Choose a template**.
 3. In the side panel's **Add** tab, click a widget. It appears in the middle of the canvas.
 4. Drag it into place and pull its corners to resize it. Its text scales with the box.
 5. With it selected, the **Selected** tab shows its **Options** and **Style**.
@@ -30,17 +30,17 @@ This chapter covers everything Grid Central does for the people watching you rac
 
 | Control | What it does | Default |
 |---|---|---|
-| **Preview ↗** | Opens the design in a browser tab, as OBS sees it. | – |
-| **Copy OBS link** | Copies this design's link for an OBS Browser source. | – |
-| **Add to OBS** | Puts the design you're editing into OBS's current scene as the "Grid Central Overlay" source, in one click (OBS must be connected). The source keeps that design until you press it again on another one. | – |
-| **OVERLAY** | Which design you're editing. The design the "Grid Central Overlay" source in OBS shows is marked **· OBS**. Opening another design here doesn't change OBS, except on the free plan, where OBS shows the design open here. | Minimal HUD |
+| **Preview ↗** | Opens the design in a browser tab, as OBS sees it. On Rookie it shows only the core widgets (**Relative**, **Standings** and **Flags**), while OBS shows nothing. | – |
+| **Copy OBS link** | Copies this design's link for an OBS Browser source. (Driver) | – |
+| **Add to OBS** | Puts the design you're editing into OBS's current scene as the "Grid Central Overlay" source, in one click (OBS must be connected). The source keeps that design until you press it again on another one. (Broadcast add-on) | – |
+| **OVERLAY** | Which design you're editing. The design the "Grid Central Overlay" source in OBS shows is marked **· OBS**. Opening another design here doesn't change OBS. | Minimal HUD |
 | Save note | "Saving…", "All changes saved", "Saved here · start the companion for OBS" or "Not saved: too big". | – |
 | **Save** | Saves now. | – |
-| **+ New from template** | New design from a template. (Pro) | – |
+| **+ New from template** | New design from a template. (Driver) | – |
 | **Rename** | Renames the design (up to 40 characters). | – |
-| **Duplicate** | Copies the design as "… copy". (Pro) | – |
-| **Export** / **Import** | Saves the design as a `.grid-overlay.json` file, or loads one. Imports keep only real widgets and settings, so shared files are safe. (Import is Pro) | – |
-| **Delete** | Deletes the design after asking. OBS sources using its link then show the design open in the designer, and change when you open another. If you deleted the design marked **· OBS**, open the one you want and press **Add to OBS**. | – |
+| **Duplicate** | Copies the design as "… copy". (Driver) | – |
+| **Export** / **Import** | Saves the design as a `.grid-overlay.json` file, or loads one. Imports keep only real widgets and settings, so shared files are safe. (Import is part of Driver) | – |
+| **Delete** | Deletes the design after asking. OBS sources using its link then show your first design. If it was the design marked **· OBS**, the Grid Central Overlay source and the mark move to your first design: straight away if OBS is connected, otherwise when Grid Central next connects. | – |
 | **OBS BROWSER SOURCE** | This design's link, like `http://127.0.0.1:8765/overlay.html?layout=…`. | – |
 
 ### Canvas toolbar
@@ -48,7 +48,7 @@ This chapter covers everything Grid Central does for the people watching you rac
 | Control | What it does | Default |
 |---|---|---|
 | **↶** / **↷** | Undo and redo, up to 60 steps (Ctrl+Z, Ctrl+Y). | – |
-| **Screen** | **16:9 standard**, **16:10**, **21:9 ultrawide**, **32:9 super ultrawide**, or **This screen (width × height)**. Widgets keep their side of the screen when you change it. If the design is the one in OBS and OBS is connected, the source gets the new size. | 16:9 standard |
+| **Screen** | **16:9 standard**, **16:10**, **21:9 ultrawide**, **32:9 super ultrawide**, or **This screen (width × height)**. Widgets keep their side of the screen when you change it. If the design is the one in OBS, the source gets the new size whenever OBS is connected, even for a change (or an undo) made while it wasn't. Changing it is part of Driver. | 16:9 standard |
 | **Snap to grid** | Snaps widgets to an 8-pixel grid. | On |
 | **Background** | What's behind the canvas while you design: **Track scene**, **Dark**, **Light** or **Transparent**. Doesn't change the overlay. | Track scene |
 | **SAMPLE DATA** / **LIVE FROM IRACING** | Where the numbers come from: sample laps until you're in a session. | – |
@@ -100,7 +100,7 @@ Templates bring their own theme.
 | Problem | Fix |
 |---|---|
 | "Saved here · start the companion for OBS" | Start the companion; the design is sent to OBS automatically. |
-| A widget opens "This is part of Pro" | In free mode you can use **Standings**, **Fuel** and **Flags**. |
+| A widget opens "PART OF GRID CENTRAL DRIVER" | On Rookie you can add **Relative**, **Standings** and **Flags**. Every other widget is part of Driver. |
 | A widget shows dashes (—) | It's waiting for data. Fuel per lap, strategy and tyre wear need a few laps. |
 | A design changed by itself | A newer copy came from the companion (an edit in another window). The newest wins. |
 
@@ -108,7 +108,7 @@ Templates bring their own theme.
 
 ## Overlay widgets
 
-Defaults are in brackets.
+Defaults are in brackets. On Rookie, the free plan, you can add **Relative**, **Standings** and **Flags**. Every other widget has a **DRIVER** tag in the **Add** tab: it's part of Driver.
 
 ### Driving
 
@@ -150,7 +150,7 @@ The **iRating change** is what each driver would gain or lose if the race ended 
 | **Damage** | REPAIRS, OPTIONAL and FAST REPAIRS left, warning lights (WATER, OIL TEMP, OIL PRESS, FUEL PRESS, STALL), water and oil temperatures, and a car diagram coloured by how badly each area is hit (estimated). | **Car diagram (estimated hit areas)**, **Tyre wear on the car**, **Engine temperatures**, **Colour key under the car** (all on). **Minor damage**, **Major damage**, **Wrecked** colours (yellow, orange, red). |
 | **Tyres** | Tread left on each tyre with bars across it (inside, middle, outside), COMPOUND, LAPS ON SET, SETS LEFT. Green, amber below 60%, red below 30%. | **Wear across each tyre** (on). **Compound, laps and sets** (on). |
 | **Flags** | The flag that's out as a real flag rippling on a pole (waved flags flap faster), with its name: red, black, meatball, caution, yellow, debris, blue, white and chequered. Hidden when no flag is out. | **Flag name** (on). **Waving in the wind** (on). |
-| **Commentary captions** | Subtitles for the Broadcast commentary, with LEAD or ANALYST. | **Who's talking** (on). **Background** (on). |
+| **Commentary captions** | Subtitles for the Broadcast commentary (part of the Broadcast add-on), with LEAD or ANALYST. | **Who's talking** (on). **Background** (on). |
 
 iRacing only measures tyres in the pits. Between stops, Grid Central estimates them from how fast they wore and marks the numbers with **~**.
 
@@ -173,7 +173,9 @@ When the companion is running but you're not in an iRacing session, the data wid
 
 **Where to find it.** **Race overlay → Add to OBS** or **Copy OBS link**, or **Broadcast → Add Grid Central overlay to scene**.
 
-### The one-click way
+OBS overlays are part of Driver: on Rookie, OBS shows nothing. The one-click way uses OBS control, which is part of the Broadcast add-on. With Driver alone, use **Copy OBS link** (see "Doing it yourself").
+
+### The one-click way (Broadcast add-on)
 
 1. Connect OBS (see "Broadcast control" below).
 2. Pick your streaming scene in OBS, or in **Broadcast → PROGRAM SCENE**.
@@ -183,7 +185,7 @@ When the companion is running but you're not in an iRacing session, the data wid
 
 The source keeps that design while you open and edit others. To show a different design, open it and press **Add to OBS** again; the message says which design the source now shows. Pressing it also adds the source to the current scene if that scene doesn't have it yet. There's only one Grid Central Overlay source, so every scene that has it shows the same design.
 
-### Doing it yourself
+### Doing it yourself (Driver)
 
 1. On **Race overlay**, pick the design and press **Copy OBS link**.
 2. In OBS, **Sources → + → Browser**, name it, press OK.
@@ -197,16 +199,16 @@ The source keeps that design while you open and edit others. To show a different
 - **Different overlays in different scenes** (say, a "Starting soon" design): press **Copy OBS link** on each design and add your own Browser source for each (see "Doing it yourself").
 - When Grid Central connects to OBS, it reads which design an existing Grid Central Overlay source shows, so the **· OBS** mark is right even for a source added by an older version or changed in OBS.
 - Without the companion, OBS shows sample data tagged "SAMPLE DATA · START GRID CENTRAL FOR LIVE DATA", so you can line things up any time.
-- **Free plan:** OBS shows one overlay (the one open in the designer) with only Standings, Fuel and Flags.
+- **Rookie:** OBS shows nothing, because OBS overlays are part of Driver. **Preview ↗** still shows your design in a browser, with the core widgets only (**Relative**, **Standings** and **Flags**).
 
 ### If it doesn't work
 
 | Problem | Fix |
 |---|---|
 | "Connect OBS first (Settings → Connections → OBS Studio)…" | Connect OBS under Settings → Connections → OBS Studio. |
-| Blank in OBS | Start the companion and get in a session. Right-click the source → **Refresh**. |
+| Blank in OBS | Start the companion and get in a session. Right-click the source → **Refresh**. On Rookie, OBS stays blank once the companion is running: OBS overlays are part of Driver. |
 | Sample data during a race | The companion isn't running. Start it and refresh the source. |
-| Wrong size or cut off | Match the source size to the design, then right-click → **Transform → Fit to screen**. For the Grid Central Overlay source, open its design and press **Add to OBS** again to resize it. |
+| Wrong size or cut off | Match the source size to the design, then right-click → **Transform → Fit to screen**. |
 | Edits don't reach OBS | Designs reach OBS through the companion: start it and press **Save**. If you used **Add to OBS**, check you're editing the design marked **· OBS**. |
 | OBS shows a different design from the one you're editing | That's expected: the source keeps the design marked **· OBS**. Open the one you want and press **Add to OBS**. |
 | "Couldn't access the clipboard…" | Copy the link under **OBS BROWSER SOURCE** by hand. |
@@ -217,7 +219,7 @@ The source keeps that design while you open and edit others. To show a different
 
 **What it does.** Shows one of your designs on top of iRacing on your own monitor. It's a see-through, always-on-top window that clicks pass straight through. It never shows sample data.
 
-**Where to find it.** **Race overlay**, panel **IN-GAME OVERLAY** ("On your screen while you drive"). (Pro)
+**Where to find it.** **Race overlay**, panel **IN-GAME OVERLAY** ("On your screen while you drive"). It's on every plan: on Rookie, the free plan, it shows only the core widgets (**Relative**, **Standings** and **Flags**) of the design you pick.
 
 1. In iRacing's graphics options, use **windowed or borderless**, not full screen.
 2. Start the companion.
@@ -226,17 +228,18 @@ The source keeps that design while you open and edit others. To show a different
 
 | Control | What it does | Default |
 |---|---|---|
-| **DESIGN** | The design shown on your screen (can differ from OBS's). Switches live. | The design you're editing |
+| **DESIGN** | The design shown on your screen (can differ from OBS's). Switches live. If you delete it, your first design is shown. | The design you're editing |
 | **SCREEN** | **Main screen**, or **Screen 1 (left)** to **Screen 4**, counted from the left. | Main screen |
 | **Show on screen** / **Hide from screen** | Opens or closes the overlay. | – |
 | **Change** | Press it, then your new shortcut: **Ctrl** or **Alt** plus a key, or an **F key** alone. **Esc** or **Cancel** keeps the old one. | Ctrl+Alt+O |
 
-**Tips:** set the canvas **Screen** to **This screen** so the design matches your monitor. Keep it light: fewer widgets, lower opacity. The shortcut works inside iRacing without blocking other programs. The window closes when the companion stops. You can also show, hide or switch it from the phone pit wall's **More** tab.
+**Tips:** set the canvas **Screen** to **This screen** (Driver) so the design matches your monitor. Keep it light: fewer widgets, lower opacity. The shortcut works inside iRacing without blocking other programs. The window closes when the companion stops. You can also show, hide or switch it from the phone pit wall's **More** tab (Driver).
 
 | Problem | Fix |
 |---|---|
 | "The in-game overlay is opened by the companion. Start it first…" | Start the companion and press **Show on screen** again. |
 | ON SCREEN but nothing visible | Run iRacing windowed or borderless, check **SCREEN**, press your shortcut in case it's hidden. |
+| Nothing shows on Rookie | On Rookie only **Relative**, **Standings** and **Flags** are drawn. The **Minimal HUD** design has none of them, so add one in the **Add** tab. They show only while you're in an iRacing session. |
 | Only logo and text show | You're not in an iRacing session yet. |
 | "Couldn't serve the overlay page (is port 8767 in use?)." | Close the program using port 8767, or restart the PC. |
 | "The in-game overlay files are missing from this Grid Central folder." | Reinstall Grid Central. |
@@ -247,7 +250,7 @@ The source keeps that design while you open and edit others. To show a different
 
 **What it does.** Lets you switch OBS scenes, start and stop streaming and recording, and add the overlay from Grid Central. Twitch and YouTube go **through OBS**: Grid Central never reads your stream key.
 
-**Where to find it.** Connect in **Settings → Connections → OBS Studio**; control from the **Broadcast** page. (Pro)
+**Where to find it.** Connect in **Settings → Connections → OBS Studio**; control from the **Broadcast** page. (Broadcast add-on)
 
 ### Connect OBS
 
@@ -307,7 +310,7 @@ Grid Central reconnects by itself next time, until you press **Disconnect**.
 
 **What it does.** Two commentators call your race like TV: a **lead** for the action and an **analyst** for the story. Viewers hear them on your stream (through your overlay in OBS, or a sound device); you don't. It runs while Grid Central is open.
 
-**Where to find it.** **Broadcast → Commentary** ("ON YOUR STREAM ONLY"). (Pro)
+**Where to find it.** **Broadcast → Commentary** ("ON YOUR STREAM ONLY"). (Broadcast add-on)
 
 1. Add the overlay with **Add to OBS** (that sets the sound up). If you added it yourself, tick **Control audio via OBS** in its properties.
 2. In OBS, **Edit → Advanced Audio Properties**: the overlay's **Audio Monitoring** must be **Monitor Off**.
@@ -327,13 +330,13 @@ The settings: **Follow** (**My car**, iRacing's camera car, or the whole field),
 
 **What it does.** Three separate connections; use any of them:
 
-1. **Post to a channel (webhook)**: results, summaries, personal bests, going live and driver changes.
-2. **Rich Presence**: your Discord status shows what you're driving.
-3. **League bot**: slash commands, sign-ups, reminders, announcements and the League room.
+1. **Post to a channel (webhook)**: results, summaries, personal bests, going live and driver changes. Part of Driver; going-live posts need the Broadcast add-on, and driver changes need Race Team.
+2. **Rich Presence**: your Discord status shows what you're driving. On every plan, including Rookie, the free plan.
+3. **League bot**: slash commands, sign-ups, reminders, announcements and the League room. Part of Race Team.
 
 Your webhook link and bot token stay on this PC (in discord.json) and are only ever sent to Discord. All three need the companion running.
 
-**Where to find it.** **Settings → Discord**. The chip shows what's set up, like **WEBHOOK · STATUS · BOT ONLINE**, or **NOT SET UP**. (Pro)
+**Where to find it.** **Settings → Discord**. The chip shows what's set up, like **WEBHOOK · STATUS · BOT ONLINE**, or **NOT SET UP**.
 
 ### 1. Post to a channel (webhook)
 
@@ -348,10 +351,10 @@ Your webhook link and bot token stay on this PC (in discord.json) and are only e
 | **Race results** | Finish (places gained, class position), best lap, laps, race pace, incidents, stops, at the chequered flag (or when you leave a race after 2+ laps). | On |
 | **Practice and qualifying summaries** | Laps, best lap and pace when you leave a session with 3 or more laps. | On |
 | **Personal bests** | A new best at a track in a car, with the improvement. | On |
-| **Going live** | When you start streaming in OBS (connected in Grid Central), with your links. | On |
-| **Driver changes** | Who takes over, lap and position, in team races. | On |
+| **Going live** | When you start streaming in OBS (connected in Grid Central), with your links. Needs the Broadcast add-on. | On |
+| **Driver changes** | Who takes over, lap and position, in team races. Needs Race Team. | On |
 | **Include tyre and fuel details** | Adds fuel per lap, fuel left, laps a tank, tyre wear (from your last stop) and pace fall-off. Fuel follows your units. | On |
-| **YOUR STREAM LINKS (FOR "GOING LIVE")** | Up to 5 links, each named from its address (Twitch, YouTube, Kick…). **+ Add another link**, **Remove**. | Empty |
+| **YOUR STREAM LINKS (FOR "GOING LIVE")** | Up to 5 links, each named from its address (Twitch, YouTube, Kick…). **+ Add another link**, **Remove**. Needs the Broadcast add-on. | Empty |
 
 With the bot connected and a results channel picked, posts go through the bot instead.
 
@@ -417,7 +420,7 @@ In a session, your status shows car and track, the session (or "in the garage"),
 
 **What it does.** Your league's schedule, a countdown to the next race, who's signed up, and your Discord announcements. The schedule works on its own; sign-ups, reminders and announcements need the league bot.
 
-**Where to find it.** **League room** in the left menu, with **Discord settings →** and **+ Add a race** at the top. (Pro)
+**Where to find it.** **League room** in the left menu, with **Discord settings →** and **+ Add a race** at the top. (Race Team)
 
 1. Start the companion (it keeps the schedule).
 2. Type your league's name in **NAME**.
@@ -448,15 +451,17 @@ In a session, your status shows car and track, the session (or "in the garage"),
 
 **What it does.** Your team follows the car live from anywhere in a web page: position, laps, gaps, fuel, flags, the strategy with **BOX THIS LAP**, standings and the radio. They can send messages that your engineer reads out ("Sam says: …"). Unlike the phone pit wall, it isn't limited to your Wi-Fi.
 
-**Where to find it.** **Settings → Phone & team hub**, panel **Team hub**. The chip shows **OFF**, **STARTING**, **LIVE · SHARING**, **PROBLEM** or **COMPANION NOT RUNNING**. (Pro)
+**Where to find it.** **Settings → Phone & team hub**, panel **Team hub**. The chip shows **OFF**, **STARTING**, **LIVE · SHARING**, **PROBLEM** or **COMPANION NOT RUNNING**. (Race Team)
 
-### Option A: hosted by Grid Central (Team plan)
+### Option A: hosted by Grid Central (Race Team)
 
 1. Join or create a team in **Settings → Account → Team** (drivers enter the owner's **join code** and press **Join team**).
 2. Start the companion.
 3. Press **Share with my team**, then **Copy team link** and send it to your team.
 
 Every driver can share; the page follows whoever is driving, with a button per sharing driver. The link is the same for the whole team. The owner can replace it with **New team link** in Settings → Account → Team.
+
+The hosted hub needs a seat in a team whose Race Team plan is paid, even during the beta. Until then the panel says "For drivers in a team on Race Team (Settings → Account → Team).", and **Share with my team** says "Join a team on Race Team first (Settings → Account → Team)." Use Option B in the meantime: it's part of Race Team too, but during the beta it works for everyone.
 
 ### Option B: your own free hosting
 

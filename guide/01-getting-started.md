@@ -80,7 +80,7 @@ Run the new Setup. Your laps, settings, paints and strategy data are kept (they'
 2. Press **Unlock**. It shows "Checking…" while it checks the code online.
 3. When the code is accepted, the window closes and the setup wizard starts.
 
-After that you go straight in, and the code is re-checked in the background at each start. Offline, it keeps working for up to **30 days**. The code also gives a Grid Central account 12 months free (see "Your account").
+After that you go straight in, and the code is re-checked in the background at each start. Offline, it keeps working for up to **30 days**. The code also gives your Grid Central account 6 months of Driver free from release day (see "Your account and plans").
 
 **Tip.** If you don't have a code, ask whoever invited you to the beta, or email support.gridcentral@gmail.com.
 
@@ -155,11 +155,11 @@ Whichever you choose, **All voice calls** (the switch at the top of **Settings �
 | **SAFETY RATING**, **iRATING** | From your iRacing profile; when not live, the last values seen. |
 | **BEST LAP** | Your best at your last track, the car, and sessions there. |
 | **THIS WEEK** | How many sessions and laps you've done this week. |
-| **SESSION DEBRIEF** | After a session, your engineer's report: pace and consistency against last time, the race, where you lose time, corners fixed and what to work on. The menu picks one of your last 20. |
+| **SESSION DEBRIEF** | After a session, your engineer's report: pace and consistency against last time, the race, where you lose time, corners fixed and what to work on. The menu picks one of your last 20. Part of Driver. |
 | **Race control** | Track map with your car on it; car, track and air temp, conditions, position. |
 | **Lap analysis** | A chart of your lap times (from two laps on), with **BEST LAP**, **LAST LAP** and **OPTIMAL LAP**. |
 | **Your ratings and races** | Charts of your iRating and safety rating over time, and your **RECENT RACES**. |
-| **One thing to work on** | The coach's top tip. **Open driver coach →** |
+| **One thing to work on** | The coach's top tip. **Open driver coach →** Part of Driver. |
 | **ON-TRACK SPOTTER** | "Spotter ready" or "Spotter muted". Its switch is **All voice calls**, the same one as in **Settings → Voice & radio**: it mutes the spotter, engineer and coach. |
 
 **Your iRacing profile.** After your first session, the sidebar shows your name, licence and iRating. **···** opens your profile card (licence, iRating, club, division, team, car, session) with **View on iRacing ↗** and **Copy customer ID**.
@@ -181,46 +181,68 @@ The footer shows your version (for example **V 0.5.9.1 · BETA**).
 | "The track map appears after your first full lap at a track." | Complete a full lap, or go online so the map can download. |
 | "Your lap times appear here once you've completed two laps." | Drive two complete laps. |
 
-## Your account and Grid Central Pro
+## Your account and plans
 
-**What it does.** An account (email and password) gives a **7-day free trial** of Pro, no card needed, and carries your beta code's 12 months free and later your subscription. One PC per subscription. Your laps, settings and paints stay on your PC.
+**What it does.** An account (email and password) gives a **7-day free trial** of Driver, no card needed, and carries your beta code's free months and later your subscription. One PC per subscription. Your laps, settings and paints stay on your PC.
 
 **Where to find it.** **Settings → Account**, in the **Account** panel. The chip at the top right of the panel shows your status.
 
-**During the beta, everything stays unlocked**, with or without an account. Free mode and PRO labels start when Grid Central goes on sale.
+**During the beta, everything stays unlocked**, with or without an account. The plans and their labels start when Grid Central goes on sale. Until then the Account panel already shows your plan, followed by "During the beta, everything stays unlocked.", so it can say **ROOKIE** while nothing is locked.
 
 ### Creating an account or signing in
 
 1. Start the companion (it tells Grid Central which PC this is).
 2. In **Settings → Account**, enter **EMAIL** and **PASSWORD** (at least 8 characters for a new account).
 3. Press **Create account**, or **Sign in** if you have one. The panel shows "Signed in as …".
-4. Beta tester? If **BETA TESTER? ENTER YOUR BETA CODE FOR 12 MONTHS FREE** shows, enter your code and press **Use code**. A new account made on the PC where you unlocked the beta gets the code automatically.
+4. Beta tester? If **BETA TESTER? ENTER YOUR BETA CODE FOR 6 MONTHS OF DRIVER FREE** shows, enter your code and press **Use code**. A new account made on the PC where you unlocked the beta gets the code automatically.
 
 | Control | What it does |
 |---|---|
 | **Create account** | New account; starts the trial if this PC hasn't had one. |
 | **Forgot password?** | Type your email first; a reset link is emailed. |
-| **Move my subscription here** | Shown when it's on another PC; moves it here (that PC goes free). |
+| **Move my subscription here** | Shown when it's on another PC; moves it here (that PC goes to Rookie). |
 | **Subscribe** | Greyed out ("Coming soon"). |
 | **Sign out** | Signs you out on this PC. |
-| **Use code** | Adds a beta code (12 months free; one account per code). |
+| **Use code** | Adds a beta code (6 months of Driver free from release day; one account per code). |
 
 | Status chip | What it means |
 |---|---|
-| **NOT SIGNED IN**, **FREE** | No account, or no plan. |
-| **TRIAL · N DAYS LEFT**, **BETA TESTER**, **PRO**, **TEAM** | Your plan; the line below shows its end date. |
+| **NOT SIGNED IN**, **ROOKIE** | No account, or no plan: you're on Rookie, the free plan. |
+| **TRIAL · N DAYS LEFT**, **BETA TESTER**, **DRIVER**, **RACE TEAM** | Your plan; the line below says when it ends. The trial and a beta code give Driver. |
+| **+ BROADCAST** after the plan, for example **DRIVER + BROADCAST** | You have the Broadcast add-on too. |
 | **IN USE ON ANOTHER PC** | Your subscription is on another PC. Press **Move my subscription here**. |
 | **NEEDS A CHECK** | Not checked online for 30 days. Connect to the internet. |
 
 The account is checked at start and every 6 hours, and works offline for up to 30 days.
 
-### What's free and what's Pro
+### Beta testers' free months
 
-Once plans go on sale, without Pro you're in **free mode**: the spotter, dashboard, lap times, a basic overlay (Standings, Fuel and Flags) and car painting stay free. Pro adds the engineer and coach, talkback, strategy, lap comparison and telemetry, every overlay widget and the in-game overlay, helmet and suit painting, finishes, Live in iRacing, race setups, the phone pit wall, the League room, Discord and the team hub. Pro areas are then dimmed with a **PRO** label; clicking one offers **Start your 7-day free trial** or **Not now**.
+A beta code gives **Driver** free for **6 months from release day** (the day Grid Central goes on sale), whenever you entered your code. It doesn't include Race Team or the Broadcast add-on.
 
-### The Team plan
+- Until Grid Central goes on sale, the line under the chip reads "Thanks for testing! Driver is free for 6 months from release day."
+- Once it goes on sale, the line shows the end date: "Thanks for testing! Driver is free until …".
+- From 30 days before the end, it reads "Your free months as a beta tester end on …" with the date, then "Subscribe before then to keep Driver at your beta tester price." The same message pops up once 30 days before the end and once 7 days before.
+- The beta tester price is for testers who entered their code by 30 days after release day. Codes entered later get the same message without "at your beta tester price".
+- When the free months end, you're on Rookie unless you subscribe or drive for a team on Race Team.
 
-The **Team** panel (also in **Settings → Account**): one person runs the team, and every driver gets Pro on their own PC plus the hosted team hub.
+### The plans
+
+Once Grid Central goes on sale, it has three plans and an add-on:
+
+| Plan | What you get |
+|---|---|
+| **Rookie** (free) | Your spotter with a simple radar, the dashboard, your lap times, the in-game overlay with the core widgets (**Relative**, **Standings** and **Flags**), car painting and your Discord status. |
+| **Driver** | Everything in Rookie, plus the engineer and coach on the radio, talkback, race strategy, race setups, lap comparison and telemetry, the full radar, every overlay widget and OBS overlays, the whole paint shop (helmet and suit, finishes, Spray Booth, Live in iRacing, car numbers), the phone pit wall and Discord posts. The 7-day free trial and a beta code give Driver. |
+| **Race Team** | For teams and leagues: every driver in the team gets Driver on their own PC, plus team races, shared laps, view-only phone links for teammates, talking to your crew by voice, the team hub (hosted with no setup, or on your own free hosting) and the League room with its bot. It's for 3 drivers, and you can add 5 more at a time. |
+| **Broadcast add-on** | For streaming, on top of Driver or Race Team: AI race commentary with natural voices (the **Broadcast** page), OBS control from Grid Central and your phone (the **OBS Studio** panel and **Add to OBS**), and going-live posts on Discord. If a team has it, every driver in the team gets it. It isn't part of the trial or the beta code. |
+
+Once plans are on sale, areas your plan doesn't include are dimmed, with a label naming the plan they need, for example **DRIVER · Race strategy**, **RACE TEAM · The team hub** or **BROADCAST · OBS control**. Single buttons, switches and menu items get a small tag instead (**DRIVER**, **RACE TEAM** or **BROADCAST**); a menu item with a tag still opens its page. A few small buttons, such as the ones on each lap in **Lap data**, show no tag. Clicking anything locked opens a window that says which plan it's part of, for example "PART OF GRID CENTRAL DRIVER". Its first button is **Start your 7-day free trial** (for Driver) or **Create account** (for Race Team and the add-on) when you aren't signed in, and **See your account** when you are (or **Move my subscription here** if your subscription is on another PC). **Not now** closes it.
+
+### Race Team and the Team panel
+
+The **Team** panel (also in **Settings → Account**, headed **THE RACE TEAM PLAN**): one person runs the team and buys its seats, and every driver with a seat gets Race Team on their own PC: Driver plus the team features. If the team has the Broadcast add-on, every driver gets that too. The owner only gets them by taking a seat with **I drive for this team**.
+
+The chip at the top right shows **NO TEAM** when you aren't in a team, **NO SEATS YET** or the seats used (for example **2 OF 3 SEATS**) when you own one, and **DRIVER** when you drive for one. That **DRIVER** is your role in the team, not the Driver plan.
 
 | Control | What it does |
 |---|---|
@@ -229,11 +251,11 @@ The **Team** panel (also in **Settings → Account**): one person runs the team,
 | **JOIN CODE**, **Copy** | The code your drivers enter, in the form `XXXX-XXXX-XXXX`. |
 | **New code** | New join code; the old one stops, drivers stay. |
 | **New team link** | New team page link; the old one stops. Drivers pick it up by themselves. |
-| **I drive for this team** | On: you take one of the team's seats and get Pro too. Off: you manage the team without a seat. |
+| **I drive for this team** | On: you take one of the team's seats and get Driver and the team features too. Off: you manage the team without a seat. |
 | **DRIVERS** list, **Remove** | Shows who's in the team. **Remove** frees that driver's seat. |
 | **Buy seats** | Greyed out ("Coming soon"). |
 | **JOIN A TEAM: ENTER THE CODE FROM YOUR TEAM OWNER** + **Join team** | For drivers: joins the team with the owner's code. |
-| **Leave team** | Leaves the team. You lose the Pro it gives you. |
+| **Leave team** | Leaves the team. You lose the Race Team plan it gives you. |
 
 ### If it doesn't work
 
@@ -279,7 +301,7 @@ The chip shows **COMPANION NOT RUNNING**, **COMPANION RUNNING · WAITING FOR IRA
 | **▶ Start companion** | Starts the companion now. Shows **✓ Companion running** when it's running. | n/a |
 | **Connection guide ↗** | Opens a short explanation of how to connect. | n/a |
 
-### OBS Studio panel (Pro)
+### OBS Studio panel (Broadcast add-on)
 
 Controls streaming, recording and scenes from Grid Central. The chip shows **NOT CONNECTED** until connected.
 
@@ -296,11 +318,11 @@ Controls streaming, recording and scenes from Grid Central. The chip shows **NOT
 | **Remember password on this device** | Saves the password so you don't have to type it again. | Off |
 | **Setup guide ↗** | Step-by-step OBS instructions. | n/a |
 
-Your stream keys stay in OBS. Grid Central never asks for them. For more about OBS, see the Broadcast chapter.
+Your stream keys stay in OBS. Grid Central never asks for them. For more about OBS, see "Broadcast control" in chapter 5.
 
 ## Settings: Voice & radio tab
 
-Your race team is three people on the radio: the **spotter** (cars around you), the **engineer** (your race) and the **coach** (your driving). Each has its own switch at the top right of its panel, plus **Voice** (its own voice, or **Same as main voice**; Pro) and **Volume** (10% to 100%, default 100%). The Engineer, Coach and Talkback panels are Pro. The calls themselves are described in the AI spotter and Talkback chapters. All switches below are on by default unless the table says otherwise.
+Your race team is three people on the radio: the **spotter** (cars around you), the **engineer** (your race) and the **coach** (your driving). Each has its own switch at the top right of its panel, plus **Voice** (its own voice, or **Same as main voice**; Driver) and **Volume** (10% to 100%, default 100%). The Engineer, Coach and Talkback panels are part of Driver: on Rookie, only the spotter talks. The calls themselves are described in the AI spotter and Talkback chapters. All switches below are on by default unless the table says otherwise.
 
 ### Voice & radio panel
 
@@ -319,7 +341,7 @@ Your race team is three people on the radio: the **spotter** (cars around you), 
 | **Flag callouts** | Yellow, caution, debris, blue, black, meatball, red, white and checkered flags. | On |
 | **Hazards ahead** | Stopped, slow or off-track cars ahead, and which turn. Warns 200, 300, 500 or 800 m ahead (in Imperial the choices read 700, 1000, 1600 or 2600 ft). | On, 300 m |
 
-### Engineer panel (Pro)
+### Engineer panel (Driver)
 
 **How much it talks** sets the call switches in one go: **Essential** (strategy, damage, weather, team stints, laps to go), **Standard** (adds gaps, battles, rivals, positions, best laps, incidents and the debrief) or **Everything** (adds every lap time). It shows **Custom** once you change a switch yourself. Default: Standard.
 
@@ -328,7 +350,7 @@ Your race team is three people on the radio: the **spotter** (cars around you), 
 | **Strategy callouts** | Pit window open, box this lap, fuel to add, fuel saving. | On |
 | **Damage callouts** | Repair time after contact, engine warnings. | On |
 | **Weather callouts** | Rain, the track wetting or drying, wets or slicks. | On |
-| **Team stint callouts** | Stint time warnings and who's next. | On |
+| **Team stint callouts** | Stint time warnings and who's next, in team races (needs Race Team). | On |
 | **Gap reports** | Position and gaps ahead and behind, every 2, 3 or 5 laps. | On, every 3 laps |
 | **Battle calls** | "Car 44 behind is quicker, defend". | On |
 | **Rivals' pit stops** | "Car 25 ahead has pitted, push now". | On |
@@ -339,7 +361,7 @@ Your race team is three people on the radio: the **spotter** (cars around you), 
 | **Incidents** | "Incident, that's 4x now." | On |
 | **Session debrief** | A short spoken summary when you leave a session. | On |
 
-### Coach panel (Pro)
+### Coach panel (Driver)
 
 **How much it talks**: **Essential** (a note after the lap), **Standard** (adds a reminder before the corner) or **Everything** (adds the result after it). Default: Everything.
 
@@ -353,7 +375,7 @@ Your race team is three people on the radio: the **spotter** (cars around you), 
 | **Corner result after it** | Quicker or slower than your best, straight away. | On |
 | **Progress across sessions** | Corners you've fixed and how your laps are improving. | On |
 
-### Talkback panel (Pro)
+### Talkback panel (Driver)
 
 The chip shows **OFF**, **LOADING SPEECH MODEL**, **READY**, **LISTENING…** or **ERROR**. Speech is recognised on your PC, and the mic is only listened to while you hold the button.
 
@@ -394,7 +416,7 @@ The chip shows **OFF**, **LOADING SPEECH MODEL**, **READY**, **LISTENING…** or
 | **Setup wizard**: **Run setup again** | Opens the setup wizard. | n/a |
 | **Open-source licences**: **View licences** | The open-source parts Grid Central uses and their licences (also `THIRD-PARTY-NOTICES.txt` in the Grid Central folder). | n/a |
 
-## Settings: Phone & team hub tab (Pro)
+## Settings: Phone & team hub tab (Driver)
 
 These panels are covered in full in the Phone and Team hub chapters. Here is a summary of the controls.
 
@@ -403,31 +425,33 @@ These panels are covered in full in the Phone and Team hub chapters. Here is a s
 | Control | What it does | Default |
 |---|---|---|
 | **Let my phone connect** | Turns on the phone pit wall and shows a QR code. If Windows asks, allow Grid Central on *private* networks. Needs the companion running ("Start the companion first."). | Off |
-| **Crew** / **View only** | Which link the QR code is for: Crew (with pit menu and radio buttons) or View only. | Crew |
+| **Crew** / **View only** | Which link the QR code is for: Crew (with pit menu and radio buttons) or View only. View only needs Race Team. | Crew |
 | **Copy link** | Copies the phone link. | n/a |
 | **New pairing code** | Makes a new code. Phones that used this link before are disconnected, but the other link keeps working. | n/a |
 
-**Team hub panel.** Your team follows the car live from anywhere in a web page.
+**Team hub panel (Race Team).** Your team follows the car live from anywhere in a web page.
 
 | Control | What it does |
 |---|---|
-| **Share with my team** + **Copy team link** | The hosted team hub. Team plan only, and no setup needed. |
+| **Share with my team** + **Copy team link** | The hosted team hub, with no setup needed. It needs a seat in a team on Race Team, even during the beta. |
 | **Copy rules**, **DATABASE ADDRESS**, **TEAM PAGE ADDRESS** | Settings for running the hub on your own free Firebase and GitHub Pages hosting. |
 | **Team name** + **Start sharing** | Starts sharing. **Copy team link** copies the link and **New link** stops the old one working. |
 
-## Settings: Discord tab (Pro)
+## Settings: Discord tab
 
 Covered in full in the Discord chapter. There are three independent ways to connect, and the chip shows **NOT SET UP** until one is done. Your webhook link and bot token stay on your PC, in the companion's folder.
 
+Your Discord status is free on every plan. Posting to a channel is part of Driver (its **Going live** posts and stream links need the Broadcast add-on, and **Driver changes** posts need Race Team), and the league bot is part of Race Team.
+
 | Section | Controls |
 |---|---|
-| **1 Post to a channel** (webhook) | Webhook link + **Save**, **Send test**, **Remove**; **Include tyre and fuel details** (off by default); **YOUR STREAM LINKS (FOR "GOING LIVE")** with **+ Add another link**. |
+| **1 Post to a channel** (webhook) | Webhook link + **Save**, **Send test**, **Remove**; **Include tyre and fuel details** (on by default); **YOUR STREAM LINKS (FOR "GOING LIVE")** with **+ Add another link**. |
 | **2 Show what you're driving in your Discord status** (Rich Presence) | **Application ID**, **Show my status** (off by default), **Include my position** (on by default). The Discord app has to be running on your PC. |
 | **3 League bot** | Bot token + **Save**, **Invite the bot ↗**, **Remove token**; then **SERVER**, **ANNOUNCEMENTS**, **RESULTS AND UPDATES**, **RACE REMINDERS**, **REMIND BEFORE EACH RACE** and **Send test to results channel**. |
 
 ## Settings: Account tab
 
-This tab has the **Account** and **Team** panels, described in "Your account and Grid Central Pro" above. It also shows the support address: support.gridcentral@gmail.com.
+This tab has the **Account** and **Team** panels, described in "Your account and plans" above. It also shows the support address: support.gridcentral@gmail.com.
 
 ## Backup and restore
 
@@ -517,7 +541,7 @@ Start with the top-bar status and the companion window. Most problems come down 
 | **"WAITING FOR IRACING"** or **"Waiting for iRacing"** | The companion is running. Load into a session and get in the car. The garage menus don't send live data. |
 | **No spoken calls** | Click anywhere in Grid Central once, because browsers block sound until you do. Check the **All voice calls** switch at the top, **Read calls aloud**, and each role's switch and volume in **Settings → Voice & radio**. Try **◖ Test the voice** in the setup wizard. |
 | **Engineer speaks English after switching language** | Install a voice for that language in Windows **Settings → Time & language → Speech**, then pick it under **Voice**. |
-| **The in-game overlay doesn't show over iRacing** | Set iRacing to windowed or borderless. Full screen covers everything else. |
+| **The in-game overlay doesn't show over iRacing** | Set iRacing to windowed or borderless. Full screen covers everything else. On Rookie, only the **Relative**, **Standings** and **Flags** widgets are drawn, so a design without them (such as **Minimal HUD**) shows nothing: add one in the **Add** tab. |
 | **Talkback doesn't hear me** | Check the microphone and button in **Settings → Voice & radio → Talkback**, and that the status shows **READY**. Hold the button a moment before speaking. If it says "Press Set button, then press the wheel button or key you want to talk with.", set a button first. |
 | **Phone can't connect** | Allow GridCentral.exe on **private** networks when Windows asks. Set your Wi-Fi to Private in Windows **Settings → Network & internet**. Make sure the phone is on the same Wi-Fi. |
 | **"No QR code"** on the Phone panel | Type the link shown under it into your phone instead. |

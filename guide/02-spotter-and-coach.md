@@ -6,7 +6,7 @@ Grid Central puts three people on your radio:
 - **The engineer** looks after your race: gaps, battles, rivals' pit stops, positions, laps to go, best laps, incidents, damage, fuel and strategy, and a debrief at the end.
 - **The coach** looks at your driving. After each clean lap it finds the corner where you lose the most time and tells you what to change.
 
-Each one has its own switch, voice and volume. The spotter is free. The engineer and the coach are part of Pro: on the free plan their panels have a **PRO** cover, and only the spotter speaks.
+Each one has its own switch, voice and volume. The spotter is in every plan, including Rookie, the free plan. The engineer and the coach are part of Driver: on Rookie their panels have a **DRIVER** cover, and only the spotter speaks. During the beta everything is unlocked.
 
 This chapter covers the **AI spotter** page (the live radar, the coach, lap analysis and progress), the track map on the **Overview**, the engineer's calls, **Rivals' strategy** on the **Race strategy** page, and **Your ratings and races** on the Overview.
 
@@ -40,10 +40,10 @@ The status chip at the top right of the radar says **OFFLINE** (companion not ru
 
 Open it from **AI spotter** in the left menu. At the top are three buttons: **Lap data →**, **Spotter settings →** (jumps to the voice settings) and **◖ Test voice spotter**. Below them, from top to bottom:
 
-- **LIVE RADAR** (free): the cars around you.
-- **CORNER-BY-CORNER COACHING** (Pro): the coach's notes and your focus corner.
-- **LAP ANALYSIS** (Pro): every lap against your best.
-- **PROGRESS** (Pro): your sessions and the corners you've fixed.
+- **LIVE RADAR**: the cars around you. Rookie has a simple radar; the full radar is part of Driver.
+- **CORNER-BY-CORNER COACHING** (Driver): the coach's notes and your focus corner.
+- **LAP ANALYSIS** (Driver): every lap against your best.
+- **PROGRESS** (Driver): your sessions and the corners you've fixed.
 - **SPOTTER RADIO** (free): the latest call and its time.
 
 On the **Overview**, the **ON-TRACK SPOTTER** card has the master on/off switch ("Spotter ready" or "Spotter muted") and a **Configure spotter →** link to this page.
@@ -115,14 +115,14 @@ Calls appear in the radar's **CALL LOG** and the **SPOTTER RADIO** panel. Settin
 1. In **Settings → Voice & radio**, find the **Spotter** panel and make sure its switch (top right) is on.
 2. Turn on **Spotter callouts**, **Flag callouts** and **Hazards ahead**.
 3. Pick how far ahead hazards are called (the menu next to **Hazards ahead**).
-4. Optional (Pro): give the spotter its own **Voice** so you can tell it apart from the engineer.
+4. Optional (Driver): give the spotter its own **Voice** so you can tell it apart from the engineer.
 
 ### Controls
 
 | Control (as shown) | What it does | Default |
 |---|---|---|
 | **Spotter** switch (panel top right) | Turns the spotter on or off: alongside calls, flags and hazards | On |
-| **Voice** | Gives the spotter its own voice. You hear "Car left. Clear." when you pick one. Pro only. | Same as main voice |
+| **Voice** | Gives the spotter its own voice. You hear "Car left. Clear." when you pick one. Driver only. | Same as main voice |
 | **Volume** | How loud the spotter is, 10% to 100% in steps of 5 | 100% |
 | **Spotter callouts** | Calls for cars alongside | On |
 | **Flag callouts** | Yellow, caution, debris, blue, black, meatball, red, white and checkered flags, and "Green, green, green" after a caution | On |
@@ -179,12 +179,12 @@ The radar shows you in the middle and the cars around you. iRacing's spotter say
 
 ### Where to find it
 
-**AI spotter → LIVE RADAR**. Switch views with the **Proximity** and **Pit wall** buttons at the top right of the radar. Grid Central remembers your choice.
+**AI spotter → LIVE RADAR**. Switch views with the **Proximity** and **Pit wall** buttons at the top right of the radar. Grid Central remembers your choice. The **Pit wall** view is part of Driver.
 
 ### Setup
 
 1. Start the companion and get in the car (see **Before you start**).
-2. Choose **Proximity** for a big, easy-to-read radar, or **Pit wall** for a slim radar next to relative timing.
+2. Choose **Proximity** for a big, easy-to-read radar, or **Pit wall** (Driver) for a slim radar next to relative timing.
 
 ### The Proximity view
 
@@ -192,15 +192,15 @@ The radar shows you in the middle and the cars around you. iRacing's spotter say
 |---|---|
 | The radar | Your car in the middle, with range lines at 10 m and 20 m ahead and behind (30 ft and 60 ft with **Imperial**). It shows about 21 m (70 ft) each way. A car alongside sits beside you on the side iRacing reports. |
 | Side glow and bars | The side with a car glows amber. It turns red when it's tight: three wide, two cars on one side, or a car right level with you (within about 1.2 m). |
-| Car badges | Each car shows its number, coloured by class in multiclass sessions. |
-| Edge markers | A small arrow at the top or bottom edge for the nearest car just off the radar (up to 60 m away), for example "#44 · 35 m" ("#44 · 115 ft" with **Imperial**). |
+| Car badges (Driver) | Each car shows its number, coloured by class in multiclass sessions. |
+| Edge markers (Driver) | A small arrow at the top or bottom edge for the nearest car just off the radar (up to 60 m away), for example "#44 · 35 m" ("#44 · 115 ft" with **Imperial**). |
 | Big word | STANDBY (not on track), CLEAR, CAR LEFT, CAR RIGHT, THREE WIDE, TWO LEFT or TWO RIGHT |
-| Line under it | Who's there and where, for example "#44 J. Smith · half a car ahead" (or "nose at your rear wheel", "half a car behind", "level with you", "at your front wheel"). Otherwise "Nothing alongside". |
-| **AHEAD** and **BEHIND** cards | The nearest car each way within 200 m: number, name, distance, time gap and trend ("▲ closing 12 km/h", "▼ pulling away", "▼ dropping back" or "steady"). Otherwise "Nobody within 200 m" ("Nobody within 656 ft" with **Imperial**). |
-| Class bar | Multiclass sessions only. "**Faster class behind** · GTP #10 · 80 m, closing 40 km/h, with you in about 7 s" or "**Slower class ahead**", for another class within 160 m and closing. Otherwise "No other classes nearby". |
+| Line under it | Who's there and where, for example "#44 J. Smith · half a car ahead" (or "nose at your rear wheel", "half a car behind", "level with you", "at your front wheel"). Otherwise "Nothing alongside". On Rookie it says only where the car is, without its number or name. |
+| **AHEAD** and **BEHIND** cards (Driver) | The nearest car each way within 200 m: number, name, distance, time gap and trend ("▲ closing 12 km/h", "▼ pulling away", "▼ dropping back" or "steady"). Otherwise "Nobody within 200 m" ("Nobody within 656 ft" with **Imperial**). |
+| Class bar (Driver) | Multiclass sessions only. "**Faster class behind** · GTP #10 · 80 m, closing 40 km/h, with you in about 7 s" or "**Slower class ahead**", for another class within 160 m and closing. Otherwise "No other classes nearby". |
 | **CALL LOG** | The last 12 calls with the time. Its heading also shows iRacing's raw spotter state, for example "IRACING SPOTTER: LEFT". |
 
-### The Pit wall view
+### The Pit wall view (Driver)
 
 | Part | What it shows |
 |---|---|
@@ -215,6 +215,10 @@ The radar shows you in the middle and the cars around you. iRacing's spotter say
 | Call chips | The last six calls, under the table |
 
 Speeds on both views (closing speeds, the trend and your own speed) are in km/h or mph, following **Settings → Appearance & data → Units**. Distances follow it too: metres (to a tenth of a metre on the **AHEAD** and **BEHIND** cards and in **GAP**), or whole feet with **Imperial**.
+
+### The simple radar on Rookie
+
+On Rookie, the radar always uses the **Proximity** view. It shows the big word, the line under it, the side glow and bars, the range lines, the cars alongside and just ahead and behind you, and the **CALL LOG**. The parts marked (Driver) above aren't shown: there are no car numbers or edge markers, no class bar, and the **AHEAD** and **BEHIND** cards show "—" under a **DRIVER · Gaps and closing speeds** cover. The **Pit wall** button has a **DRIVER** tag, and clicking it tells you it's part of Driver. If you had picked **Pit wall** before, it comes back when you have Driver again.
 
 ### Tips
 
@@ -277,7 +281,7 @@ Corners are found from your own driving: slow corners where the speed dips, and 
 
 ### Where to find it
 
-**AI spotter → CORNER-BY-CORNER COACHING** for the notes, and the **One thing to work on** card on the Overview. The settings are in **Settings → Voice & radio → Coach**. This is a Pro feature.
+**AI spotter → CORNER-BY-CORNER COACHING** for the notes, and the **One thing to work on** card on the Overview. The settings are in **Settings → Voice & radio → Coach**. This is a Driver feature.
 
 ### Setup
 
@@ -372,7 +376,7 @@ Reminders and results stay quiet while a car is alongside you. Laps re-sent afte
 
 - **"No clean lap yet to compare against."** All your laps so far went onto pit road, off track, had an incident, or were out laps. Drive a full clean lap.
 - **"Lap 7 is your best lap, so it's the reference…"** You've selected the reference lap while comparing against your best lap. Pick another lap, or switch **Compare each corner with** to **Your best through it**.
-- **No voice from the coach.** The coach is Pro. Check the **Coach** switch, **Corner-by-corner coaching**, **Read calls aloud** and the master switch. The coach is muted when the master switch is off.
+- **No voice from the coach.** The coach is part of Driver. Check the **Coach** switch, **Corner-by-corner coaching**, **Read calls aloud** and the master switch. The coach is muted when the master switch is off.
 - **No reminders.** Turn on **Reminder before the corner**, and make sure **Focus corner until fixed** or **Target corner from last lap** is on. Without either, there's no corner to remind you about.
 - **The coaching changed after I switched car or track.** Coaching is kept separately for each car and track combination, layout included.
 - **My laps and coaching are gone.** They're kept in this browser on this PC. Use **Settings → Appearance & data → Backup** to keep them safe or move them to another PC.
@@ -387,7 +391,7 @@ It shows any lap against your reference: the speed, throttle, brake and steering
 
 ### Where to find it
 
-**AI spotter → LAP ANALYSIS** (Pro). The tag at the top right shows the car and track.
+**AI spotter → LAP ANALYSIS** (Driver). The tag at the top right shows the car and track.
 
 ### Controls and readouts
 
@@ -420,7 +424,7 @@ It tracks how you're getting on with this car and track over time.
 
 ### Where to find it
 
-**AI spotter → PROGRESS** (Pro). It appears once you've driven at least one session here, and only while **Progress across sessions** is on.
+**AI spotter → PROGRESS** (Driver). It appears once you've driven at least one session here, and only while **Progress across sessions** is on.
 
 | Part | What it shows |
 |---|---|
@@ -436,7 +440,7 @@ Progress is recorded even while the panel is off.
 
 ### What it does
 
-Instead of your own best, the coach compares every corner with someone else's lap: a teammate's shared lap, a lap from an iRacing telemetry file, or one from the lap library. All the notes then say "Alex's lap" instead of "your best".
+Instead of your own best, the coach compares every corner with someone else's lap: a teammate's shared lap, a lap from an iRacing telemetry file, or one from the lap library. All the notes then say "Alex's lap" instead of "your best". Like the coach, this is part of Driver. Importing a teammate's shared lap is part of Race Team.
 
 ### Steps
 
@@ -459,7 +463,7 @@ In the **Lap library** panel, ◎ does the same for a lap you've downloaded.
 
 ### What it does
 
-The engineer talks you through the session. It's part of Pro.
+The engineer talks you through the session. It's part of Driver.
 
 ### Where to find it
 
@@ -482,7 +486,7 @@ The engineer talks you through the session. It's part of Pro.
 | **Strategy callouts** | Pit window open, box this lap, fuel to add and fuel saving, in races | On |
 | **Damage callouts** | Repair time after contact, and engine warnings | On |
 | **Weather callouts** | Rain, the track getting wetter or drying, wets or slicks | On |
-| **Team stint callouts** | Stint time warnings and who's next, in team races | On |
+| **Team stint callouts** | Stint time warnings and who's next, in team races. Team races are part of Race Team. | On |
 | **Gap reports** (menu) | Every 2, 3 or 5 laps | Every 3 laps |
 | **Gap reports** (switch) | Your position and the gaps ahead and behind, in races | On |
 | **Battle calls** | Defending from a quicker car behind, catching the car ahead | On |
@@ -520,7 +524,8 @@ Battle calls skip laps that had a gap report, and call each car at most every 4 
 
 - **Gap reports, battles and laps to go never come in practice.** They're for races only.
 - **No damage call after a hit.** The hit has to add about a second of repairs. Offline testing often reports no repair time at all.
-- **The engineer is silent on the free plan.** The engineer is part of Pro. Only the spotter talks on the free plan.
+- **The engineer is silent on Rookie.** The engineer is part of Driver. Only the spotter talks on Rookie, the free plan.
+- **No stint calls in a team race.** Team stint calls need Race Team.
 
 ---
 
@@ -532,7 +537,7 @@ In races, it records every car's pit stops and predicts the next stop of the car
 
 ### Where to find it
 
-**Race strategy → Rivals' strategy** ("THE CARS AROUND YOU"). The Race strategy page is part of Pro. The chip says **RACES ONLY** outside races and **LIVE · RACE** in a race.
+**Race strategy → Rivals' strategy** ("THE CARS AROUND YOU"). The Race strategy page is part of Driver. The chip says **RACES ONLY** outside races and **LIVE · RACE** in a race.
 
 | Column | Meaning |
 |---|---|
@@ -580,4 +585,4 @@ Your ratings are recorded each time Grid Central sees you in an online session (
 
 ## Seeing spotter calls in the car
 
-To see calls on your main screen, add the **Spotter** widget (in the **Race control** group) to a design on the **Race overlay** page. It shows CAR LEFT, CAR RIGHT, THREE WIDE, TWO CARS LEFT, TWO CARS RIGHT or CLEAR, and the **Minimal HUD** design already has it. Press **Show on screen** in the **In-game overlay** panel to put it over iRacing. iRacing must run windowed or borderless, and **Ctrl+Alt+O** hides and shows it. See the Race overlay chapter for more.
+To see calls on your main screen, add the **Spotter** widget (in the **Race control** group) to a design on the **Race overlay** page. It shows CAR LEFT, CAR RIGHT, THREE WIDE, TWO CARS LEFT, TWO CARS RIGHT or CLEAR, and the **Minimal HUD** design already has it. The **Spotter** widget is part of Driver: on Rookie, the in-game overlay only shows the **Relative**, **Standings** and **Flags** widgets. Press **Show on screen** in the **In-game overlay** panel to put it over iRacing. iRacing must run windowed or borderless, and **Ctrl+Alt+O** hides and shows it. See the Race overlay chapter for more.

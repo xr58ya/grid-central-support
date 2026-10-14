@@ -9,7 +9,7 @@ This chapter covers three pages in the left-hand menu, plus the session debrief 
 **What you need**
 
 - The **Grid Central companion** running (the small window that opens with Grid Central). Without it these pages show **OFFLINE** or "Start the companion…". The status chips then go to **WAITING FOR IRACING** (companion running, no session) and **LIVE** once you're in a session.
-- **Pro** for Race strategy, Race setup, lap comparison, race events, telemetry files, shared laps, the lap library and the debrief. During the beta everything is unlocked.
+- **Driver** for Race strategy, Race setup, lap comparison, race events, telemetry files, the lap library, keeping a lap (☆), coaching against a lap (◎) and the debrief. **Race Team** for sharing laps (⤓ and **Import a shared lap**) and team races. On Rookie, the free plan, you keep the lap list, your personal bests and your session history. During the beta everything is unlocked.
 - Everything these pages learn is stored on your PC. **Settings → Appearance & data → Save a backup** keeps it safe or moves it to another PC.
 
 ---
@@ -31,7 +31,7 @@ This chapter covers three pages in the left-hand menu, plus the session debrief 
 | CAR AND TRACK | Which laps the whole page shows. Your last pick is remembered | Last pick |
 | Keep my best lap for every car and track | Saves your fastest clean lap for each car and track for good, as **Personal best**, and replaces it when you beat it | On |
 
-**Tips.** Each track layout is its own entry. Recent laps are limited to the **last 40 per car and track**; keep the ones you want for longer (see "Keeping, exporting and sharing laps").
+**Tips.** Each track layout is its own entry. Recent laps are limited to the **last 40 per car and track**; keep the ones you want for longer with ☆, which is part of Driver (see "Keeping, exporting and sharing laps").
 
 **If it doesn't work.** An empty picker means nothing has been recorded yet: laps driven with the companion closed are lost. Laps you joined part-way round are marked "Out lap".
 
@@ -60,9 +60,9 @@ This chapter covers three pages in the left-hand menu, plus the session debrief 
 | Small text | The lap's name ("Lap 12", "Personal best", "Shared by Alex"), date, and why it wasn't clean: "Pit road", "Off track", "Incident", "Out lap" or "Incomplete lap" |
 | Tag | **Recent** (driven lately), **Best** (kept personal best), **Saved** (kept with ☆), **File** (telemetry file), **Shared** (teammate or lap library) |
 | Coloured dot | The lap's chart colour: lime = reference, cyan = lap 2, pink = lap 3 |
-| ☆ / ★ | Keep for good / already kept (press to remove) |
-| ⤓ | Export as a .gclap file |
-| ◎ | Coach against this lap (clean laps only) |
+| ☆ / ★ (Driver) | Keep for good / already kept (press to remove) |
+| ⤓ (Race Team) | Export as a .gclap file |
+| ◎ (Driver) | Coach against this lap (clean laps only) |
 | Show laps | **All laps** (default), **Recent laps**, or **Saved, files and shared** |
 | Clean laps only | Hides laps that weren't clean. Default: ticked |
 
@@ -90,6 +90,8 @@ This chapter covers three pages in the left-hand menu, plus the session debrief 
 ## Keeping, exporting and sharing laps
 
 **Where to find it.** The ☆, ⤓ and ◎ buttons on each lap, and **Import a shared lap** at the top right of Lap data.
+
+**Plans.** Keeping a lap (☆) and coaching against it (◎) are part of Driver. Sharing laps (⤓ and **Import a shared lap**) is part of Race Team, so you and your teammate both need it. The buttons on each lap don't show a plan label; on a plan without them, pressing one tells you which plan it's part of. Your personal best for each car and track is still kept on Rookie by **Keep my best lap for every car and track**.
 
 **Steps**
 
@@ -176,7 +178,7 @@ To use a file someone sent you, press **Import telemetry file**, pick it ("Impor
 - "No telemetry files yet.": press Alt+L in the car to record one.
 - "Couldn't import it… Grid Central needs to be open from the companion (http://127.0.0.1:8765).": use the normal Grid Central window.
 - "This file doesn't have… so it can't be split into laps." or "No complete laps in this file.": that file can't be used.
-- "That's part of Grid Central Pro.": loading files needs Pro.
+- "That's part of Grid Central Driver.": loading files needs Driver.
 
 ---
 
@@ -273,7 +275,7 @@ The fuel boxes stay in litres even with Imperial units, because iRacing's pit me
 | WINDOW | Earliest to latest lap for this stop on this number of stops |
 | ADD | Fuel to add |
 | TYRES | "New" or "Keep" (when TYRES PER STOP is set) |
-| NEXT DRIVER | Who takes over (when drivers are entered under Team race) |
+| NEXT DRIVER | Who takes over (when drivers are entered under Team race, which is part of Race Team) |
 | STOP TIME | Pit lane loss + fuelling + tyres |
 
 A fuel-saving plan only appears when the saving is 15% a lap or less.
@@ -328,7 +330,7 @@ The stop times (ADD AT NEXT STOP and IF YOU PIT NOW) include the planner's **TYR
 1. Switch it on ("Automatic pit fuel is on…").
 2. Try it in a practice race first, watching the state label and the pit menu (F4).
 
-**State label:** OFF; OFF · PRO; ON · WAITING FOR IRACING; ON · RACES ONLY; ON · WAITING FOR YOU IN THE CAR; ON · MEASURING FUEL USE; ON · PAUSED ON PIT ROAD; ON · SETTING 34 L or ON · 34 L SET (working; in gallons with Imperial units, like ON · SETTING 9.0 GAL); ON · NO FUEL NEEDED; ON · YOUR SETTING UNTIL THE STOP (you set fuel by voice or from the phone); ON · RACE FINISHED; or ON · plus an error (it retries after 15 seconds).
+**State label:** OFF; OFF · DRIVER; ON · WAITING FOR IRACING; ON · RACES ONLY; ON · WAITING FOR YOU IN THE CAR; ON · MEASURING FUEL USE; ON · PAUSED ON PIT ROAD; ON · SETTING 34 L or ON · 34 L SET (working; in gallons with Imperial units, like ON · SETTING 9.0 GAL); ON · NO FUEL NEEDED; ON · YOUR SETTING UNTIL THE STOP (you set fuel by voice or from the phone); ON · RACE FINISHED; or ON · plus an error (it retries after 15 seconds).
 
 **Tips.** It only re-sends when it needs more fuel, or about one and a half laps' worth less, so your own F4 change usually sticks. The engineer says "Pit fuel set to 34 litres." ("9 gallons" with Imperial units) or "You've got the fuel to finish. Pit fuel unticked."
 
@@ -355,7 +357,7 @@ Calls: "Rain is starting.", "The race has been declared wet. Wet tyres are allow
 
 **What it does.** Shares out planned stints between drivers, checks the stint limit and minimum drive time, and in team races records each driver change live.
 
-**Where to find it.** **Race strategy** → **TEAM RACE · Driver stints**. Chip: **NOT A TEAM RACE**, **TEAM · WAITING FOR THE RACE** or **LIVE · TEAM RACE**.
+**Where to find it.** **Race strategy** → **TEAM RACE · Driver stints**. Chip: **NOT A TEAM RACE**, **TEAM · WAITING FOR THE RACE** or **LIVE · TEAM RACE**. Team races are part of Race Team: with Driver alone, the panel has a **RACE TEAM · Team races** cover, the plans are worked out for you driving alone, and there are no stint calls.
 
 | Input (as shown) | What it means | Default |
 |---|---|---|
