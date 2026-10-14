@@ -1,0 +1,98 @@
+name: Bug report
+description: Something in Grid Central is broken or not working as expected.
+title: "[Bug]: "
+labels: ["type: bug", "status: needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem. The more detail you give, the faster it can be fixed.
+        Search the existing issues first in case it has already been reported.
+        Prefer email, or need to share something privately? Write to support.gridcentral@gmail.com.
+  - type: input
+    id: version
+    attributes:
+      label: Grid Central version
+      description: Shown in Settings, or in the window title.
+      placeholder: "0.5.9.1"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part of Grid Central?
+      multiple: true
+      options:
+        - Install or update
+        - Setup wizard
+        - Dashboard / main app
+        - Overlays (in-game or OBS)
+        - Phone companion
+        - Talkback / voice / commentary
+        - Engineer, strategy or coach
+        - Telemetry, lap data or debrief
+        - Team hub or online features
+        - Paint / spray booth
+        - Discord link
+        - Account, beta code or Pro
+        - Translations
+        - Other / not sure
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the problem, and what you expected to happen instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can the problem be made to happen again?
+      placeholder: |
+        1. Open ...
+        2. Click ...
+        3. See the problem
+    validations:
+      required: true
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: How often does it happen?
+      options:
+        - Every time
+        - Sometimes
+        - Only happened once
+    validations:
+      required: true
+  - type: input
+    id: session
+    attributes:
+      label: iRacing session details
+      description: Car, track and session type if it matters (practice, race, team race, replay).
+      placeholder: "Porsche 963 at Spa, team race"
+  - type: input
+    id: os
+    attributes:
+      label: Windows version
+      placeholder: "Windows 11 23H2"
+    validations:
+      required: true
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware and setup
+      description: Monitors or VR, phone model if using the phone companion, streaming software if using overlays.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error messages or logs
+      description: Paste any error text here. It is formatted as code automatically.
+      render: text
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or video
+      description: Drag and drop images or a short clip here.

@@ -1,0 +1,62 @@
+name: Setup help
+description: Need help installing, setting up or using a feature.
+title: "[Help]: "
+labels: ["type: setup help", "status: needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check the user guide in the app first, it may already answer your question.
+        Prefer email, or need to share something privately? Write to support.gridcentral@gmail.com.
+  - type: input
+    id: version
+    attributes:
+      label: Grid Central version
+      placeholder: "0.5.9.1"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: What do you need help with?
+      multiple: true
+      options:
+        - Install or update
+        - Setup wizard
+        - Dashboard / main app
+        - Overlays (in-game or OBS)
+        - Phone companion
+        - Talkback / voice / commentary
+        - Engineer, strategy or coach
+        - Telemetry, lap data or debrief
+        - Team hub or online features
+        - Paint / spray booth
+        - Discord link
+        - Account, beta code or Pro
+        - Translations
+        - Other / not sure
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: What are you trying to set up?
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you tried so far?
+      description: The steps you followed and where you got stuck.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Windows version
+      placeholder: "Windows 11 23H2"
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Drag and drop images of the screen you are stuck on.

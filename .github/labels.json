@@ -1,0 +1,132 @@
+[
+  {
+    "name": "type: bug",
+    "color": "d73a4a",
+    "description": "Something is broken"
+  },
+  {
+    "name": "type: feature request",
+    "color": "a2eeef",
+    "description": "New feature or improvement"
+  },
+  {
+    "name": "type: setup help",
+    "color": "0075ca",
+    "description": "Help installing, setting up or using a feature"
+  },
+  {
+    "name": "status: needs triage",
+    "color": "fbca04",
+    "description": "New, not looked at yet"
+  },
+  {
+    "name": "status: needs info",
+    "color": "f9d0c4",
+    "description": "Waiting on more detail from the reporter"
+  },
+  {
+    "name": "status: confirmed",
+    "color": "0e8a16",
+    "description": "Reproduced or accepted"
+  },
+  {
+    "name": "status: in progress",
+    "color": "1d76db",
+    "description": "Being worked on"
+  },
+  {
+    "name": "status: fixed in dev",
+    "color": "c2e0c6",
+    "description": "Fixed, waiting for the next release"
+  },
+  {
+    "name": "duplicate",
+    "color": "cfd3d7",
+    "description": "Already reported elsewhere"
+  },
+  {
+    "name": "wontfix",
+    "color": "ffffff",
+    "description": "Not planned"
+  },
+  {
+    "name": "priority: critical",
+    "color": "b60205",
+    "description": "App unusable or data lost"
+  },
+  {
+    "name": "priority: high",
+    "color": "d93f0b",
+    "description": "Major feature broken, no workaround"
+  },
+  {
+    "name": "priority: medium",
+    "color": "e99695",
+    "description": "Has a workaround"
+  },
+  {
+    "name": "priority: low",
+    "color": "fef2c0",
+    "description": "Minor or cosmetic"
+  },
+  {
+    "name": "area: install",
+    "color": "5319e7",
+    "description": "Installer, updates, setup wizard"
+  },
+  {
+    "name": "area: dashboard",
+    "color": "5319e7",
+    "description": "Main app"
+  },
+  {
+    "name": "area: overlays",
+    "color": "5319e7",
+    "description": "In-game and OBS overlays, overlay editor"
+  },
+  {
+    "name": "area: phone",
+    "color": "5319e7",
+    "description": "Phone companion"
+  },
+  {
+    "name": "area: voice",
+    "color": "5319e7",
+    "description": "Talkback, voice studio, commentary"
+  },
+  {
+    "name": "area: engineer",
+    "color": "5319e7",
+    "description": "Engineer, strategy, coach, hints"
+  },
+  {
+    "name": "area: telemetry",
+    "color": "5319e7",
+    "description": "Telemetry, lap data, debrief, track map, radar"
+  },
+  {
+    "name": "area: team",
+    "color": "5319e7",
+    "description": "Team hub and online features"
+  },
+  {
+    "name": "area: paint",
+    "color": "5319e7",
+    "description": "Paint and spray booth"
+  },
+  {
+    "name": "area: discord",
+    "color": "5319e7",
+    "description": "Discord link"
+  },
+  {
+    "name": "area: account",
+    "color": "5319e7",
+    "description": "Account, beta codes, Pro"
+  },
+  {
+    "name": "area: translations",
+    "color": "5319e7",
+    "description": "German, Spanish and other languages"
+  }
+]

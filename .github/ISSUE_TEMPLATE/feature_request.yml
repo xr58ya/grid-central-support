@@ -1,0 +1,66 @@
+name: Feature request
+description: Suggest a new feature or an improvement to an existing one.
+title: "[Feature]: "
+labels: ["type: feature request", "status: needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea. Search the existing requests first, and add a 👍 to one that matches instead of opening a new one.
+        Prefer email, or need to share something privately? Write to support.gridcentral@gmail.com.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part of Grid Central?
+      multiple: true
+      options:
+        - Install or update
+        - Setup wizard
+        - Dashboard / main app
+        - Overlays (in-game or OBS)
+        - Phone companion
+        - Talkback / voice / commentary
+        - Engineer, strategy or coach
+        - Telemetry, lap data or debrief
+        - Team hub or online features
+        - Paint / spray booth
+        - Discord link
+        - Account, beta code or Pro
+        - Translations
+        - Something new
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The problem or goal behind the request. For example, "During team races I can't tell when my teammate is about to pit."
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: What would you like Grid Central to do?
+      description: Describe how you picture it working.
+    validations:
+      required: true
+  - type: textarea
+    id: workaround
+    attributes:
+      label: How do you handle it today?
+      description: Any workaround or other app you use for this now.
+  - type: dropdown
+    id: importance
+    attributes:
+      label: How important is this to you?
+      options:
+        - Nice to have
+        - Would use it often
+        - I can't use Grid Central properly without it
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Mockups, examples or links
+      description: Sketches, screenshots of other apps, or anything else that helps.
