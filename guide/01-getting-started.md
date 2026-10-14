@@ -164,7 +164,7 @@ Whichever you choose, **All voice calls** (the switch at the top of **Settings �
 
 **Your iRacing profile.** After your first session, the sidebar shows your name, licence and iRating. **···** opens your profile card (licence, iRating, club, division, team, car, session) with **View on iRacing ↗** and **Copy customer ID**.
 
-The footer shows your version (for example **V 0.5.9.1 · BETA**).
+The footer shows your version (for example **V 0.5.9.2 · BETA**).
 
 **Tips**
 
@@ -541,7 +541,7 @@ Start with the top-bar status and the companion window. Most problems come down 
 | **"WAITING FOR IRACING"** or **"Waiting for iRacing"** | The companion is running. Load into a session and get in the car. The garage menus don't send live data. |
 | **No spoken calls** | Click anywhere in Grid Central once, because browsers block sound until you do. Check the **All voice calls** switch at the top, **Read calls aloud**, and each role's switch and volume in **Settings → Voice & radio**. Try **◖ Test the voice** in the setup wizard. |
 | **Engineer speaks English after switching language** | Install a voice for that language in Windows **Settings → Time & language → Speech**, then pick it under **Voice**. |
-| **The in-game overlay doesn't show over iRacing** | Set iRacing to windowed or borderless. Full screen covers everything else. On Rookie, only the **Relative**, **Standings** and **Flags** widgets are drawn, A design with none of them (such as **Minimal HUD**) shows them in their usual places. |
+| **The in-game overlay doesn't show over iRacing** | Set iRacing to windowed or borderless. Full screen covers everything else. On Rookie, only the **Relative**, **Standings** and **Flags** widgets are drawn. A design with none of them (such as **Minimal HUD**) shows them in their usual places. |
 | **Talkback doesn't hear me** | Check the microphone and button in **Settings → Voice & radio → Talkback**, and that the status shows **READY**. Hold the button a moment before speaking. If it says "Press Set button, then press the wheel button or key you want to talk with.", set a button first. On Rookie the status stays **OFF**, because talkback is part of Driver. |
 | **Phone can't connect** | Allow GridCentral.exe on **private** networks when Windows asks. Set your Wi-Fi to Private in Windows **Settings → Network & internet**. Make sure the phone is on the same Wi-Fi. On Rookie, phones can't connect: the phone pit wall is part of Driver. |
 | **"No QR code"** on the Phone panel | Type the link shown under it into your phone instead. |
@@ -556,7 +556,7 @@ Start with the top-bar status and the companion window. Most problems come down 
 
 Email **support.gridcentral@gmail.com** and include:
 
-- Your version, from the bottom right of Grid Central (for example **V 0.5.9.1 · BETA**)
+- Your version, from the bottom right of Grid Central (for example **V 0.5.9.2 · BETA**)
 - The track, the car and the session type
 - What you were doing, what you expected and what happened, and how often it happens
 - `companion.log` from the Grid Central folder (and `companion-previous.log` if the problem was in the run before)

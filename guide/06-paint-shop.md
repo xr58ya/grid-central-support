@@ -296,7 +296,7 @@ If the car's 3D model is loaded (Spray Booth), gradients run front to back or to
 2. Click a tile to use that pattern. Only one pattern is used at a time, as in iRacing.
 3. Set **COLOUR 1**, **COLOUR 2** and **COLOUR 3**. They apply to every pattern, so you can switch patterns and keep your colours.
 
-The tiles show the 3D car once its model has been loaded in the Spray Booth. Until then you see "Load this car's 3D model in the Spray Booth to see the patterns on the car." On Rookie the note doesn't show, because the Spray Booth is part of Driver. and flat pictures of the sheet.
+The tiles show the 3D car once its model has been loaded in the Spray Booth. Until then you see "Load this car's 3D model in the Spray Booth to see the patterns on the car." and flat pictures of the sheet. On Rookie that note doesn't show, because the Spray Booth is part of Driver.
 
 ---
 
