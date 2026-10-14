@@ -73,7 +73,7 @@ This chapter covers three pages in the left-hand menu, plus the session debrief 
 | Title | Each lap's finishing gap to the reference, "+0.215 s · −0.480 s against the reference" |
 | TIME GAP | The gap to the reference around the lap. Above the centre line = slower, below = quicker. The scale is printed underneath |
 | SPEED, THROTTLE, BRAKE, STEERING, GEAR | The laps' traces on top of each other |
-| Readout | Distance into the lap (metres when the track length is known, otherwise "% of the lap"), then per lap: speed in km/h, throttle %, brake %, gear and, for laps 2 and 3, the gap at that point |
+| Readout | Distance into the lap (metres when the track length is known, otherwise "% of the lap"), then per lap: speed (km/h, or mph with Imperial units), throttle %, brake %, gear and, for laps 2 and 3, the gap at that point |
 | Map | The reference line, green where lap 2 is quicker, red where slower; brighter = bigger difference. With three laps it compares lap 2 only |
 | Sector table | The lap in **10 equal sectors** (not iRacing's official sectors). Reference time, then each lap's difference (green quicker, red slower). Turn numbers like "Sector 3 T5" appear once iRacing's track map is loaded |
 
@@ -259,7 +259,7 @@ Practice laps of about 1:45.0, 2.9 L a lap, 90 L tank.
 | TYRES PER STOP (S) | Extra seconds a tyre change adds | Empty or 0 = **no tyres**; measured from a tyre stop |
 | TYRE SETS FOR STOPS | Sets available for stops. With fewer sets than stops, changes are spread so each set does a similar distance | Empty = **Unlimited**; sets left in iRacing |
 
-The fuel boxes stay in litres even with US units, because iRacing's pit menu takes litres.
+The fuel boxes stay in litres even with Imperial units, because iRacing's pit menu takes litres. With Imperial units a note under the boxes says so.
 
 **The plans**
 
@@ -309,7 +309,9 @@ A fuel-saving plan only appears when the saving is 15% a lap or less.
 | WEATHER | Track wetness, rain, declared wet, and a suggestion |
 | MEASURED | Fuel per lap and where it's from (green laps, "earlier laps here", "estimate"), lap time, pit lane loss (measured or estimate), tank |
 
-**Engineer calls** (races, once per stint, at the line): "Pit window is open. 42 litres gets you to the finish.", "Box next lap. Add 42 litres.", "Box this lap. Add 42 litres." (with "Check the pit menu fuel." if the menu is short), "Save 0.25 litres a lap and you can skip a stop." (at most every 5 laps), "Fuel is good to the finish." Switch them with **Settings → Voice & radio → Engineer → Strategy callouts**; the **Callout settings** button at the top of the page goes to the call settings.
+The stop times (ADD AT NEXT STOP and IF YOU PIT NOW) include the planner's **TYRES PER STOP**, so set that to 0 if you won't change tyres.
+
+**Engineer calls** (races, once per stint, at the line): "Pit window is open. 42 litres gets you to the finish.", "Box next lap. Add 42 litres.", "Box this lap. Add 42 litres." (with "Check the pit menu fuel." if the menu is short), "Save 0.25 litres a lap and you can skip a stop." (at most every 5 laps), "Fuel is good to the finish." With Imperial units the engineer gives the fuel in gallons. Switch them with **Settings → Voice & radio → Engineer → Strategy callouts**; the **Callout settings** button at the top of the page goes to the call settings.
 
 **If it doesn't work.** "Companion not running" / "Waiting for iRacing": start the companion or join a session. Numbers at "—": complete two green-flag laps first.
 
@@ -326,9 +328,9 @@ A fuel-saving plan only appears when the saving is 15% a lap or less.
 1. Switch it on ("Automatic pit fuel is on…").
 2. Try it in a practice race first, watching the state label and the pit menu (F4).
 
-**State label:** OFF; OFF · PRO; ON · WAITING FOR IRACING; ON · RACES ONLY; ON · WAITING FOR YOU IN THE CAR; ON · MEASURING FUEL USE; ON · PAUSED ON PIT ROAD; ON · SETTING 34 L or ON · 34 L SET (working); ON · NO FUEL NEEDED; ON · YOUR SETTING UNTIL THE STOP (you set fuel by voice); ON · RACE FINISHED; or ON · plus an error (it retries after 15 seconds).
+**State label:** OFF; OFF · PRO; ON · WAITING FOR IRACING; ON · RACES ONLY; ON · WAITING FOR YOU IN THE CAR; ON · MEASURING FUEL USE; ON · PAUSED ON PIT ROAD; ON · SETTING 34 L or ON · 34 L SET (working; in gallons with Imperial units, like ON · SETTING 9.0 GAL); ON · NO FUEL NEEDED; ON · YOUR SETTING UNTIL THE STOP (you set fuel by voice or from the phone); ON · RACE FINISHED; or ON · plus an error (it retries after 15 seconds).
 
-**Tips.** It only re-sends when it needs more fuel, or about one and a half laps' worth less, so your own F4 change usually sticks. The engineer says "Pit fuel set to 34 litres." or "You've got the fuel to finish. Pit fuel unticked."
+**Tips.** It only re-sends when it needs more fuel, or about one and a half laps' worth less, so your own F4 change usually sticks. The engineer says "Pit fuel set to 34 litres." ("9 gallons" with Imperial units) or "You've got the fuel to finish. Pit fuel unticked."
 
 ---
 
@@ -389,7 +391,7 @@ Calls for cars within 6 seconds: "Car 25 ahead has pitted. Push, you can jump th
 
 ## Race setup: Loaded now and notes
 
-**What it does.** Shows the car setup you're driving, read from iRacing, and keeps your notes on it. (This page is about car setups. The first-run setup wizard is **Run setup again** in Settings.)
+**What it does.** Shows the car setup you're driving, read from iRacing, and keeps your notes on it. (This page is about car setups. The first-run setup wizard is **Settings → Appearance & data → Run setup again**.)
 
 **Where to find it.** Left menu → **Race setup** → **LOADED NOW**.
 

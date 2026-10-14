@@ -38,16 +38,16 @@ The **Paint** page (heading "Paint shop.", subtitle "Paint your car, helmet and 
 
 ## The ready boxes
 
-**What it does.** These four boxes show what's ready for installing. Each one is clickable and takes you to its fix. Install and Download also check the first two (car and ID) and flash the box that's missing.
+**What it does.** These four boxes show what's ready for installing. Each one is clickable and takes you to its fix. Install and Download also check the car and the ID, and flash the box that's missing.
 
 | Box | Shows | When clicked |
 |---|---|---|
 | **CAR** | The car's name, "Every car" (helmet or suit for all cars), "Use the …" (you're in a car) or "Choose your car" | Picks the car you're driving, or opens Setup → CAR |
-| **TEMPLATE** | "iRacing's PSD", "Loaded", "Not used" (you chose to paint without one) or "Load it" | Searches for the template. "Not used" goes back to asking for one. |
+| **TEMPLATE** | "iRacing's PSD", "Loaded", "Not used" (you chose to paint without one) or "Load it" | Searches for the template, or opens Setup once one is loaded. "Not used" goes back to asking for one. |
 | **IRACING ID** | Your ID, or "Add your ID" | Opens Setup with the ID box ready to type in |
 | **ONE-CLICK INSTALL** | "On" or "Start the companion" | Starts the companion |
 
-The summary counts only the **car** and the **ID**. Those are the two things you must have. A template and the companion are recommended, not required.
+The summary counts the **car**, the **template** and the **ID**, so a missing template shows as a thing to do. If you chose **Paint without a template**, the box shows "Not used" and isn't counted. Install and Download only need the car and the ID, and the companion is recommended, not required.
 
 ---
 
@@ -128,7 +128,7 @@ Shown only when there's no template ("Without a template.").
 
 **If it doesn't work**
 - *"Choose your car first, so Grid Central knows which template to look for."*: pick the car before searching.
-- *"Start the companion (Settings → iRacing) to search for templates."*: searching needs the companion. Use Load a file instead.
+- *"Start the companion (Settings → Connections → iRacing) to search for templates."*: searching needs the companion. Use Load a file instead.
 - *"No template found for the …"*: download it in iRacing first, then search again. Templates saved somewhere unusual won't be found, so use Load a file.
 - *"This template looks like the …, not the …"*: you loaded another car's template. Use **Switch car**, or load the right template.
 - Templates folder says *"No iRacing template folders (like 67_template_MX16) in it"*: choose the folder that holds the template folders themselves.
@@ -517,7 +517,7 @@ Install and Download first check for things that won't come out as they look. Th
 | "iRacing didn't reload the paint: …" | The file is in place. Leave the car and get back in. |
 | Installed without the companion and nothing changed | Press Ctrl+R in iRacing, and check the file went into the car's own folder |
 | Wrong colours on the number | iRacing paints the number from its own Paint Shop. Set the number colours there. |
-| Live: "start the companion (Settings → iRacing)…" | Start the companion |
+| Live: "start the companion (Settings → Connections → iRacing)…" | Start the companion |
 | "You're driving a different car (…)" during Live | Pick that car in Setup |
 | Paint looks fine here but parts are missing in iRacing | Look at the check list: hidden layers, items off the sheet, outside the mask, or under Car Mandatory |
 | Finishes don't show | They're car only and need car_spec_ID.tga next to the paint. Install writes it, Download saves both files. |
@@ -540,7 +540,7 @@ Install and Download first check for things that won't come out as they look. Th
 | Under the car | The pattern strip and its three colours. The mouse wheel scrolls along it. |
 | Right | **Selected** (properties), **Layers**, **Look** (Finish and Wheels), **Scene** (backdrop, quality, 3D model, plus everything from the Setup tab: car, ID, number, versions, template) |
 
-**Simple** (the default) keeps to the everyday tools and hides the sheet, the Layers tab and More tools. **Advanced** shows everything. Your choice is remembered.
+**Simple** (the default) keeps to the everyday tools and hides the sheet, the Layers tab, More tools, the model's name in the top bar, and the **Rect**, **Ellipse** and **Line** tools (they draw on the sheet). If one of those is picked when Simple comes on, you're put back on **Move**. **Advanced** shows everything. Your choice is remembered.
 
 ### Mouse controls
 
@@ -559,7 +559,7 @@ Install and Download first check for things that won't come out as they look. Th
 - **Text** and **Number** show a faint preview, then go where you click.
 - **Logo** asks for the file, then "Click the car where it goes. Esc cancels."
 - With **Move**, hovering lights up what a click would select and shows its name. Dragging a number, text or logo follows the car's surface and snaps into blocks. Hold **Alt** for no snapping.
-- Shapes, Select, Lasso and Stroke work on the sheet only: "Shapes and selections are drawn on the sheet (bottom left; ⤢ makes it bigger)."
+- Shapes, Select, Lasso and Stroke work on the sheet only: "Shapes and selections are drawn on the sheet (bottom left; ⤢ makes it bigger)." In Simple, where the sheet is hidden, it says "Shapes and selections are drawn on the sheet: switch to Advanced (top bar) to show it."
 
 **Right-click menu.** For an item: **Edit…**, **Duplicate**, **Bring forward**, **Send back**, **Delete**. For **This panel** (or **These panels (both sides)** with Symmetry): **Fill with the paint colour**, **Select it**, **Show "layer" only here**. Under **Finish**: Gloss, Satin, Matte, Metallic, Pearl, Chrome, Brushed metal, **The whole car's finish**. Under **Here**: **Pick this colour**, **Focus here**, **Back to the whole car**.
 
@@ -578,7 +578,7 @@ Install and Download first check for things that won't come out as they look. Th
 
 ### 3D models
 
-- Cars show as a simple **Stand-in car** until there's a 3D model for them. Grid Central downloads models by itself as they're added ("Getting the 3D model for the …"). A downloaded model is kept, and the credit shows in the top bar.
+- Cars show as a simple **Stand-in car** until there's a 3D model for them. Grid Central downloads models by itself as they're added ("Getting the 3D model for the …"). A downloaded model is kept, and the credit shows in the top bar in **Advanced**.
 - On the stand-in, the paint won't line up: "There's no 3D model for the … yet…". A **Live in iRacing** button appears in Scene so you can see the paint on the real car.
 - **Load 3D model…** takes a .glb whose UV map matches iRacing's template. The paint goes on the material named like "paint", "livery", "body", "car_skin" or "decal". If none is found it goes on the biggest part, with a note telling you to name the material "paint" in Blender. Your own model is kept for that car in this browser, and downloads never replace it.
 - Finishes show as iRacing shows them: chrome mirrors the booth, and matte goes flat.
@@ -603,7 +603,7 @@ Press **Photo** for a picture of the car as shown. Add **Say something about it 
 - "Choose your car in Setup to see it in 3D.": pick the car (Scene tab).
 - "That's not on the car's paint. Point at the body.": windows, tyres and so on can't be painted.
 - **No template loaded** card: press **Find my template**, or **Paint without one**.
-- Shape tools do nothing on the car: switch to **Advanced** and draw on the sheet.
+- No Rect, Ellipse or Line on the rail, or shape tools do nothing on the car: switch to **Advanced** and draw on the sheet.
 - "That model couldn't be loaded: …" / "That file has no 3D model in it.": export the model as .glb.
 
 ---

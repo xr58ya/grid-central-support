@@ -201,7 +201,7 @@ Pressing it again updates the source, and adds it to the current scene if that s
 
 | Problem | Fix |
 |---|---|
-| "Connect OBS first (Settings → OBS Studio)…" | Connect OBS under Settings → Connections → OBS Studio. |
+| "Connect OBS first (Settings → Connections → OBS Studio)…" | Connect OBS under Settings → Connections → OBS Studio. |
 | Blank in OBS | Start the companion and get in a session. Right-click the source → **Refresh**. |
 | Sample data during a race | The companion isn't running. Start it and refresh the source. |
 | Wrong size or cut off | Match the source size to the design, then right-click → **Transform → Fit to screen**. |
@@ -302,7 +302,7 @@ Grid Central reconnects by itself next time, until you press **Disconnect**.
 
 ## Commentary on your stream
 
-**What it does.** Two commentators call your race like TV: a **lead** for the action and an **analyst** for the story. Viewers hear them through your overlay in OBS; you don't. It runs while Grid Central is open.
+**What it does.** Two commentators call your race like TV: a **lead** for the action and an **analyst** for the story. Viewers hear them on your stream (through your overlay in OBS, or a sound device); you don't. It runs while Grid Central is open.
 
 **Where to find it.** **Broadcast → Commentary** ("ON YOUR STREAM ONLY"). (Pro)
 

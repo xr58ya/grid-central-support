@@ -20,7 +20,7 @@ Some details worth knowing:
 - **Nothing is sent anywhere.** Recognition happens on your PC with a small offline speech model.
 - **It understands two readings of what you said.** One reading is open: it hears any word. The other only listens for the words Grid Central knows. That makes key words like "box" and the numbers more reliable. The names of the drivers in your session are added to the list of words it listens for, so "how's my pace against Hoffmann?" works.
 - **Answers come from the right person.** Traffic questions ("am I clear?", "is pit lane clear?") are answered in the spotter's voice. Coaching questions ("where am I losing time?", "how was turn 5?", "what's my optimal lap?") come from the coach. Everything else comes from the engineer.
-- **Talkback answers use the engineer's volume** (Settings → Voice & radio → Engineer → Volume).
+- **Each answer uses the volume of whoever gives it**: the engineer's for most answers (Settings → Voice & radio → Engineer → Volume), the spotter's for traffic questions and the coach's for coaching questions.
 
 ### Where to find it
 
@@ -49,7 +49,7 @@ Some details worth knowing:
 | **Push-to-talk button** / **Set button** | Shows your button ("Not set" until you choose one). Press **Set button**, then the button or key. | Not set |
 | **Microphone** | The headset mic you race with. Lists the microphones Windows has. | Windows default microphone |
 | **Pit commands by voice** | Lets talkback change iRacing's pit menu: "Set fuel 40 litres", "fill it up", "four tyres", "left side only", "rears up one psi", "wets", "fast repair", "no fuel". When it's off, the engineer says "Voice pit commands are switched off in Settings." | On |
-| **Check pit changes first** | Your engineer reads the change back and waits for "yes" before setting it. **When it isn't sure what it heard** (a number or pit word it doubted, or its two readings heard different numbers), **Always**, or **Never**. | When it isn't sure what it heard |
+| **Check pit changes first** | Your engineer reads the change back and waits for "yes" before setting it. **When it isn't sure what it heard** (a number or pit word it doubted, or its two readings heard different numbers), **Always**, or **Never**. A change from a phrase you taught it, or an in-car change of three clicks or more, is always read back first, even on **Never**. | When it isn't sure what it heard |
 | **In-car changes by voice** | "Bias forward one click", "TC up two", "ABS down", "map 3". Grid Central presses your own iRacing keys, and only while iRacing is the active window. | Off |
 | **Keys for in-car changes** (fold-out) | A grid of **Down (−)** and **Up (+)** buttons for each setting: Brake bias, Traction control, ABS, Engine map, Fuel mix, Front bar, Rear bar, Engine braking. Press **Set**, then the key you use in iRacing, holding Shift, Ctrl or Alt if your binding uses them. **Esc** cancels and **Delete** clears it. For brake bias, up is forward. | All unset |
 | Error line (red text) | Explains a problem, for example "Press Set button, then press the wheel button or key you want to talk with." or a microphone or download error. | — |
@@ -277,7 +277,7 @@ Grid Central uses two kinds of voice.
 | **Voice** (Voice & radio) | The main voice for spotter, engineer and coach. | System default, or the best ★ natural voice for your language |
 | **Speaking style** | Calm, Concise or Enthusiastic: how quickly calls are read. | Calm |
 | **Voice** (Spotter / Engineer / Coach) | That role's own voice. Separate voices are part of Pro. | Same as main voice |
-| **Volume** (each role) | How loud that role is. The engineer's volume is also Talkback's. | 100% |
+| **Volume** (each role) | How loud that role is, including its Talkback answers. | 100% |
 
 **Adding more Windows voices:** Windows Settings → Time & language → Speech → add voices. A Spanish or German Windows voice is needed for the race team to speak those languages naturally.
 
@@ -477,7 +477,7 @@ A red dot on the **Car** tab means damage or a warning light.
 | **Next stop** | When to box (for example "Window open · box within 3 laps"), ADD, STOP TIME, LATEST lap, and any driver change. |
 | **If you box this lap** | The position you'd rejoin in, your position now, the time lost, and who'd be AHEAD and BEHIND. |
 | **Stops to come** | Every remaining stop from the fuel in the car now: STOP, LAP, WINDOW, ADD, TYRES (New or Keep), TIME. |
-| **Pit menu** | What's set now. **−5 / −1 / +1 / +5** set an amount (in litres), and **Set fuel** sends it. **Use strategy** fills in the strategy's figure. **No fuel**, **4 tyres**, **No tyres**, **Fast repair**, **No fast repair** and **Tear-off** do what they say. Crew only. |
+| **Pit menu** | What's set now. **−5 / −1 / +1 / +5** set an amount in litres, because iRacing's pit menu takes litres. With imperial units, the gallons are shown alongside, for example "40 L (10.6 gal)". **Set fuel** sends it. **Use strategy** fills in the strategy's figure. **No fuel**, **4 tyres**, **No tyres**, **Fast repair**, **No fast repair** and **Tear-off** do what they say. Crew only. |
 
 A fuel amount set from the phone stays until your stop, like one set by voice. iRacing only takes pit menu changes with the driver in the car.
 

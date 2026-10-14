@@ -60,7 +60,7 @@ It works the same, except that updates aren't installed for you: the banner offe
 
 ### Upgrading from an older beta
 
-Run the new Setup. Your laps, settings, paints and strategy data are kept (they're in your browser). Coming from a zip version? Copy `overlays.json`, `phone.json` and `discord.json` from the old folder into the installed one (Start menu → right-click Grid Central → **Open file location**) before starting it, then delete the old folder.
+Run the new Setup. Your laps, settings, paints and strategy data are kept (they're in your browser). Coming from a zip version? Copy `overlays.json`, `phone.json`, `discord.json` and `teamhub.json` from the old folder into the installed one (Start menu → right-click Grid Central → **Open file location**) before starting it, then delete the old folder.
 
 ### If it doesn't work
 
@@ -140,7 +140,7 @@ Move with **Next** and **Back**. **Skip setup** closes it; skipping, Esc or fini
 | **Spotter and flags** | Cars alongside, flags, hazards and damage. No coaching or gap reports. |
 | **Quiet** | Only cars alongside. |
 
-Whichever you choose, the voice spotter itself stays on.
+Whichever you choose, **All voice calls** (the switch at the top of **Settings → Voice & radio**) is switched on.
 
 ## The Overview page
 
@@ -160,7 +160,7 @@ Whichever you choose, the voice spotter itself stays on.
 | **Lap analysis** | A chart of your lap times (from two laps on), with **BEST LAP**, **LAST LAP** and **OPTIMAL LAP**. |
 | **Your ratings and races** | Charts of your iRating and safety rating over time, and your **RECENT RACES**. |
 | **One thing to work on** | The coach's top tip. **Open driver coach →** |
-| **ON-TRACK SPOTTER** | "Spotter ready" or "Spotter muted"; the switch mutes the voice spotter everywhere. |
+| **ON-TRACK SPOTTER** | "Spotter ready" or "Spotter muted". Its switch is **All voice calls**, the same one as in **Settings → Voice & radio**: it mutes the spotter, engineer and coach. |
 
 **Your iRacing profile.** After your first session, the sidebar shows your name, licence and iRating. **···** opens your profile card (licence, iRating, club, division, team, car, session) with **View on iRacing ↗** and **Copy customer ID**.
 
@@ -192,7 +192,7 @@ The footer shows your version (for example **V 0.5.9.1 · BETA**).
 ### Creating an account or signing in
 
 1. Start the companion (it tells Grid Central which PC this is).
-2. In **Settings → Account**, enter **EMAIL** and **PASSWORD** (at least 8 characters).
+2. In **Settings → Account**, enter **EMAIL** and **PASSWORD** (at least 8 characters for a new account).
 3. Press **Create account**, or **Sign in** if you have one. The panel shows "Signed in as …".
 4. Beta tester? If **BETA TESTER? ENTER YOUR BETA CODE FOR 12 MONTHS FREE** shows, enter your code and press **Use code**. A new account made on the PC where you unlocked the beta gets the code automatically.
 
@@ -255,7 +255,7 @@ The **Team** panel (also in **Settings → Account**): one person runs the team,
 
 **Where to find it.** **⚙ Settings** at the bottom of the sidebar, or **Connect iRacing ↗** in the top bar. It opens your last tab; the left and right arrow keys switch tabs.
 
-Changes save straight away, often with a short confirmation ("Spotter callouts on."). Some messages name a panel, such as "Settings → iRacing". This is which tab each panel is in:
+Changes save straight away, often with a short confirmation ("Spotter callouts on."). Most messages that send you to a setting name the tab and then the panel, such as "Settings → Connections → iRacing" or "Settings → Voice & radio → Spotter". This is which tab each panel is in:
 
 | Panel | Tab |
 |---|---|
@@ -306,7 +306,7 @@ Your race team is three people on the radio: the **spotter** (cars around you), 
 
 | Control | What it does | Default |
 |---|---|---|
-| Switch at the top right | The voice spotter on or off (the same switch as on the Overview). | On |
+| **All voice calls** (the switch at the top right) | Mutes or brings back every call from the spotter, engineer and coach (the same switch as on the Overview). Talkback's answers and your crew's messages are still read out. | On |
 | **Read calls aloud** | Speaks calls with your Windows voices. | On |
 | **Voice** | The main voice for all three. Your language's voices come first; ★ natural ones sound best. | Best natural voice, else System default |
 | **Speaking style** | **Calm**, **Concise** or **Enthusiastic**: how quickly calls are read. | Calm |
@@ -316,7 +316,7 @@ Your race team is three people on the radio: the **spotter** (cars around you), 
 | Control | What it does | Default |
 |---|---|---|
 | **Spotter callouts** | Car left, car right, clear. | On |
-| **Flag callouts** | Debris, yellow, caution, blue, black and meatball flags. | On |
+| **Flag callouts** | Yellow, caution, debris, blue, black, meatball, red, white and checkered flags. | On |
 | **Hazards ahead** | Stopped, slow or off-track cars ahead, and which turn. Warns 200, 300, 500 or 800 m ahead. | On, 300 m |
 
 ### Engineer panel (Pro)
@@ -363,7 +363,7 @@ The chip shows **OFF**, **LOADING SPEECH MODEL**, **READY**, **LISTENING…** or
 | **Push-to-talk button**: **Set button** | Press it, then the wheel button or key to talk with. | Not set |
 | **Microphone** | Your headset mic. Use a different button from iRacing's voice chat. | Windows default microphone |
 | **Pit commands by voice** | "Set fuel 40 litres", "four tyres", "fast repair"… | On |
-| **Check pit changes first** | **When it isn't sure what it heard**, **Always** or **Never**. | When it isn't sure |
+| **Check pit changes first** | **When it isn't sure what it heard**, **Always** or **Never**. A change from a phrase you taught it, or an in-car change of three clicks or more, is always read back first. | When it isn't sure |
 | **In-car changes by voice** | "Bias forward one click", "TC up two"… Grid Central presses your iRacing keys (set them under **Keys for in-car changes**), only while iRacing is the active window. | Off |
 | **Ask** box | Type a question to test it. | n/a |
 | **Teach it your phrases** | Tell it what you meant by phrases it missed. | n/a |
@@ -389,7 +389,7 @@ The chip shows **OFF**, **LOADING SPEECH MODEL**, **READY**, **LISTENING…** or
 
 | Control | What it does | Default |
 |---|---|---|
-| **Units** | **Metric (litres, °C, km/h)** or **Imperial (US gallons, °F, mph)** in Grid Central and spoken calls. The planner's fuel boxes stay in litres, as iRacing's pit menu does. | Metric |
+| **Units** | **Metric (litres, °C, km/h)** or **Imperial (US gallons, °F, mph)**: fuel, temperatures and speeds in Grid Central and spoken calls. Distances on the radar, in hazard calls and in coaching stay in metres. The planner's fuel boxes stay in litres, as iRacing's pit menu does (in Imperial, the planner says so), and the phone's pit card shows litres with the gallons alongside. | Metric |
 | **Backup**: **Save a backup** and **Restore** | See "Backup and restore" below. | n/a |
 | **Setup wizard**: **Run setup again** | Opens the setup wizard. | n/a |
 | **Open-source licences**: **View licences** | The open-source parts Grid Central uses and their licences (also `THIRD-PARTY-NOTICES.txt` in the Grid Central folder). | n/a |
@@ -515,7 +515,7 @@ Start with the top-bar status and the companion window. Most problems come down 
 |---|---|
 | **"IRACING NOT CONNECTED"** or **"Companion not running"** | Start the companion (**Settings → Connections → ▶ Start companion**, or open Grid Central from the Start menu) and leave its window open. |
 | **"WAITING FOR IRACING"** or **"Waiting for iRacing"** | The companion is running. Load into a session and get in the car. The garage menus don't send live data. |
-| **No spoken calls** | Click anywhere in Grid Central once, because browsers block sound until you do. Check the voice spotter switch, **Read calls aloud**, and each role's switch and volume in **Settings → Voice & radio**. Try **◖ Test the voice** in the setup wizard. |
+| **No spoken calls** | Click anywhere in Grid Central once, because browsers block sound until you do. Check the **All voice calls** switch at the top, **Read calls aloud**, and each role's switch and volume in **Settings → Voice & radio**. Try **◖ Test the voice** in the setup wizard. |
 | **Engineer speaks English after switching language** | Install a voice for that language in Windows **Settings → Time & language → Speech**, then pick it under **Voice**. |
 | **The in-game overlay doesn't show over iRacing** | Set iRacing to windowed or borderless. Full screen covers everything else. |
 | **Talkback doesn't hear me** | Check the microphone and button in **Settings → Voice & radio → Talkback**, and that the status shows **READY**. Hold the button a moment before speaking. If it says "Press Set button, then press the wheel button or key you want to talk with.", set a button first. |

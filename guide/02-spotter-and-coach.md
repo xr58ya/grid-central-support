@@ -73,12 +73,12 @@ Every spoken call goes through one radio. You pick the main voice, the speaking 
 
 | Control (as shown) | What it does | Default |
 |---|---|---|
-| Master switch (top right of **Voice & radio**, "Enable voice spotter") | Mutes or unmutes everything: spotter, engineer and coach. The radar and the call log keep working while it's muted. | On |
+| Master switch (top right of **Voice & radio**, "All voice calls") | Mutes or unmutes all voice calls: spotter, engineer and coach. Talkback's answers and your crew's messages are still read out. The radar and the call log keep working while it's muted. | On |
 | **Read calls aloud** | Speaks calls with your Windows voices. When it's off, calls still appear in the call log but aren't spoken. | On |
 | **Voice** | The main voice. The spotter, engineer and coach all use it unless you give one its own voice. | System default (on first run, the best natural voice in your language is picked automatically if there is one) |
 | **Speaking style** | How quickly calls are read. **Concise** is the quickest, **Enthusiastic** is a little slower, and **Calm** is the slowest. | Calm |
 
-Language and units are set elsewhere: **Settings → Appearance & data → Language** (English, Español or Deutsch) also changes the language of the spoken calls, and **Units** changes the speeds, fuel and temperatures in the engineer's and coach's calls. The radar and hazard distances are always in metres.
+Language and units are set elsewhere: **Settings → Appearance & data → Language** (English, Español or Deutsch) also changes the language of the spoken calls, and **Units** changes the speeds, fuel and temperatures in the engineer's and coach's calls, and the speeds on the radar, in the coaching notes and in the lap analysis corner table. Distances (on the radar, in hazard calls and in the coach's notes) are always in metres.
 
 ### How calls take turns
 
@@ -92,7 +92,7 @@ A more important call interrupts a less important one, which then carries on fro
 
 ### If it doesn't work
 
-- **"Voice spotter is muted. Turn it on to hear calls."** The master switch is off. Turn it on, either on the Overview card or in **Voice & radio**.
+- **"Voice calls are muted. Turn them on to hear calls."** The master switch is off. Turn it on, either on the Overview card or in **Voice & radio**.
 - **"Turn on Read calls aloud…"** or **"Spotter callouts are off…"**: turn that switch on in **Voice & radio**.
 - **The voice list says "Unavailable in this browser".** The browser you're using can't speak. Use the Grid Central app window or Microsoft Edge.
 - **The voice sounds robotic.** Choose a **★ natural** voice.
@@ -208,11 +208,13 @@ The radar shows you in the middle and the cars around you. iRacing's spotter say
 | Relative table | The nearest four cars ahead (at the top) and four behind, within 260 m, with you in the middle. |
 | First column | A chip: AHEAD, BEHIND, LEFT, RIGHT or YOU |
 | **CAR** | Number and name, coloured by class |
-| **CLASS** | The car's class. **CLASS** and **TIME** are hidden when the Grid Central window is narrow. |
+| **CLASS** | The car's class. It's only shown in multiclass sessions. **CLASS** and **TIME** are hidden when the Grid Central window is narrow. |
 | **GAP** | Metres ahead (+) or behind (−). For a car alongside, where it is ("half a car ahead"). On your row: your position, such as P5. |
 | **TIME** | The time gap in seconds |
 | **TREND** | "▲ 12 km/h" when the gap is closing, "▼ 8 km/h" when it's growing, "—" when it's steady. On your row: your speed. |
 | Call chips | The last six calls, under the table |
+
+Speeds on both views (closing speeds, the trend and your own speed) are in km/h or mph, following **Settings → Appearance & data → Units**. Distances are always in metres.
 
 ### Tips
 
