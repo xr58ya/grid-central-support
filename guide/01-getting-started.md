@@ -317,7 +317,7 @@ Your race team is three people on the radio: the **spotter** (cars around you), 
 |---|---|---|
 | **Spotter callouts** | Car left, car right, clear. | On |
 | **Flag callouts** | Yellow, caution, debris, blue, black, meatball, red, white and checkered flags. | On |
-| **Hazards ahead** | Stopped, slow or off-track cars ahead, and which turn. Warns 200, 300, 500 or 800 m ahead. | On, 300 m |
+| **Hazards ahead** | Stopped, slow or off-track cars ahead, and which turn. Warns 200, 300, 500 or 800 m ahead (in Imperial the choices read 660, 980, 1640 or 2620 ft). | On, 300 m |
 
 ### Engineer panel (Pro)
 
@@ -349,7 +349,7 @@ Your race team is three people on the radio: the **spotter** (cars around you), 
 | **Compare each corner with** | **Your best through it** (your optimal lap) or **Your best lap**. | Your best through it |
 | **Focus corner until fixed** | Stays on your worst corner until it's sorted. | On |
 | **Target corner from last lap** | With focus off, coaches your worst corner from the last lap. | On |
-| **Reminder before the corner** | A cue 100, 150, 200 or 300 m before your braking point. | On, 150 m |
+| **Reminder before the corner** | A cue 100, 150, 200 or 300 m before your braking point (in Imperial the choices read 330, 490, 660 or 980 ft). | On, 150 m |
 | **Corner result after it** | Quicker or slower than your best, straight away. | On |
 | **Progress across sessions** | Corners you've fixed and how your laps are improving. | On |
 
@@ -389,7 +389,7 @@ The chip shows **OFF**, **LOADING SPEECH MODEL**, **READY**, **LISTENING…** or
 
 | Control | What it does | Default |
 |---|---|---|
-| **Units** | **Metric (litres, °C, km/h)** or **Imperial (US gallons, °F, mph)**: fuel, temperatures and speeds in Grid Central and spoken calls. Distances on the radar, in hazard calls and in coaching stay in metres. The planner's fuel boxes stay in litres, as iRacing's pit menu does (in Imperial, the planner says so), and the phone's pit card shows litres with the gallons alongside. | Metric |
+| **Units** | **Metric (litres, °C, km/h, metres)** or **Imperial (US gallons, °F, mph, feet)**: fuel, temperatures, speeds and distances in Grid Central and spoken calls. In Imperial, fuel use a lap shows in gal/lap, and distances are in feet on the radar, in hazard calls, in the coach's notes, spoken cues and corner table, in the Lap data readout and in the distance choices in Settings. The planner's fuel boxes stay in litres, as iRacing's pit menu does (in Imperial, the planner says so), and the phone's pit card shows litres with the gallons alongside. | Metric |
 | **Backup**: **Save a backup** and **Restore** | See "Backup and restore" below. | n/a |
 | **Setup wizard**: **Run setup again** | Opens the setup wizard. | n/a |
 | **Open-source licences**: **View licences** | The open-source parts Grid Central uses and their licences (also `THIRD-PARTY-NOTICES.txt` in the Grid Central folder). | n/a |

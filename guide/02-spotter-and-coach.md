@@ -78,7 +78,7 @@ Every spoken call goes through one radio. You pick the main voice, the speaking 
 | **Voice** | The main voice. The spotter, engineer and coach all use it unless you give one its own voice. | System default (on first run, the best natural voice in your language is picked automatically if there is one) |
 | **Speaking style** | How quickly calls are read. **Concise** is the quickest, **Enthusiastic** is a little slower, and **Calm** is the slowest. | Calm |
 
-Language and units are set elsewhere: **Settings → Appearance & data → Language** (English, Español or Deutsch) also changes the language of the spoken calls, and **Units** changes the speeds, fuel and temperatures in the engineer's and coach's calls, and the speeds on the radar, in the coaching notes and in the lap analysis corner table. Distances (on the radar, in hazard calls and in the coach's notes) are always in metres.
+Language and units are set elsewhere: **Settings → Appearance & data → Language** (English, Español or Deutsch) also changes the language of the spoken calls, and **Units** (**Metric (litres, °C, km/h, metres)** or **Imperial (US gallons, °F, mph, feet)**) sets the fuel, temperatures, speeds and distances in the spoken calls (the spotter's hazard calls included), on the radar, in the coaching notes, and in the lap analysis chart and corner table. It also relabels the distance menus for **Hazards ahead** and **Reminder before the corner** in feet, rounded to the nearest 10 ft.
 
 ### How calls take turns
 
@@ -126,7 +126,7 @@ Calls appear in the radar's **CALL LOG** and the **SPOTTER RADIO** panel. Settin
 | **Volume** | How loud the spotter is, 10% to 100% in steps of 5 | 100% |
 | **Spotter callouts** | Calls for cars alongside | On |
 | **Flag callouts** | Yellow, caution, debris, blue, black, meatball, red, white and checkered flags, and "Green, green, green" after a caution | On |
-| **Hazards ahead** (distance menu) | How far ahead stopped, slow or off-track cars are called: 200 m, 300 m, 500 m or 800 m | 300 m |
+| **Hazards ahead** (distance menu) | How far ahead stopped, slow or off-track cars are called: 200 m, 300 m, 500 m or 800 m (with **Imperial**: 660 ft, 980 ft, 1640 ft or 2620 ft) | 300 m (980 ft) |
 | **Hazards ahead** (switch) | Turns hazard calls on or off | On |
 
 ### What each call means
@@ -155,11 +155,11 @@ Calls appear in the radar's **CALL LOG** and the **SPOTTER RADIO** panel. Settin
 - "Slow car ahead. 300 metres." A car is going under about 40 km/h.
 - "Car off ahead, Turn 9. 150 metres." A car has left the track.
 
-The turn number is only given when Grid Central has iRacing's official map of the track (see **The track map**). Distances are rounded to the nearest 50 m. Only the nearest new hazard is called at a time, and the same car isn't called again for 30 seconds unless its state changes (from slow to stopped, for example). Cars on pit road are ignored.
+The turn number is only given when Grid Central has iRacing's official map of the track (see **The track map**). Distances are rounded to the nearest 50 m. With **Imperial**, they're given in feet, rounded to the nearest 100 ft: "Slow car ahead. 1000 feet." Only the nearest new hazard is called at a time, and the same car isn't called again for 30 seconds unless its state changes (from slow to stopped, for example). Cars on pit road are ignored.
 
 ### Tips
 
-- On fast tracks, set **Hazards ahead** to 500 m or 800 m to give yourself more warning. On tight street circuits, 200 m cuts down on calls about cars that aren't in your way.
+- On fast tracks, set **Hazards ahead** to 500 m or 800 m (1640 ft or 2620 ft) to give yourself more warning. On tight street circuits, 200 m (660 ft) cuts down on calls about cars that aren't in your way.
 - If you already use iRacing's own spotter, turn one of them down so you don't hear every call twice.
 
 ### If it doesn't work
@@ -190,13 +190,13 @@ The radar shows you in the middle and the cars around you. iRacing's spotter say
 
 | Part | What it shows |
 |---|---|
-| The radar | Your car in the middle, with range lines at 10 m and 20 m ahead and behind. It shows about 21 m each way. A car alongside sits beside you on the side iRacing reports. |
+| The radar | Your car in the middle, with range lines at 10 m and 20 m ahead and behind (30 ft and 60 ft with **Imperial**). It shows about 21 m (70 ft) each way. A car alongside sits beside you on the side iRacing reports. |
 | Side glow and bars | The side with a car glows amber. It turns red when it's tight: three wide, two cars on one side, or a car right level with you (within about 1.2 m). |
 | Car badges | Each car shows its number, coloured by class in multiclass sessions. |
-| Edge markers | A small arrow at the top or bottom edge for the nearest car just off the radar (up to 60 m away), for example "#44 · 35 m". |
+| Edge markers | A small arrow at the top or bottom edge for the nearest car just off the radar (up to 60 m away), for example "#44 · 35 m" ("#44 · 115 ft" with **Imperial**). |
 | Big word | STANDBY (not on track), CLEAR, CAR LEFT, CAR RIGHT, THREE WIDE, TWO LEFT or TWO RIGHT |
 | Line under it | Who's there and where, for example "#44 J. Smith · half a car ahead" (or "nose at your rear wheel", "half a car behind", "level with you", "at your front wheel"). Otherwise "Nothing alongside". |
-| **AHEAD** and **BEHIND** cards | The nearest car each way within 200 m: number, name, distance, time gap and trend ("▲ closing 12 km/h", "▼ pulling away", "▼ dropping back" or "steady"). Otherwise "Nobody within 200 m". |
+| **AHEAD** and **BEHIND** cards | The nearest car each way within 200 m: number, name, distance, time gap and trend ("▲ closing 12 km/h", "▼ pulling away", "▼ dropping back" or "steady"). Otherwise "Nobody within 200 m" ("Nobody within 656 ft" with **Imperial**). |
 | Class bar | Multiclass sessions only. "**Faster class behind** · GTP #10 · 80 m, closing 40 km/h, with you in about 7 s" or "**Slower class ahead**", for another class within 160 m and closing. Otherwise "No other classes nearby". |
 | **CALL LOG** | The last 12 calls with the time. Its heading also shows iRacing's raw spotter state, for example "IRACING SPOTTER: LEFT". |
 
@@ -204,17 +204,17 @@ The radar shows you in the middle and the cars around you. iRacing's spotter say
 
 | Part | What it shows |
 |---|---|
-| Radar strip | Three lanes with you in the middle (YOU). It shows about 28 m each way, with ticks at 10 m and 20 m. The side zones light up amber or red the same way as in Proximity. |
+| Radar strip | Three lanes with you in the middle (YOU). It shows about 28 m each way, with ticks at 10 m and 20 m (these stay in metres with **Imperial**). The side zones light up amber or red the same way as in Proximity. |
 | Relative table | The nearest four cars ahead (at the top) and four behind, within 260 m, with you in the middle. |
 | First column | A chip: AHEAD, BEHIND, LEFT, RIGHT or YOU |
 | **CAR** | Number and name, coloured by class |
 | **CLASS** | The car's class. It's only shown in multiclass sessions. **CLASS** and **TIME** are hidden when the Grid Central window is narrow. |
-| **GAP** | Metres ahead (+) or behind (−). For a car alongside, where it is ("half a car ahead"). On your row: your position, such as P5. |
+| **GAP** | Distance ahead (+) or behind (−), in metres or feet. For a car alongside, where it is ("half a car ahead"). On your row: your position, such as P5. |
 | **TIME** | The time gap in seconds |
 | **TREND** | "▲ 12 km/h" when the gap is closing, "▼ 8 km/h" when it's growing, "—" when it's steady. On your row: your speed. |
 | Call chips | The last six calls, under the table |
 
-Speeds on both views (closing speeds, the trend and your own speed) are in km/h or mph, following **Settings → Appearance & data → Units**. Distances are always in metres.
+Speeds on both views (closing speeds, the trend and your own speed) are in km/h or mph, following **Settings → Appearance & data → Units**. Distances follow it too, apart from the radar strip's ticks: metres (to a tenth of a metre on the **AHEAD** and **BEHIND** cards and in **GAP**), or whole feet with **Imperial**.
 
 ### Tips
 
@@ -301,7 +301,7 @@ A lap is used for coaching (and can be your reference) only if it's a complete l
 | **Compare each corner with** | **Your best through it** (your best time in each corner from all your clean laps, your optimal lap) or **Your best lap** (your single fastest lap) | Your best through it |
 | **Focus corner until fixed** | Keeps working on the corner you lose the most time in until it's sorted | On |
 | **Target corner from last lap** | When focus is off, coaches the corner you lost the most time in on your last lap | On |
-| **Reminder before the corner** (distance) | How far before your braking point the reminder comes: 100 m, 150 m, 200 m or 300 m | 150 m |
+| **Reminder before the corner** (distance) | How far before your braking point the reminder comes: 100 m, 150 m, 200 m or 300 m (with **Imperial**: 330 ft, 490 ft, 660 ft or 980 ft) | 150 m (490 ft) |
 | **Reminder before the corner** (switch) | A spoken cue on the approach | On |
 | **Corner result after it** | Tells you straight away whether you were quicker or slower than your best | On |
 | **Progress across sessions** | Shows the **PROGRESS** panel | On |
@@ -314,6 +314,8 @@ For the selected lap, the panel shows up to three corners where you lost the mos
 > You braked 14 m earlier than your best. Stay flat a little longer and brake at your reference point.
 > Also: get to full throttle 9 metres sooner.
 > LAP 12 VS YOUR BEST HERE, LAP 8 · CLICK TO SEE THE TRACE
+
+With **Imperial**, distances in the notes are in feet and speeds in mph, so this note says "You braked 46 ft earlier…" and "Also: get to full throttle 30 feet sooner."
 
 Click a note to jump to that corner in **LAP ANALYSIS**. The **Open lap analysis ↓** button does the same for the whole lap.
 
@@ -335,6 +337,8 @@ Click a note to jump to that corner in **LAP ANALYSIS**. The **Open lap analysis
 | **Keep it up** | You were quicker here than your best |
 | **Grip in reserve** | Even your best here uses clearly less grip than the car has held at the same speed elsewhere. It's a hint: banking, camber and bumps matter. |
 
+These limits are measured in metres and km/h whatever your units. With **Imperial**, 6 m is about 20 ft and 8 m about 26 ft.
+
 When the coach sees a slide on the way out, it doesn't also blame late throttle or extra steering, because the slide explains both.
 
 ### The focus card
@@ -354,6 +358,8 @@ With focus off and **Target corner from last lap** on, the card says **TARGET CO
 | "Turn 5: two tenths slower." / "Turn 5: a tenth better." / "Turn 5: matched your best." | The corner result, straight after the corner |
 | "Turn 5 sorted. Nice work." | Three clean laps in a row through your focus corner |
 | "Turn 5: brake 14 metres later." | After a lap, with focus off and target on, if that corner lost at least 0.1 s |
+
+With **Imperial**, distances are spoken in feet: "Brake 46 feet later."
 
 Reminders and results stay quiet while a car is alongside you. Laps re-sent after Grid Central reconnects update the notes silently.
 
@@ -394,8 +400,8 @@ It shows any lap against your reference: the speed, throttle, brake and steering
 | **Clear laps** | Deletes every recorded lap for this car and track, your reference included. You're asked to confirm. The track map is kept. |
 | **LAPS** list | Newest first: lap number, time, gap to the reference, and the time of day (or "NOT COUNTED · reason"). Click a lap to select it. |
 | ☆ / ★ next to a lap | ★ is the reference. Click ☆ on a clean lap to pin it as the reference ("Compare against this lap instead"). Click the pinned ★ again to go back to your fastest lap. |
-| **SPEED & PEDALS** chart | Speed (selected lap bright, **Best** grey), then **Throttle**, **Brake** and **Steering** (left above the line). Dashed lines mark the corners. |
-| Corner table | **Corner** (name, distance from the line, "fast" for fast corners, and which lap it's compared with), **Time** (+ lost, − gained), **Braking** (metres earlier or later), **Turn-in**, **Apex speed** (with the difference), **Full throttle** (metres sooner or later), **Coaching** (the short fix) |
+| **SPEED & PEDALS** chart | Speed (selected lap bright, **Best** grey), then **Throttle**, **Brake** and **Steering** (left above the line). Dashed lines mark the corners. The speed grid is marked every 50 km/h, or every 30 mph with **Imperial**. |
+| Corner table | **Corner** (name, distance from the line, "fast" for fast corners, and which lap it's compared with), **Time** (+ lost, − gained), **Braking** (how far earlier or later), **Turn-in**, **Apex speed** (with the difference), **Full throttle** (how far sooner or later), **Coaching** (the short fix). Distances are in metres, or feet with **Imperial**; **Apex speed** is in km/h or mph. |
 
 Click a corner row to zoom into that corner (click again, or **Show full lap**, to zoom out). The orange dot is where you braked, the hollow circle where your best did; the blue and dashed lines mark the two turn-ins.
 

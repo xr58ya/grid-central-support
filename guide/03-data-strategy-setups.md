@@ -73,7 +73,7 @@ This chapter covers three pages in the left-hand menu, plus the session debrief 
 | Title | Each lap's finishing gap to the reference, "+0.215 s · −0.480 s against the reference" |
 | TIME GAP | The gap to the reference around the lap. Above the centre line = slower, below = quicker. The scale is printed underneath |
 | SPEED, THROTTLE, BRAKE, STEERING, GEAR | The laps' traces on top of each other |
-| Readout | Distance into the lap (metres when the track length is known, otherwise "% of the lap"), then per lap: speed (km/h, or mph with Imperial units), throttle %, brake %, gear and, for laps 2 and 3, the gap at that point |
+| Readout | Distance into the lap (metres, or feet with Imperial units, when the track length is known; otherwise "% of the lap"), then per lap: speed (km/h, or mph with Imperial units), throttle %, brake %, gear and, for laps 2 and 3, the gap at that point |
 | Map | The reference line, green where lap 2 is quicker, red where slower; brighter = bigger difference. With three laps it compares lap 2 only |
 | Sector table | The lap in **10 equal sectors** (not iRacing's official sectors). Reference time, then each lap's difference (green quicker, red slower). Turn numbers like "Sector 3 T5" appear once iRacing's track map is loaded |
 
@@ -210,7 +210,7 @@ Columns: TIME, DRIVER, CAR, TRACK, ADDED. **Refresh** reloads from GitHub.
 - Headline: "Race at Okayama Full Course: 22 laps, best 1:27.410."
 - Against your last session here: best lap quicker or slower, race pace, consistency, "More consistent than last time."
 - With 8+ clean laps: "You got quicker as it went on", "Your pace dropped off… towards the end" or "Your pace held steady all session."
-- Races: "Finished P6 from P9 (+3). 1 stop, 38.2 L of fuel used, 4x incidents."
+- Races: "Finished P6 from P9 (+3). 1 stop, 38.2 L of fuel used, 4x incidents." With Imperial units the fuel is in US gallons: "10.1 gal of fuel used".
 - From the coach: where you lose most time, corners you fixed, and the lap your best corners add up to.
 - **Next time:** one thing to work on.
 
@@ -259,7 +259,7 @@ Practice laps of about 1:45.0, 2.9 L a lap, 90 L tank.
 | TYRES PER STOP (S) | Extra seconds a tyre change adds | Empty or 0 = **no tyres**; measured from a tyre stop |
 | TYRE SETS FOR STOPS | Sets available for stops. With fewer sets than stops, changes are spread so each set does a similar distance | Empty = **Unlimited**; sets left in iRacing |
 
-The fuel boxes stay in litres even with Imperial units, because iRacing's pit menu takes litres. With Imperial units a note under the boxes says so.
+The fuel boxes stay in litres even with Imperial units, because iRacing's pit menu takes litres. With Imperial units a note under the boxes says so. The plans themselves follow your units: with Imperial units the example's 1-stop plan reads "0.77 gal/lap · 30 s in the pits", "27.2 gal of fuel in all" and **+3.4 gal**, and the saving plan says "Use 0.67 gal a lap (13% less)…".
 
 **The plans**
 
@@ -267,7 +267,7 @@ The fuel boxes stay in litres even with Imperial units, because iRacing's pit me
 |---|---|
 | Plan name | "No stop", "1-stop", "2-stop"…, or "…, saving fuel" |
 | FLAT OUT | The fewest-stops plan at normal fuel use |
-| L/lap · time | Fuel use assumed and total time in the pits (plus total race time for lap races). The saving plan shows "… s less in the pits" |
+| L/lap (gal/lap with Imperial units) · time | Fuel use assumed and total time in the pits (plus total race time for lap races). The saving plan shows "… s less in the pits" |
 | Stint bar / Stints | Each stint's laps (hover for driver), total fuel, and how many stops get new tyres |
 | BOX ON | Suggested lap, for even stints |
 | WINDOW | Earliest to latest lap for this stop on this number of stops |
@@ -302,12 +302,12 @@ A fuel-saving plan only appears when the saving is 15% a lap or less.
 | STOPS NEEDED | "Fuel to the finish", "One more stop", "2 more stops" |
 | ADD AT NEXT STOP | Litres for your last stop, or **Fill up** when more follow; "About 31 s in the pits" |
 | PIT WINDOW | **Open now** or "In 3 laps"; "Fuel runs out in 9 laps" or "Box this lap" |
-| FUEL SAVE | Litres a lap to save for one stop fewer, as %, and "Worth it under 0.80 s a lap". Up to 15% with more than two laps left; else "Too much to save, take the stop" or "Not needed" |
+| FUEL SAVE | Fuel a lap to save for one stop fewer ("0.25 L/lap", or "0.07 gal/lap" with Imperial units), as %, and "Worth it under 0.80 s a lap". Up to 15% with more than two laps left; else "Too much to save, take the stop" or "Not needed" |
 | IF YOU PIT NOW | Time lost, the position you'd rejoin in, and the cars just ahead and behind after the stop (an estimate) |
 | PIT MENU | What the pit menu (F4) is set to, with warnings: "Fuel is unticked in the pit menu", "Set to 20.0 L, but you need 32.0 L" |
 | TYRES | Compound and age, last measured wear per corner (LF, RF, LR, RR), wear per lap, estimated wear now, sets left |
 | WEATHER | Track wetness, rain, declared wet, and a suggestion |
-| MEASURED | Fuel per lap and where it's from (green laps, "earlier laps here", "estimate"), lap time, pit lane loss (measured or estimate), tank |
+| MEASURED | Fuel per lap (L/lap, or gal/lap with Imperial units) and where it's from (green laps, "earlier laps here", "estimate"), lap time, pit lane loss (measured or estimate), tank |
 
 The stop times (ADD AT NEXT STOP and IF YOU PIT NOW) include the planner's **TYRES PER STOP**, so set that to 0 if you won't change tyres.
 
