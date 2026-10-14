@@ -73,7 +73,7 @@ Every spoken call goes through one radio. You pick the main voice, the speaking 
 
 | Control (as shown) | What it does | Default |
 |---|---|---|
-| Master switch (top right of **Voice & radio**, "All voice calls") | Mutes or unmutes all voice calls: spotter, engineer and coach. Talkback's answers and your crew's messages are still read out. The radar and the call log keep working while it's muted. | On |
+| Master switch (top right of **Voice & radio**; hover it to see "All voice calls: spotter, engineer and coach") | Mutes or unmutes all voice calls: spotter, engineer and coach. Talkback's answers and your crew's messages are still read out. The radar and the call log keep working while it's muted. | On |
 | **Read calls aloud** | Speaks calls with your Windows voices. When it's off, calls still appear in the call log but aren't spoken. | On |
 | **Voice** | The main voice. The spotter, engineer and coach all use it unless you give one its own voice. | System default (on first run, the best natural voice in your language is picked automatically if there is one) |
 | **Speaking style** | How quickly calls are read. **Concise** is the quickest, **Enthusiastic** is a little slower, and **Calm** is the slowest. | Calm |
@@ -400,7 +400,7 @@ It shows any lap against your reference: the speed, throttle, brake and steering
 | **Clear laps** | Deletes every recorded lap for this car and track, your reference included. You're asked to confirm. The track map is kept. |
 | **LAPS** list | Newest first: lap number, time, gap to the reference, and the time of day (or "NOT COUNTED · reason"). Click a lap to select it. |
 | ☆ / ★ next to a lap | ★ is the reference. Click ☆ on a clean lap to pin it as the reference ("Compare against this lap instead"). Click the pinned ★ again to go back to your fastest lap. |
-| **SPEED & PEDALS** chart | Speed (selected lap bright, **Best** grey), then **Throttle**, **Brake** and **Steering** (left above the line). Dashed lines mark the corners. The speed grid is marked every 50 km/h, or every 30 mph with **Imperial**. |
+| **SPEED & PEDALS** chart | Speed (selected lap bright, **Best** grey), then **Throttle**, **Brake** and **Steering** (left above the line). Dashed lines mark the corners. The speed grid is marked every 50 km/h, or every 30 mph with **Imperial**, and the top line shows the unit. |
 | Corner table | **Corner** (name, distance from the line, "fast" for fast corners, and which lap it's compared with), **Time** (+ lost, − gained), **Braking** (how far earlier or later), **Turn-in**, **Apex speed** (with the difference), **Full throttle** (how far sooner or later), **Coaching** (the short fix). Distances are in metres, or feet with **Imperial**; **Apex speed** is in km/h or mph. |
 
 Click a corner row to zoom into that corner (click again, or **Show full lap**, to zoom out). The orange dot is where you braked, the hollow circle where your best did; the blue and dashed lines mark the two turn-ins.

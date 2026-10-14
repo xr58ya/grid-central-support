@@ -306,7 +306,7 @@ Your race team is three people on the radio: the **spotter** (cars around you), 
 
 | Control | What it does | Default |
 |---|---|---|
-| **All voice calls** (the switch at the top right) | Mutes or brings back every call from the spotter, engineer and coach (the same switch as on the Overview). Talkback's answers and your crew's messages are still read out. | On |
+| **All voice calls** (the switch at the top right; hover it to see its name) | Mutes or brings back every call from the spotter, engineer and coach (the same switch as on the Overview). Talkback's answers and your crew's messages are still read out. | On |
 | **Read calls aloud** | Speaks calls with your Windows voices. | On |
 | **Voice** | The main voice for all three. Your language's voices come first; ★ natural ones sound best. | Best natural voice, else System default |
 | **Speaking style** | **Calm**, **Concise** or **Enthusiastic**: how quickly calls are read. | Calm |
