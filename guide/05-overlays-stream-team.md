@@ -32,8 +32,8 @@ This chapter covers everything Grid Central does for the people watching you rac
 |---|---|---|
 | **Preview ↗** | Opens the design in a browser tab, as OBS sees it. | – |
 | **Copy OBS link** | Copies this design's link for an OBS Browser source. | – |
-| **Add to OBS** | Adds the overlay to OBS's current scene in one click (OBS must be connected). | – |
-| **OVERLAY** | Which design you're editing. Also switches the "Grid Central Overlay" source in OBS to it. | Minimal HUD |
+| **Add to OBS** | Puts the design you're editing into OBS's current scene as the "Grid Central Overlay" source, in one click (OBS must be connected). The source keeps that design until you press it again on another one. | – |
+| **OVERLAY** | Which design you're editing. The design the "Grid Central Overlay" source in OBS shows is marked **· OBS**. Opening another design here doesn't change OBS. | Minimal HUD |
 | Save note | "Saving…", "All changes saved", "Saved here · start the companion for OBS" or "Not saved: too big". | – |
 | **Save** | Saves now. | – |
 | **+ New from template** | New design from a template. (Pro) | – |
@@ -48,7 +48,7 @@ This chapter covers everything Grid Central does for the people watching you rac
 | Control | What it does | Default |
 |---|---|---|
 | **↶** / **↷** | Undo and redo, up to 60 steps (Ctrl+Z, Ctrl+Y). | – |
-| **Screen** | **16:9 standard**, **16:10**, **21:9 ultrawide**, **32:9 super ultrawide**, or **This screen (width × height)**. Widgets keep their side of the screen when you change it. | 16:9 standard |
+| **Screen** | **16:9 standard**, **16:10**, **21:9 ultrawide**, **32:9 super ultrawide**, or **This screen (width × height)**. Widgets keep their side of the screen when you change it. If the design is the one in OBS, the source gets the new size. | 16:9 standard |
 | **Snap to grid** | Snaps widgets to an 8-pixel grid. | On |
 | **Background** | What's behind the canvas while you design: **Track scene**, **Dark**, **Light** or **Transparent**. Doesn't change the overlay. | Track scene |
 | **SAMPLE DATA** / **LIVE FROM IRACING** | Where the numbers come from: sample laps until you're in a session. | – |
@@ -177,11 +177,11 @@ When the companion is running but you're not in an iRacing session, the data wid
 
 1. Connect OBS (see "Broadcast control" below).
 2. Pick your streaming scene in OBS, or in **Broadcast → PROGRAM SCENE**.
-3. On **Race overlay**, choose your design in **OVERLAY** and press **Add to OBS**.
-4. A Browser source called **Grid Central Overlay** appears, sized to your design, with **Control audio via OBS** ticked and audio monitoring off (ready for the commentary).
+3. On **Race overlay**, open your design in **OVERLAY** and press **Add to OBS**.
+4. A Browser source called **Grid Central Overlay** appears, sized to your design, with **Control audio via OBS** ticked and audio monitoring off (ready for the commentary). A message names the scene and the design the source shows, and **OVERLAY** marks that design **· OBS**.
 5. Keep it **above** your game capture in OBS's Sources list.
 
-Pressing it again updates the source, and adds it to the current scene if that scene doesn't have it yet.
+The source keeps that design while you open and edit others. To show a different design, open it and press **Add to OBS** again; the message says which design the source now shows. Pressing it also adds the source to the current scene if that scene doesn't have it yet. There's only one Grid Central Overlay source, so every scene that has it shows the same design.
 
 ### Doing it yourself
 
@@ -193,9 +193,11 @@ Pressing it again updates the source, and adds it to the current scene if that s
 
 ### Tips
 
-- **The one-click source follows the designer:** it switches to whatever you pick in **OVERLAY**. For a fixed design in a scene (say, "Starting soon"), add your own Browser source with that design's link.
+- **The one-click source keeps its design.** Opening or editing other designs doesn't change what OBS shows. To switch it, open a design and press **Add to OBS**.
+- **Different overlays in different scenes** (say, a "Starting soon" design): press **Copy OBS link** on each design and add your own Browser source for each (see "Doing it yourself").
+- When Grid Central connects to OBS, it reads which design an existing Grid Central Overlay source shows, so the **· OBS** mark is right even for a source added by an older version or changed in OBS.
 - Without the companion, OBS shows sample data tagged "SAMPLE DATA · START GRID CENTRAL FOR LIVE DATA", so you can line things up any time.
-- **Free plan:** OBS shows one overlay (the one picked in the designer) with only Standings, Fuel and Flags.
+- **Free plan:** OBS shows one overlay (the one open in the designer) with only Standings, Fuel and Flags.
 
 ### If it doesn't work
 
@@ -205,7 +207,8 @@ Pressing it again updates the source, and adds it to the current scene if that s
 | Blank in OBS | Start the companion and get in a session. Right-click the source → **Refresh**. |
 | Sample data during a race | The companion isn't running. Start it and refresh the source. |
 | Wrong size or cut off | Match the source size to the design, then right-click → **Transform → Fit to screen**. |
-| Edits don't reach OBS | Designs reach OBS through the companion: start it and press **Save**. |
+| Edits don't reach OBS | Designs reach OBS through the companion: start it and press **Save**. If you used **Add to OBS**, check you're editing the design marked **· OBS**. |
+| OBS shows a different design from the one you're editing | That's expected: the source keeps the design marked **· OBS**. Open the one you want and press **Add to OBS**. |
 | "Couldn't access the clipboard…" | Copy the link under **OBS BROWSER SOURCE** by hand. |
 
 ---
@@ -270,7 +273,7 @@ Grid Central reconnects by itself next time, until you press **Disconnect**.
 |---|---|
 | Status chip | **NOT STREAMING**, **LIVE**, **RECORDING** or **LIVE · RECORDING**. |
 | **PROGRAM SCENE** | Your OBS scenes, in OBS's order. Picking one switches OBS. |
-| **Add Grid Central overlay to scene +** | Same as **Add to OBS**. |
+| **Add Grid Central overlay to scene +** | Same as **Add to OBS**: puts the design open in **Race overlay** into the current scene. |
 | **Start recording** / **Stop recording** | Records in OBS; when it stops, a toast says where the file went. |
 | **Start streaming** / **Stop streaming** | Asks "Start streaming in OBS? You'll go live on the service configured in OBS." then goes live. |
 | **Race-day checklist** | **Mic level checked**, **Overlay added as OBS browser source** (ticks itself when the overlay is found in OBS), **Stream key configured in OBS**, **Audio levels balanced**. Ticks are remembered. |
