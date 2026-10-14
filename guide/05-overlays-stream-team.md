@@ -33,14 +33,14 @@ This chapter covers everything Grid Central does for the people watching you rac
 | **Preview ↗** | Opens the design in a browser tab, as OBS sees it. | – |
 | **Copy OBS link** | Copies this design's link for an OBS Browser source. | – |
 | **Add to OBS** | Puts the design you're editing into OBS's current scene as the "Grid Central Overlay" source, in one click (OBS must be connected). The source keeps that design until you press it again on another one. | – |
-| **OVERLAY** | Which design you're editing. The design the "Grid Central Overlay" source in OBS shows is marked **· OBS**. Opening another design here doesn't change OBS. | Minimal HUD |
+| **OVERLAY** | Which design you're editing. The design the "Grid Central Overlay" source in OBS shows is marked **· OBS**. Opening another design here doesn't change OBS, except on the free plan, where OBS shows the design open here. | Minimal HUD |
 | Save note | "Saving…", "All changes saved", "Saved here · start the companion for OBS" or "Not saved: too big". | – |
 | **Save** | Saves now. | – |
 | **+ New from template** | New design from a template. (Pro) | – |
 | **Rename** | Renames the design (up to 40 characters). | – |
 | **Duplicate** | Copies the design as "… copy". (Pro) | – |
 | **Export** / **Import** | Saves the design as a `.grid-overlay.json` file, or loads one. Imports keep only real widgets and settings, so shared files are safe. (Import is Pro) | – |
-| **Delete** | Deletes the design after asking. OBS sources using its link then show your first overlay. | – |
+| **Delete** | Deletes the design after asking. OBS sources using its link then show the design open in the designer, and change when you open another. If you deleted the design marked **· OBS**, open the one you want and press **Add to OBS**. | – |
 | **OBS BROWSER SOURCE** | This design's link, like `http://127.0.0.1:8765/overlay.html?layout=…`. | – |
 
 ### Canvas toolbar
@@ -48,7 +48,7 @@ This chapter covers everything Grid Central does for the people watching you rac
 | Control | What it does | Default |
 |---|---|---|
 | **↶** / **↷** | Undo and redo, up to 60 steps (Ctrl+Z, Ctrl+Y). | – |
-| **Screen** | **16:9 standard**, **16:10**, **21:9 ultrawide**, **32:9 super ultrawide**, or **This screen (width × height)**. Widgets keep their side of the screen when you change it. If the design is the one in OBS, the source gets the new size. | 16:9 standard |
+| **Screen** | **16:9 standard**, **16:10**, **21:9 ultrawide**, **32:9 super ultrawide**, or **This screen (width × height)**. Widgets keep their side of the screen when you change it. If the design is the one in OBS and OBS is connected, the source gets the new size. | 16:9 standard |
 | **Snap to grid** | Snaps widgets to an 8-pixel grid. | On |
 | **Background** | What's behind the canvas while you design: **Track scene**, **Dark**, **Light** or **Transparent**. Doesn't change the overlay. | Track scene |
 | **SAMPLE DATA** / **LIVE FROM IRACING** | Where the numbers come from: sample laps until you're in a session. | – |
@@ -206,7 +206,7 @@ The source keeps that design while you open and edit others. To show a different
 | "Connect OBS first (Settings → Connections → OBS Studio)…" | Connect OBS under Settings → Connections → OBS Studio. |
 | Blank in OBS | Start the companion and get in a session. Right-click the source → **Refresh**. |
 | Sample data during a race | The companion isn't running. Start it and refresh the source. |
-| Wrong size or cut off | Match the source size to the design, then right-click → **Transform → Fit to screen**. |
+| Wrong size or cut off | Match the source size to the design, then right-click → **Transform → Fit to screen**. For the Grid Central Overlay source, open its design and press **Add to OBS** again to resize it. |
 | Edits don't reach OBS | Designs reach OBS through the companion: start it and press **Save**. If you used **Add to OBS**, check you're editing the design marked **· OBS**. |
 | OBS shows a different design from the one you're editing | That's expected: the source keeps the design marked **· OBS**. Open the one you want and press **Add to OBS**. |
 | "Couldn't access the clipboard…" | Copy the link under **OBS BROWSER SOURCE** by hand. |

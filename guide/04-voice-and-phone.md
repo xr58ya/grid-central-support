@@ -149,6 +149,8 @@ Fuel is spoken in your units (litres or US gallons, from Settings → Appearance
 | "How was turn 5?" | That corner on your last lap against your best. "How was that corner?" gives the last corner result. |
 | "What's my optimal lap?" | Your best sectors put together, and how far under your best that is. |
 
+The coach's fix is given in your units. With Imperial units, distances are in feet and speeds in mph: "Your focus is Turn 5: turn in 39 feet later."
+
 **Pit menu commands** (need **Pit commands by voice**)
 
 | Say something like | What it sets |
@@ -331,7 +333,7 @@ The **Broadcast** page → the **Commentary** panel (eyebrow "ON YOUR STREAM ONL
 ### Setting it up with OBS step by step
 
 1. Connect OBS first: **Settings → Connections → OBS Studio**. In OBS 28 or newer, go to Tools → WebSocket Server Settings → Enable, then enter the port and password in Grid Central and press **Connect OBS**.
-2. Add your Grid Central overlay to OBS. The easiest way is **Broadcast → OBS control → Add Grid Central overlay to scene**, which sets the sound up for you. You can also use Race overlay → Add to OBS, or add a Browser source with the overlay's link. If you added the Browser source yourself, tick **Control audio via OBS** in its properties.
+2. Add your Grid Central overlay to OBS. The easiest way is **Broadcast → OBS control → Add Grid Central overlay to scene**, which sets the sound up for you. It shows the design open in **Race overlay**, so open the one you want there first. You can also use Race overlay → Add to OBS, or add a Browser source with the overlay's link. If you added the Browser source yourself, tick **Control audio via OBS** in its properties.
 3. In OBS, open **Edit → Advanced Audio Properties** and check the overlay's **Audio Monitoring** is **Monitor Off**. Viewers hear it, you don't.
 4. Keep the overlay source **visible** in your scene (it can be see-through). OBS mutes hidden sources.
 5. In Grid Central, switch on the **Commentary** switch. With **Natural voices**, the voices download now (about 340 MB). The status line shows "Downloading the natural voices… n%".
@@ -436,7 +438,7 @@ No camera? Press **Copy link** on the PC and send the link to your phone, or typ
 | **Copy link** | Copies the link shown. | — |
 | **New pairing code** | Makes a new code for the link shown. Phones that used that link before must scan again. The other link keeps working. | — |
 
-The phone page follows Grid Central's language and units (litres or gallons, °C or °F) and its accent colour.
+The phone page follows Grid Central's language and units (litres or gallons, °C or °F, and feet and mph in the coach's notes) and its accent colour.
 
 ### The phone screens
 
@@ -490,7 +492,7 @@ A fuel amount set from the phone stays until your stop, like one set by voice. i
 | Lap times | The last 15 laps as bars of time lost to your best: Best, Within 0.5 s, Slower, Didn't count, Pit lap. |
 | Gaps each lap | Lines for the car ahead and behind, with "Catching #16 by 0.30 s a lap (… about 6 laps to reach them)", "is closing by…" or "holding at…". |
 | Every lap | The last 40 laps: LAP, TIME, +BEST, POS, AHEAD, BEHIND. |
-| **History** | Choose **Car and track** (your current one comes first). You get Progress (sessions and a best/race-pace chart), Best laps, and Coaching: FOCUS CORNER ("2 of 3 clean laps to fix it"), Your last lap, Where you lose time most, Fixed, and your optimal lap. Needs Grid Central open. |
+| **History** | Choose **Car and track** (your current one comes first). You get Progress (sessions and a best/race-pace chart), Best laps, and Coaching: FOCUS CORNER ("2 of 3 clean laps to fix it"), Your last lap, Where you lose time most, Fixed, and your optimal lap. The coach's notes are in your units (feet and mph with Imperial). Needs Grid Central open. |
 
 **Radio**
 

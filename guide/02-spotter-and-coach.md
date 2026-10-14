@@ -78,7 +78,7 @@ Every spoken call goes through one radio. You pick the main voice, the speaking 
 | **Voice** | The main voice. The spotter, engineer and coach all use it unless you give one its own voice. | System default (on first run, the best natural voice in your language is picked automatically if there is one) |
 | **Speaking style** | How quickly calls are read. **Concise** is the quickest, **Enthusiastic** is a little slower, and **Calm** is the slowest. | Calm |
 
-Language and units are set elsewhere: **Settings → Appearance & data → Language** (English, Español or Deutsch) also changes the language of the spoken calls, and **Units** (**Metric (litres, °C, km/h, metres)** or **Imperial (US gallons, °F, mph, feet)**) sets the fuel, temperatures, speeds and distances in the spoken calls (the spotter's hazard calls included), on the radar, in the coaching notes, and in the lap analysis chart and corner table. It also relabels the distance menus for **Hazards ahead** and **Reminder before the corner** in feet, rounded to the nearest 10 ft.
+Language and units are set elsewhere: **Settings → Appearance & data → Language** (English, Español or Deutsch) also changes the language of the spoken calls, and **Units** (**Metric (litres, °C, km/h, metres)** or **Imperial (US gallons, °F, mph, feet)**) sets the fuel, temperatures, speeds and distances in the spoken calls (the spotter's hazard calls included), on the radar, in the coaching notes, and in the lap analysis chart and corner table. It also relabels the distance menus for **Hazards ahead** and **Reminder before the corner** in feet, rounded to the nearest 100 ft as the spoken hazard calls are.
 
 ### How calls take turns
 
@@ -126,7 +126,7 @@ Calls appear in the radar's **CALL LOG** and the **SPOTTER RADIO** panel. Settin
 | **Volume** | How loud the spotter is, 10% to 100% in steps of 5 | 100% |
 | **Spotter callouts** | Calls for cars alongside | On |
 | **Flag callouts** | Yellow, caution, debris, blue, black, meatball, red, white and checkered flags, and "Green, green, green" after a caution | On |
-| **Hazards ahead** (distance menu) | How far ahead stopped, slow or off-track cars are called: 200 m, 300 m, 500 m or 800 m (with **Imperial**: 660 ft, 980 ft, 1640 ft or 2620 ft) | 300 m (980 ft) |
+| **Hazards ahead** (distance menu) | How far ahead stopped, slow or off-track cars are called: 200 m, 300 m, 500 m or 800 m (with **Imperial**: 700 ft, 1000 ft, 1600 ft or 2600 ft) | 300 m (1000 ft) |
 | **Hazards ahead** (switch) | Turns hazard calls on or off | On |
 
 ### What each call means
@@ -159,7 +159,7 @@ The turn number is only given when Grid Central has iRacing's official map of th
 
 ### Tips
 
-- On fast tracks, set **Hazards ahead** to 500 m or 800 m (1640 ft or 2620 ft) to give yourself more warning. On tight street circuits, 200 m (660 ft) cuts down on calls about cars that aren't in your way.
+- On fast tracks, set **Hazards ahead** to 500 m or 800 m (1600 ft or 2600 ft) to give yourself more warning. On tight street circuits, 200 m (700 ft) cuts down on calls about cars that aren't in your way.
 - If you already use iRacing's own spotter, turn one of them down so you don't hear every call twice.
 
 ### If it doesn't work
@@ -204,7 +204,7 @@ The radar shows you in the middle and the cars around you. iRacing's spotter say
 
 | Part | What it shows |
 |---|---|
-| Radar strip | Three lanes with you in the middle (YOU). It shows about 28 m each way, with ticks at 10 m and 20 m (these stay in metres with **Imperial**). The side zones light up amber or red the same way as in Proximity. |
+| Radar strip | Three lanes with you in the middle (YOU). It shows about 28 m each way, with ticks at 10 m and 20 m (30 ft and 60 ft with **Imperial**). The side zones light up amber or red the same way as in Proximity. |
 | Relative table | The nearest four cars ahead (at the top) and four behind, within 260 m, with you in the middle. |
 | First column | A chip: AHEAD, BEHIND, LEFT, RIGHT or YOU |
 | **CAR** | Number and name, coloured by class |
@@ -214,7 +214,7 @@ The radar shows you in the middle and the cars around you. iRacing's spotter say
 | **TREND** | "▲ 12 km/h" when the gap is closing, "▼ 8 km/h" when it's growing, "—" when it's steady. On your row: your speed. |
 | Call chips | The last six calls, under the table |
 
-Speeds on both views (closing speeds, the trend and your own speed) are in km/h or mph, following **Settings → Appearance & data → Units**. Distances follow it too, apart from the radar strip's ticks: metres (to a tenth of a metre on the **AHEAD** and **BEHIND** cards and in **GAP**), or whole feet with **Imperial**.
+Speeds on both views (closing speeds, the trend and your own speed) are in km/h or mph, following **Settings → Appearance & data → Units**. Distances follow it too: metres (to a tenth of a metre on the **AHEAD** and **BEHIND** cards and in **GAP**), or whole feet with **Imperial**.
 
 ### Tips
 
@@ -301,7 +301,7 @@ A lap is used for coaching (and can be your reference) only if it's a complete l
 | **Compare each corner with** | **Your best through it** (your best time in each corner from all your clean laps, your optimal lap) or **Your best lap** (your single fastest lap) | Your best through it |
 | **Focus corner until fixed** | Keeps working on the corner you lose the most time in until it's sorted | On |
 | **Target corner from last lap** | When focus is off, coaches the corner you lost the most time in on your last lap | On |
-| **Reminder before the corner** (distance) | How far before your braking point the reminder comes: 100 m, 150 m, 200 m or 300 m (with **Imperial**: 330 ft, 490 ft, 660 ft or 980 ft) | 150 m (490 ft) |
+| **Reminder before the corner** (distance) | How far before your braking point the reminder comes: 100 m, 150 m, 200 m or 300 m (with **Imperial**: 300 ft, 500 ft, 700 ft or 1000 ft) | 150 m (500 ft) |
 | **Reminder before the corner** (switch) | A spoken cue on the approach | On |
 | **Corner result after it** | Tells you straight away whether you were quicker or slower than your best | On |
 | **Progress across sessions** | Shows the **PROGRESS** panel | On |

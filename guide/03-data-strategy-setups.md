@@ -452,7 +452,7 @@ On most cars a higher number is stiffer or more, but check your car's garage. "O
 | LAPS | Clean laps (last 80 per setup) |
 | BEST | Best lap, with the gap to the fastest |
 | RACE PACE / CONSISTENCY | Average of laps within 3% of the best, and how much they vary |
-| FUEL/LAP / LAST DRIVEN | Average fuel per lap; date |
+| FUEL/LAP / LAST DRIVEN | Average fuel per lap (in L, or gal with Imperial units); date |
 
 ---
 
