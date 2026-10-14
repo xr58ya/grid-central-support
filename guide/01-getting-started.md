@@ -130,7 +130,7 @@ Move with **Next** and **Back**. **Skip setup** closes it; skipping, Esc or fini
    - **◖ Test the voice**: plays "Radio check. Car left. Still there. Clear. Box this lap."
    - **Read calls aloud**: the main switch for spoken calls.
    - **HOW MUCH SHOULD IT TALK?**: pick one of three presets (below).
-4. **Step 3 · Talkback (optional).** Tick **Turn on talkback**, press **Set push-to-talk button**, then press your wheel button or key. Needs the companion running.
+4. **Step 3 · Talkback (optional).** Tick **Turn on talkback**, press **Set push-to-talk button**, then press your wheel button or key. Needs the companion running. Talkback is part of Driver.
 5. **Step 4 · Units and look.** Choose **UNITS** (Metric or Imperial) and **COLOUR SCHEME** (Match Windows, Dark or Light).
 6. **All set.** Links lead to **Phone pit wall**, **Discord**, **Race overlay** and the **User guide**. Press **Finish**.
 
@@ -187,7 +187,7 @@ The footer shows your version (for example **V 0.5.9.1 · BETA**).
 
 **Where to find it.** **Settings → Account**, in the **Account** panel. The chip at the top right of the panel shows your status.
 
-**During the beta, everything stays unlocked**, with or without an account. The plans and their labels start when Grid Central goes on sale. Until then the Account panel already shows your plan, followed by "During the beta, everything stays unlocked.", so it can say **ROOKIE** while nothing is locked.
+**During the beta, everything stays unlocked**, with or without an account. The one exception is the hosted team hub, which needs a seat in a team on Race Team. Running the team hub on your own free hosting works for everyone (see "Team hub" in chapter 5). The plans and their labels start when Grid Central goes on sale. Until then the Account panel already shows your plan, followed by "During the beta, everything stays unlocked.", so it can say **ROOKIE** while nothing is locked.
 
 ### Creating an account or signing in
 
@@ -542,8 +542,8 @@ Start with the top-bar status and the companion window. Most problems come down 
 | **No spoken calls** | Click anywhere in Grid Central once, because browsers block sound until you do. Check the **All voice calls** switch at the top, **Read calls aloud**, and each role's switch and volume in **Settings → Voice & radio**. Try **◖ Test the voice** in the setup wizard. |
 | **Engineer speaks English after switching language** | Install a voice for that language in Windows **Settings → Time & language → Speech**, then pick it under **Voice**. |
 | **The in-game overlay doesn't show over iRacing** | Set iRacing to windowed or borderless. Full screen covers everything else. On Rookie, only the **Relative**, **Standings** and **Flags** widgets are drawn, so a design without them (such as **Minimal HUD**) shows nothing: add one in the **Add** tab. |
-| **Talkback doesn't hear me** | Check the microphone and button in **Settings → Voice & radio → Talkback**, and that the status shows **READY**. Hold the button a moment before speaking. If it says "Press Set button, then press the wheel button or key you want to talk with.", set a button first. |
-| **Phone can't connect** | Allow GridCentral.exe on **private** networks when Windows asks. Set your Wi-Fi to Private in Windows **Settings → Network & internet**. Make sure the phone is on the same Wi-Fi. |
+| **Talkback doesn't hear me** | Check the microphone and button in **Settings → Voice & radio → Talkback**, and that the status shows **READY**. Hold the button a moment before speaking. If it says "Press Set button, then press the wheel button or key you want to talk with.", set a button first. On Rookie the status stays **OFF**, because talkback is part of Driver. |
+| **Phone can't connect** | Allow GridCentral.exe on **private** networks when Windows asks. Set your Wi-Fi to Private in Windows **Settings → Network & internet**. Make sure the phone is on the same Wi-Fi. On Rookie, phones can't connect: the phone pit wall is part of Driver. |
 | **"No QR code"** on the Phone panel | Type the link shown under it into your phone instead. |
 | **Windows or antivirus blocks GridCentral.exe** | The beta isn't signed yet. Choose **More info → Run anyway**, or allow it in your antivirus. |
 | **The companion closed, or overlays stopped** | Look at `companion.log` in the Grid Central folder (the run before is `companion-previous.log`) and send it with your report. |

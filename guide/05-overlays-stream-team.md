@@ -30,7 +30,7 @@ This chapter covers everything Grid Central does for the people watching you rac
 
 | Control | What it does | Default |
 |---|---|---|
-| **Preview ↗** | Opens the design in a browser tab, as OBS sees it. On Rookie it shows only the core widgets (**Relative**, **Standings** and **Flags**), while OBS shows nothing. | – |
+| **Preview ↗** | Opens the design in a browser tab, as OBS sees it. On Rookie, with the companion running, it shows only the core widgets (**Relative**, **Standings** and **Flags**), while OBS shows nothing. | – |
 | **Copy OBS link** | Copies this design's link for an OBS Browser source. (Driver) | – |
 | **Add to OBS** | Puts the design you're editing into OBS's current scene as the "Grid Central Overlay" source, in one click (OBS must be connected). The source keeps that design until you press it again on another one. (Broadcast add-on) | – |
 | **OVERLAY** | Which design you're editing. The design the "Grid Central Overlay" source in OBS shows is marked **· OBS**. Opening another design here doesn't change OBS. | Minimal HUD |
@@ -40,7 +40,7 @@ This chapter covers everything Grid Central does for the people watching you rac
 | **Rename** | Renames the design (up to 40 characters). | – |
 | **Duplicate** | Copies the design as "… copy". (Driver) | – |
 | **Export** / **Import** | Saves the design as a `.grid-overlay.json` file, or loads one. Imports keep only real widgets and settings, so shared files are safe. (Import is part of Driver) | – |
-| **Delete** | Deletes the design after asking. OBS sources using its link then show your first design. If it was the design marked **· OBS**, the Grid Central Overlay source and the mark move to your first design: straight away if OBS is connected, otherwise when Grid Central next connects. | – |
+| **Delete** | Deletes the design after asking. OBS sources using its link then show your first design. If it was the design marked **· OBS**, the mark moves to your first design straight away, and the Grid Central Overlay source is pointed at it, with its size: straight away if OBS is connected, otherwise when Grid Central next connects. | – |
 | **OBS BROWSER SOURCE** | This design's link, like `http://127.0.0.1:8765/overlay.html?layout=…`. | – |
 
 ### Canvas toolbar
@@ -48,7 +48,7 @@ This chapter covers everything Grid Central does for the people watching you rac
 | Control | What it does | Default |
 |---|---|---|
 | **↶** / **↷** | Undo and redo, up to 60 steps (Ctrl+Z, Ctrl+Y). | – |
-| **Screen** | **16:9 standard**, **16:10**, **21:9 ultrawide**, **32:9 super ultrawide**, or **This screen (width × height)**. Widgets keep their side of the screen when you change it. If the design is the one in OBS, the source gets the new size whenever OBS is connected, even for a change (or an undo) made while it wasn't. Changing it is part of Driver. | 16:9 standard |
+| **Screen** | **16:9 standard**, **16:10**, **21:9 ultrawide**, **32:9 super ultrawide**, or **This screen (width × height)**. Widgets keep their side of the screen when you change it. If the design is the one marked **· OBS**, the Grid Central Overlay source gets the new size whenever OBS is connected, even for a change (or an undo) made while it wasn't. A Browser source you added yourself needs its **Width** changed by hand. Changing it is part of Driver. | 16:9 standard |
 | **Snap to grid** | Snaps widgets to an 8-pixel grid. | On |
 | **Background** | What's behind the canvas while you design: **Track scene**, **Dark**, **Light** or **Transparent**. Doesn't change the overlay. | Track scene |
 | **SAMPLE DATA** / **LIVE FROM IRACING** | Where the numbers come from: sample laps until you're in a session. | – |
@@ -183,7 +183,7 @@ OBS overlays are part of Driver: on Rookie, OBS shows nothing. The one-click way
 4. A Browser source called **Grid Central Overlay** appears, sized to your design, with **Control audio via OBS** ticked and audio monitoring off (ready for the commentary). A message names the scene and the design the source shows, and **OVERLAY** marks that design **· OBS**.
 5. Keep it **above** your game capture in OBS's Sources list.
 
-The source keeps that design while you open and edit others. To show a different design, open it and press **Add to OBS** again; the message says which design the source now shows. Pressing it also adds the source to the current scene if that scene doesn't have it yet. There's only one Grid Central Overlay source, so every scene that has it shows the same design.
+The source keeps that design while you open and edit others. To show a different design, open it and press **Add to OBS** again; the message says which design the source now shows. Pressing it also adds the source to the current scene if that scene doesn't have it yet. There's only one Grid Central Overlay source, so every scene that has it shows the same design. The source also takes that design's **Screen** size, and if you delete the design, it moves to your first one.
 
 ### Doing it yourself (Driver)
 
@@ -197,9 +197,9 @@ The source keeps that design while you open and edit others. To show a different
 
 - **The one-click source keeps its design.** Opening or editing other designs doesn't change what OBS shows. To switch it, open a design and press **Add to OBS**.
 - **Different overlays in different scenes** (say, a "Starting soon" design): press **Copy OBS link** on each design and add your own Browser source for each (see "Doing it yourself").
-- When Grid Central connects to OBS, it reads which design an existing Grid Central Overlay source shows, so the **· OBS** mark is right even for a source added by an older version or changed in OBS.
-- Without the companion, OBS shows sample data tagged "SAMPLE DATA · START GRID CENTRAL FOR LIVE DATA", so you can line things up any time.
-- **Rookie:** OBS shows nothing, because OBS overlays are part of Driver. **Preview ↗** still shows your design in a browser, with the core widgets only (**Relative**, **Standings** and **Flags**).
+- When Grid Central connects to OBS, it reads which design an existing Grid Central Overlay source shows, so the **· OBS** mark is right even for a source added by an older version or changed in OBS. It then gives the source that design's size.
+- If the companion stops while OBS is showing the overlay, OBS shows sample data tagged "SAMPLE DATA · START GRID CENTRAL FOR LIVE DATA" until it's back. OBS can only load the overlay while the companion is running, so a source added or refreshed without it stays blank.
+- **Rookie:** OBS shows nothing, because OBS overlays are part of Driver. **Preview ↗** still shows your design in a browser, with the core widgets only (**Relative**, **Standings** and **Flags**) while the companion is running.
 
 ### If it doesn't work
 
@@ -208,7 +208,7 @@ The source keeps that design while you open and edit others. To show a different
 | "Connect OBS first (Settings → Connections → OBS Studio)…" | Connect OBS under Settings → Connections → OBS Studio. |
 | Blank in OBS | Start the companion and get in a session. Right-click the source → **Refresh**. On Rookie, OBS stays blank once the companion is running: OBS overlays are part of Driver. |
 | Sample data during a race | The companion isn't running. Start it and refresh the source. |
-| Wrong size or cut off | Match the source size to the design, then right-click → **Transform → Fit to screen**. |
+| Wrong size or cut off | The **Grid Central Overlay** source takes its design's size whenever Grid Central is connected to OBS. For a Browser source you added yourself, set **Width** and **Height** to the design's size (see "Doing it yourself"). Then right-click the source → **Transform → Fit to screen**. |
 | Edits don't reach OBS | Designs reach OBS through the companion: start it and press **Save**. If you used **Add to OBS**, check you're editing the design marked **· OBS**. |
 | OBS shows a different design from the one you're editing | That's expected: the source keeps the design marked **· OBS**. Open the one you want and press **Add to OBS**. |
 | "Couldn't access the clipboard…" | Copy the link under **OBS BROWSER SOURCE** by hand. |

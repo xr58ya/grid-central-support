@@ -334,7 +334,7 @@ The **Broadcast** page → the **Commentary** panel (eyebrow "ON YOUR STREAM ONL
 ### Setting it up with OBS step by step
 
 1. Connect OBS first: **Settings → Connections → OBS Studio**. In OBS 28 or newer, go to Tools → WebSocket Server Settings → Enable, then enter the port and password in Grid Central and press **Connect OBS**.
-2. Add your Grid Central overlay to OBS. The easiest way is **Broadcast → OBS control → Add Grid Central overlay to scene**, which sets the sound up for you. It shows the design open in **Race overlay**, so open the one you want there first. You can also use Race overlay → Add to OBS, or add a Browser source with the overlay's link. If you added the Browser source yourself, tick **Control audio via OBS** in its properties.
+2. Add your Grid Central overlay to OBS. The easiest way is **Broadcast → OBS CONTROL → Add Grid Central overlay to scene**, which sets the sound up for you. It shows the design open in **Race overlay**, so open the one you want there first. You can also use **Race overlay → Add to OBS**, or add a Browser source with the link from **Copy OBS link**. If you added the Browser source yourself, tick **Control audio via OBS** in its properties.
 3. In OBS, open **Edit → Advanced Audio Properties** and check the overlay's **Audio Monitoring** is **Monitor Off**. Viewers hear it, you don't.
 4. Keep the overlay source **visible** in your scene (it can be see-through). OBS mutes hidden sources.
 5. In Grid Central, switch on the **Commentary** switch. With **Natural voices**, the voices download now (about 340 MB). The status line shows "Downloading the natural voices… n%".

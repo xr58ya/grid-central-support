@@ -11,7 +11,7 @@ A complete, step-by-step guide to everything Grid Central does and how to set it
 | [5. Overlays, streaming and team racing](05-overlays-stream-team.md) | The overlay designer and every widget, OBS, the in-game overlay, Twitch and YouTube, Discord, the league room and the team hub |
 | [6. Paint shop](06-paint-shop.md) | Your first livery in 10 steps, every paint tool, getting your paint into iRacing and the Spray Booth |
 
-**During the beta, every feature is unlocked.** Where the guide mentions a plan (Rookie, Driver, Race Team or the Broadcast add-on), that describes how Grid Central will work once it goes on sale.
+**During the beta, every feature is unlocked** (except the hosted team hub, see chapter 5). Where the guide mentions a plan (Rookie, Driver, Race Team or the Broadcast add-on), that describes how Grid Central will work once it goes on sale.
 
 This guide is written for the version on the development branch, so a few things may be newer than the version you have. Your version is shown at the bottom right of the app, for example "V 0.5.9.1 · BETA".
 
