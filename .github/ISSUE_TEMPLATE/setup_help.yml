@@ -12,6 +12,7 @@ body:
     id: version
     attributes:
       label: Grid Central version
+      description: Shown at the bottom right of the app, for example "V 0.5.9.1 · BETA".
       placeholder: "0.5.9.1"
     validations:
       required: true
