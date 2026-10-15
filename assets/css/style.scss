@@ -1,0 +1,25 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+// Grid Central colours for the training guide pages, matching the support page.
+body { background: #101112; color: #eef0ea; }
+.page-header { background: #17191a; border-bottom: 3px solid #d2ff50; }
+.project-name { color: #d2ff50; }
+.project-tagline { color: #8b9089; }
+.btn { color: #eef0ea; background-color: rgba(210, 255, 80, 0.08); border-color: rgba(210, 255, 80, 0.35); }
+.btn:hover { color: #141a08; background-color: #d2ff50; border-color: #d2ff50; }
+.main-content { color: #eef0ea; }
+.main-content a { color: #d2ff50; }
+.main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6 { color: #d2ff50; }
+.main-content code { color: #eef0ea; background-color: #1f2223; }
+.main-content pre { background-color: #1f2223; border-color: #2b2e2f; }
+.main-content pre > code { color: #eef0ea; }
+.main-content blockquote { color: #8b9089; border-left-color: #2b2e2f; }
+.main-content table th, .main-content table td { border-color: #2b2e2f; }
+.main-content table tr:nth-child(even) { background-color: #17191a; }
+.main-content hr { background-color: #2b2e2f; }
+.main-content .footer { border-top-color: #2b2e2f; }
+.site-footer { border-top-color: #2b2e2f; }
+.site-footer-owner, .site-footer-credits { color: #8b9089; }
