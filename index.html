@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grid Central Support</title>
+<meta name="description" content="Report a problem, suggest a feature, get setup help, or learn how every part of Grid Central works.">
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --text: #14171c; --muted: #5b6472;
+    --line: #e2e5ea; --accent: #e5322d; --accent-text: #ffffff; --chip: #f0f2f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1116; --panel: #161b22; --text: #e8ebf0; --muted: #9aa4b2;
+      --line: #262d38; --accent: #ff4a43; --accent-text: #ffffff; --chip: #1d232c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  a { color: var(--accent); }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+  header { border-bottom: 1px solid var(--line); background: var(--panel); }
+  header .wrap { display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
+  .logo { width: 30px; height: 30px; border-radius: 7px; background: var(--accent);
+    display: grid; place-items: center; color: var(--accent-text); font-weight: 800; font-size: 14px; }
+  header strong { font-size: 17px; letter-spacing: .2px; }
+  header nav { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
+  header nav a { color: var(--muted); text-decoration: none; }
+  header nav a:hover { color: var(--text); }
+  .hero { padding: 48px 0 28px; }
+  h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.15; margin: 0 0 10px; }
+  .lead { color: var(--muted); font-size: 18px; margin: 0; max-width: 640px; }
+  h2 { font-size: 22px; margin: 40px 0 14px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px;
+    display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: var(--text); }
+  .card:hover { border-color: var(--accent); }
+  .card .icon { font-size: 26px; }
+  .card h3 { margin: 0; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; flex: 1; }
+  .card .go { color: var(--accent); font-weight: 600; font-size: 15px; }
+  .note { background: var(--chip); border-radius: 10px; padding: 12px 16px; font-size: 15px;
+    color: var(--muted); margin-top: 14px; }
+  .note b { color: var(--text); }
+  .guide { list-style: none; padding: 0; margin: 0; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+  .guide a { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px; text-decoration: none; color: var(--text); }
+  .guide a:hover { border-color: var(--accent); }
+  .guide span { display: block; color: var(--muted); font-size: 14px; }
+  details { background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    margin-bottom: 8px; padding: 0 16px; }
+  summary { cursor: pointer; padding: 14px 0; font-weight: 600; }
+  details p, details ol { margin: 0 0 14px; color: var(--muted); }
+  .contact { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+  .contact p { margin: 0 0 8px; }
+  .btn { display: inline-block; background: var(--accent); color: var(--accent-text); text-decoration: none;
+    font-weight: 600; padding: 10px 16px; border-radius: 8px; margin-top: 6px; }
+  footer { color: var(--muted); font-size: 14px; padding: 36px 0 48px; }
+  @media (max-width: 560px) { header nav { display: none; } .hero { padding-top: 32px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="logo">GC</div>
+    <strong>Grid Central Support</strong>
+    <nav>
+      <a href="#help">Get help</a>
+      <a href="#guide">Training guide</a>
+      <a href="#common">Common problems</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>How can we help?</h1>
+    <p class="lead">Report a problem, suggest an idea, or get help setting up Grid Central, your race engineer for iRacing.</p>
+  </section>
+
+  <section id="help">
+    <div class="cards">
+      <a class="card" href="https://github.com/xr58ya/grid-central-support/issues/new?template=bug_report.yml">
+        <div class="icon">🛠️</div>
+        <h3>Report a problem</h3>
+        <p>Something broken, wrong or crashing? Tell us what happened and we'll look into it.</p>
+        <span class="go">Report a bug →</span>
+      </a>
+      <a class="card" href="https://github.com/xr58ya/grid-central-support/issues/new?template=feature_request.yml">
+        <div class="icon">💡</div>
+        <h3>Suggest a feature</h3>
+        <p>An idea that would make Grid Central better on track or on stream.</p>
+        <span class="go">Request a feature →</span>
+      </a>
+      <a class="card" href="https://github.com/xr58ya/grid-central-support/issues/new?template=setup_help.yml">
+        <div class="icon">🧭</div>
+        <h3>Get setup help</h3>
+        <p>Stuck connecting iRacing, OBS, your phone, Discord or talkback? We'll walk you through it.</p>
+        <span class="go">Ask for help →</span>
+      </a>
+    </div>
+    <div class="note">
+      <b>These forms are public.</b> They need a free GitHub account, and anyone can read them, so leave out logs,
+      emails and anything private. To send those, email <a href="mailto:support.gridcentral@gmail.com">support.gridcentral@gmail.com</a>.
+      Before you post, <a href="https://github.com/xr58ya/grid-central-support/issues?q=is%3Aissue">search existing reports</a>:
+      if yours is there, add a 👍 and any extra detail.
+    </div>
+  </section>
+
+  <section id="guide">
+    <h2>Training guide</h2>
+    <ul class="guide">
+      <li><a href="guide/01-getting-started.html">1. Getting started<span>Installing, beta code, the companion, account and plans, settings, updates</span></a></li>
+      <li><a href="guide/02-spotter-and-coach.html">2. Spotter and coach<span>Live data, spotter calls, radar, track map, corner coaching, engineer</span></a></li>
+      <li><a href="guide/03-data-strategy-setups.html">3. Data, strategy and setups<span>Lap data, telemetry, race planner, pit fuel, tyres, weather, setups</span></a></li>
+      <li><a href="guide/04-voice-and-phone.html">4. Voice and phone<span>Talkback commands, voices, stream commentary, phone pit wall</span></a></li>
+      <li><a href="guide/05-overlays-stream-team.html">5. Overlays, streaming and teams<span>Overlay designer, OBS, in-game overlay, Discord, team hub</span></a></li>
+      <li><a href="guide/06-paint-shop.html">6. Paint shop<span>Your first livery, every paint tool, installing to iRacing, Spray Booth</span></a></li>
+    </ul>
+  </section>
+
+  <section id="common">
+    <h2>Common problems</h2>
+    <details><summary>"Windows protected your PC" when installing</summary>
+      <p>The beta isn't code-signed yet. Click <b>More info</b>, then <b>Run anyway</b>. If your antivirus blocks GridCentral.exe, allow it.</p></details>
+    <details><summary>My beta code isn't accepted</summary>
+      <p>Check it's typed exactly as sent (GC-XXXX-XXXX-XXXX). A brand-new code can take a little while to switch on. If it still fails, email us. Never post your code publicly.</p></details>
+    <details><summary>"Companion not running" or "IRACING NOT CONNECTED"</summary>
+      <p>Start the companion (Settings → Connections → ▶ Start companion) and leave its small window open.</p></details>
+    <details><summary>"Waiting for iRacing"</summary>
+      <p>The companion is fine. Load into a session and get in the car: iRacing's garage menus don't send live data.</p></details>
+    <details><summary>No spoken calls</summary>
+      <p>Click anywhere in Grid Central once (the browser blocks sound until you do), then check the switches in Settings → Voice &amp; radio.</p></details>
+    <details><summary>Talkback doesn't hear me</summary>
+      <p>In Settings → Voice &amp; radio → Talkback, check the microphone and button, and that the status says READY. The first time, it downloads a speech model (about 40 MB). Hold the button a moment before speaking.</p></details>
+    <details><summary>The in-game overlay doesn't show over iRacing</summary>
+      <p>Set iRacing to windowed or borderless, not full screen. Ctrl+Alt+O shows and hides the overlay.</p></details>
+    <details><summary>OBS keeps showing a different overlay design</summary>
+      <p>The Grid Central Overlay source in OBS keeps its design (marked <b>· OBS</b> in the designer's list). Open the design you want and press <b>Add to OBS</b> again.</p></details>
+    <details><summary>I hear the commentary in my headset</summary>
+      <p>In OBS, on the Grid Central Browser source, tick <b>Control audio via OBS</b> and set Audio Monitoring to <b>Monitor Off</b> (Edit → Advanced Audio Properties).</p></details>
+    <details><summary>My paint doesn't show in iRacing</summary>
+      <p>Install needs the companion running and your iRacing ID in the paint shop's Setup. If the Trading Paints Downloader has "Update my own paints" ticked, it replaces your paint: untick it. Grid Central's install card says which problem it found.</p></details>
+    <details><summary>The phone pit wall won't connect</summary>
+      <p>Use the same Wi-Fi as the PC (not mobile data or a guest network), set the Windows network to <b>Private</b>, and scan the QR code again if your PC's address changed.</p></details>
+    <details><summary>A new feature is missing after an update</summary>
+      <p>Press Ctrl+F5. If it's still missing, close every Grid Central window and open it again.</p></details>
+    <details><summary>The companion closed or overlays stopped</summary>
+      <ol><li>Open the Start menu, find Grid Central, right-click it and choose <b>Open file location</b>.</li>
+      <li>Email <b>companion.log</b> (and companion-previous.log, if it's there) to support.gridcentral@gmail.com with the track, car and what you were doing.</li></ol></details>
+  </section>
+
+  <section id="contact">
+    <h2>Contact us</h2>
+    <div class="contact">
+      <p>Prefer email, or need to share something private (a log, your account, a beta code request)?</p>
+      <p>When reporting a problem, include your version (bottom right of the app, for example <b>V 0.5.9.2 · BETA</b>), the track, the car and what you were doing.</p>
+      <a class="btn" href="mailto:support.gridcentral@gmail.com">Email support.gridcentral@gmail.com</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  Grid Central is in closed beta. Get the latest version from the
+  <a href="https://github.com/xr58ya/grid-central/releases/latest">download page</a> or the
+  <a href="https://xr58ya.github.io/grid-central/">Grid Central website</a>.
+</footer>
+</body>
+</html>

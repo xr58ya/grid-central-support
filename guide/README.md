@@ -13,6 +13,6 @@ A complete, step-by-step guide to everything Grid Central does and how to set it
 
 **During the beta, every feature is unlocked** (except the hosted team hub, see chapter 5). Where the guide mentions a plan (Rookie, Driver, Race Team or the Broadcast add-on), that describes how Grid Central will work once it goes on sale.
 
-This guide is written for the version on the development branch, so a few things may be newer than the version you have. Your version is shown at the bottom right of the app, for example "V 0.5.9.1 · BETA".
+This guide is written for Grid Central 0.5.9.2. Your version is shown at the bottom right of the app, for example "V 0.5.9.2 · BETA". If yours is older, the Update now banner at the top of the app installs the latest one.
 
 Something missing, wrong or unclear? [Open a setup help ticket](https://github.com/xr58ya/grid-central-support/issues/new?template=setup_help.yml) or email support.gridcentral@gmail.com.
