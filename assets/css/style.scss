@@ -1,6 +1,7 @@
 ---
 ---
 
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap");
 @import "{{ site.theme }}";
 
 // Grid Central colours for the training guide pages, matching the support page.
@@ -23,3 +24,8 @@ body { background: #101112; color: #eef0ea; }
 .main-content .footer { border-top-color: #2b2e2f; }
 .site-footer { border-top-color: #2b2e2f; }
 .site-footer-owner, .site-footer-credits { color: #8b9089; }
+
+// Space Grotesk for the site name and headings, like the app.
+.project-name, .main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6 {
+  font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
