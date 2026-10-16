@@ -22,7 +22,11 @@ the owner's step-by-step setup is in [support/cloudflare-setup.md](support/cloud
 - **Build command** `npm run build`, **output directory** `dist` (also in `wrangler.toml`). The build copies the
   pages and the admin and turns `guide/*.md` into HTML; it only needs the pinned `marked` package.
 - **API**: `functions/` (Cloudflare Pages Functions), with shared code in `lib/`. `POST /api/tickets` takes the form;
-  `/api/admin/*` is the admin, behind Cloudflare Access and checked again in every function.
+  `/api/admin/*` is the admin, behind Cloudflare Access and checked again in every function. The site only answers on
+  support.getgridcentral.com (and localhost): `functions/_middleware.js` forwards the `*.pages.dev` addresses there
+  and closes their API, because Access doesn't cover them.
+- **Send limits** (`lib/tickets.js`): 5 tickets an hour per sender, 20 an hour and 35 a day in all, so Resend's free
+  100 emails a day leave room for replies.
 - **Database**: Cloudflare D1, set up with `migrations/0001_init.sql`. **Files**: a private R2 bucket.
 - **Secrets** are only ever added in the Cloudflare dashboard; `wrangler.toml` lists their names.
 - **Tests**: `npm test` (needs Node 22.13 or newer for its built-in SQLite; no network or Cloudflare account needed).

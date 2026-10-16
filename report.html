@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact Grid Central Support</title>
+<script>
+  // Once this is on main, the old GitHub Pages copy of the page sends people to the support site.
+  if (/\.github\.io$/i.test(location.hostname)) location.replace('https://support.getgridcentral.com/report.html' + location.search + location.hash);
+</script>
 <meta name="description" content="Report a problem, suggest a feature or ask for setup help with Grid Central.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -124,8 +128,8 @@
   </div>
 
   <p class="note" id="how">
-    <b>Private.</b> Your answers and any files come straight to the Grid Central team and only we can see them:
-    nothing is posted publicly. We'll email you a ticket number and reply to you there.
+    <b>Private.</b> Your answers and any files come straight to the Grid Central team and only we can see them.
+    We'll email you a ticket number and reply to you there.
     <a href="privacy.html">What we keep and why</a>.
   </p>
 
@@ -240,6 +244,9 @@
   };
   // FORMS:end
 
+  // Longest answers the server takes (lib/forms.js MAX_LENGTH).
+  var MAX_TEXT = { textarea: 8000, logs: 20000 };
+
   // Used until /api/config answers; the server checks again either way.
   var LIMITS = { maxFiles: 5, maxFileBytes: 10 * 1024 * 1024, maxTotalBytes: 25 * 1024 * 1024,
     accept: ['.log', '.txt', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.mp4', '.webm'] };
@@ -256,6 +263,7 @@
   var chosen = [];          // File objects to attach
   var ready = false;        // the server is set up to take tickets
   var siteKey = null, widget = null, token = '';
+  var checkFailed = false;  // the "are you human" check couldn't load
   var busy = false;
 
   function el(tag, attrs, text) {
@@ -271,7 +279,7 @@
 
   function attachHint() {
     $('f-files-hint').textContent = FORMS[current].attach + ' Up to ' + LIMITS.maxFiles + ' files, ' + size(LIMITS.maxFileBytes) +
-      ' each: ' + LIMITS.accept.join(' ') + '. Only the Grid Central team can open them.';
+      ' each and ' + size(LIMITS.maxTotalBytes) + ' in all: ' + LIMITS.accept.join(' ') + '. Only the Grid Central team can open them.';
     fileInput.setAttribute('accept', LIMITS.accept.join(','));
   }
 
@@ -390,8 +398,15 @@
     FORMS[current].fields.forEach(function (f) {
       var wrap = fieldWrap(f.id);
       var empty = f.type === 'multi' ? !a[f.id].length : !a[f.id];
+      var message = f.type === 'multi' ? 'Pick at least one.' : 'Please fill this in.';
       var bad = !!(f.required && empty);
-      setInvalid(wrap, bad, f.type === 'multi' ? 'Pick at least one.' : 'Please fill this in.');
+      var max = f.type === 'textarea' ? (f.id === 'logs' ? MAX_TEXT.logs : MAX_TEXT.textarea) : 0;
+      if (!bad && max && a[f.id].length > max) {
+        bad = true;
+        message = 'Please keep this under ' + max + ' characters (it has ' + a[f.id].length + ').' +
+          (f.id === 'logs' ? ' Paste only the error lines, or attach companion.log as a file instead.' : '');
+      }
+      setInvalid(wrap, bad, message);
       if (bad && !firstBad) firstBad = wrap;
     });
     var email = emailInput.value.trim();
@@ -473,6 +488,9 @@
     sendBtn.textContent = on ? 'Sending…' : 'Send';
   }
 
+  var CHECK_FAILED = 'The "are you human" check couldn\'t load (a browser extension or firewall may be blocking ' +
+    'challenges.cloudflare.com). Reload the page to try again, or press Copy my answers and email them to ' + EMAIL + '.';
+
   // Turnstile, Cloudflare's "are you human" check. Loaded once the server has said which site key to use.
   function loadCheck() {
     window.gcTurnstileReady = function () {
@@ -481,11 +499,12 @@
         sitekey: siteKey,
         theme: 'dark',
         action: 'ticket',
-        callback: function (t) { token = t; setInvalid($('check-field'), false); },
+        callback: function (t) { token = t; checkFailed = false; setInvalid($('check-field'), false); },
         'expired-callback': function () { token = ''; },
         'error-callback': function () {
           token = '';
-          say('The "are you human" check couldn\'t load. Reload the page, or email ' + EMAIL + '.', 'warn');
+          checkFailed = true;
+          say(CHECK_FAILED, 'warn');
           offerCopy();
         }
       });
@@ -495,7 +514,8 @@
     s.async = true;
     s.defer = true;
     s.onerror = function () {
-      say('The "are you human" check couldn\'t load. Check your connection and reload, or email ' + EMAIL + '.', 'warn');
+      checkFailed = true;
+      say(CHECK_FAILED, 'warn');
       offerCopy();
     };
     document.head.appendChild(s);
@@ -575,6 +595,14 @@
       say(msg, 'warn');
       return;
     }
+    // With attachments, a dropped connection or an error page from Cloudflare is usually the upload being too big
+    // or too slow, and trying again the same way won't help.
+    if (chosen.length && (status === 0 || (status >= 500 && !body))) {
+      say('Your report couldn\'t be sent (error ' + (status || 'no connection') + '). Try sending it without the attachments ' +
+        '(remove them above), then email them to ' + EMAIL + ' with your ticket number.', 'warn');
+      offerCopy();
+      return;
+    }
     say((msg || 'Your report couldn\'t be sent (error ' + (status || 'no connection') + ').') +
       ' Please try again in a minute. If it keeps failing, press Copy my answers and email them to ' + EMAIL + '.', 'warn');
     offerCopy();
@@ -587,21 +615,28 @@
     chosen.forEach(function (f) { fd.append('files', f, f.name); });
     var xhr = new XMLHttpRequest();
     xhr.open('POST', API);
-    xhr.timeout = 180000;
+    // Gives up only when nothing has moved for a while, however long a big upload on a slow line takes.
+    var idle = null;
+    function stall(ms) { clearTimeout(idle); idle = setTimeout(function () { xhr.abort(); }, ms); }
     if (chosen.length) {
       xhr.upload.onprogress = function (e) {
-        if (e.lengthComputable) statusEl.textContent = 'Sending… ' + Math.round(e.loaded / e.total * 100) + '%';
+        stall(90000);
+        // Shown on the button, not in the status line, so screen readers aren't read every percent.
+        if (e.lengthComputable) sendBtn.textContent = 'Sending… ' + Math.round(e.loaded / e.total * 100) + '%';
       };
+      xhr.upload.onload = function () { stall(120000); };
     }
     xhr.onload = function () {
+      clearTimeout(idle);
       var body = null;
       try { body = JSON.parse(xhr.responseText); } catch (e) { /* not our answer */ }
       handleAnswer(xhr.status, body, email);
     };
-    xhr.onerror = xhr.ontimeout = function () { handleAnswer(0, null, email); };
+    xhr.onerror = xhr.onabort = function () { clearTimeout(idle); handleAnswer(0, null, email); };
     setBusy(true);
     statusEl.className = '';
     statusEl.textContent = 'Sending…';
+    stall(90000);
     xhr.send(fd);
   }
 
@@ -642,6 +677,14 @@
     addFiles(fileInput.files);
     fileInput.value = '';
   });
+  // A file dropped anywhere on the page is attached (when attaching is on), instead of the browser opening it and
+  // leaving the page with the answers typed so far.
+  window.addEventListener('dragover', function (e) { e.preventDefault(); });
+  window.addEventListener('drop', function (e) {
+    e.preventDefault();
+    if (e.target.closest && e.target.closest('#drop')) return;
+    if (!form.hidden && !$('files-field').hidden && e.dataTransfer && e.dataTransfer.files.length) addFiles(e.dataTransfer.files);
+  });
   var drop = $('drop');
   ['dragenter', 'dragover'].forEach(function (t) {
     drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('over'); });
@@ -660,6 +703,8 @@
     var a = readAnswers();
     if (!validate(a)) { say('Some answers are missing: they\'re marked in red above.', 'warn'); return; }
     if (!ready) { say('Sending isn\'t available right now: press Copy my answers and email them to ' + EMAIL + '.', 'warn'); offerCopy(); return; }
+    if (checkFailed) { say(CHECK_FAILED, 'warn'); offerCopy(); return; }
+    if ($('check-field').hidden) { say('The "are you human" check is still loading. Wait a moment, then press Send again.', 'warn'); return; }
     if (!token) {
       setInvalid($('check-field'), true, 'Please complete the "are you human" check.');
       say('Please complete the "are you human" check just above Send.', 'warn');

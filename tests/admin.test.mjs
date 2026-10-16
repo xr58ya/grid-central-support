@@ -73,9 +73,10 @@ test('admin sign-in: every missing or wrong piece is refused', async function ()
   const env = baseEnv();
   const cases = [
     ['no ADMIN_EMAILS', baseEnv({ ADMIN_EMAILS: '' }), {}, 403],
-    ['no email header', env, { email: null }, 401],
+    ['no Access token or email header', env, { email: null, jwt: null }, 401],
     ['someone not on ADMIN_EMAILS', env, { email: 'stranger@example.com', claims: { email: 'stranger@example.com' } }, 403],
-    ['no Access token (header typed by hand)', env, { jwt: null }, 403],
+    ['no Access token (header typed by hand)', env, { jwt: null }, 401],
+    ['token with no email in it', env, { email: null, claims: { email: undefined } }, 403],
     ['token not signed by the team', env, { signer: otherKey }, 403],
     ['token for another email', env, { claims: { email: 'second@example.com' } }, 403],
     ['token for another application', env, { claims: { aud: ['other-aud'] } }, 403],
@@ -93,6 +94,37 @@ test('admin sign-in: every missing or wrong piece is refused', async function ()
   }
   const forged = (await key.sign(claims())).replace(/\.[^.]+$/, '.' + Buffer.from('nope').toString('base64url'));
   assert.equal((await call(me, env, await req('/api/admin/me', { jwt: forged }))).res.status, 403, 'bad signature');
+});
+
+test('admin sign-in: a guessed email header gets the same answer whether or not it is on ADMIN_EMAILS', async function () {
+  const env = baseEnv();
+  const site = 'https://grid-central-support.pages.dev';
+  const junk = 'eyJhbGciOiJSUzI1NiIsImtpZCI6ImsxIn0.eyJlbWFpbCI6Im93bmVyQGV4YW1wbGUuY29tIn0.bm9wZQ';
+  for (const jwt of [null, junk]) {
+    const answers = [];
+    for (const email of [ADMIN, 'guess@example.com']) {
+      const r = await call(me, env, await req('/api/admin/me', { site: site, email: email, jwt: jwt }));
+      answers.push([r.res.status, r.body.error]);
+    }
+    assert.deepEqual(answers[0], answers[1], 'token ' + (jwt ? 'junk' : 'missing'));
+  }
+  // The email inside a valid token is what counts: no header needed, and a different header is refused.
+  assert.equal((await call(me, env, await req('/api/admin/me', { email: null }))).res.status, 200);
+  assert.equal((await call(me, env, await req('/api/admin/me', { claims: { email: 'stranger@example.com' } }))).res.status, 403);
+});
+
+test('admin sign-in: made-up key ids fetch the Access keys again at most once a minute', async function () {
+  const env = baseEnv();
+  assert.equal((await call(me, env, await req('/api/admin/me'))).res.status, 200);
+  assert.equal(net.keyFetches, 1);
+  for (let i = 0; i < 5; i++) {
+    const fake = await makeAccessKey('made-up-' + i);
+    assert.equal((await call(me, env, await req('/api/admin/me', { signer: fake }))).res.status, 403);
+  }
+  assert.equal(net.keyFetches, 2, 'one forced refresh, then the cooldown');
+  const odd = [Buffer.from(JSON.stringify({ alg: 'RS256', kid: '../../x' })).toString('base64url'), Buffer.from('{}').toString('base64url'), 'x'].join('.');
+  assert.equal((await call(me, env, await req('/api/admin/me', { jwt: odd }))).res.status, 403);
+  assert.equal(net.keyFetches, 2, 'a malformed key id is refused without fetching');
 });
 
 test('admin sign-in: the right person with a valid Access token gets in, in any letter case', async function () {
@@ -163,6 +195,48 @@ test('ticket list: newest first, with filters and counts', async function () {
   for (const bad of ['?type=x', '?status=x', '?area=x', '?priority=x', '?version=abc']) {
     assert.equal((await call(list, env, await req('/api/admin/tickets' + bad))).res.status, 400, bad);
   }
+});
+
+test('ticket search looks at what was typed, not the stored JSON; Load more pages by ticket number', async function () {
+  const env = baseEnv();
+  await seed(env);
+  const ctx = context(ticketRequest({ email: 'path@example.com', answers: bugAnswers({ steps: 'Open C:\\Users\\me\\AppData', 'what-happened': 'It said "Connection lost"' }) }), env);
+  assert.equal((await postTicket(ctx)).status, 201);
+  await ctx.settle();
+  const ids = async function (q) {
+    const r = await call(list, env, await req('/api/admin/tickets' + q));
+    assert.equal(r.res.status, 200, q + ' ' + JSON.stringify(r.body));
+    return r.body.tickets.map(function (t) { return t.number; });
+  };
+  assert.deepEqual(await ids('?q=' + encodeURIComponent('C:\\Users')), ['GC-1004']);
+  assert.deepEqual(await ids('?q=' + encodeURIComponent('"Connection lost"')), ['GC-1004']);
+  assert.deepEqual(await ids('?q=steps'), [], 'field names are not searched');
+  assert.deepEqual(await ids('?q=Talkback'), ['GC-1004', 'GC-1001'], 'the area picks are searched');
+  assert.deepEqual(await ids('?before=GC-1003'), ['GC-1002', 'GC-1001']);
+  assert.deepEqual(await ids('?type=bug&before=1004'), ['GC-1001']);
+});
+
+test('status and priority: only what changed is saved, and a page that is out of date is told to reload', async function () {
+  const env = baseEnv();
+  await seed(env);
+  const send = async function (body) {
+    return call(patchOne, env, await req('/api/admin/tickets/GC-1001', { method: 'PATCH', body: body }), { id: 'GC-1001' });
+  };
+  // Two tabs opened GC-1001 (new, priority not set). Tab B sets the priority; tab A then changes the status only.
+  let r = await send({ priority: 'high', from: { status: 'new', priority: 'none' } });
+  assert.equal(r.res.status, 200);
+  r = await send({ status: 'confirmed', from: { status: 'new', priority: 'none' } });
+  assert.equal(r.res.status, 200, JSON.stringify(r.body));
+  assert.deepEqual([r.body.ticket.status, r.body.ticket.priority], ['confirmed', 'high'], 'tab B\'s priority stays');
+  // Tab A still thinks the status is "new": changing it again is refused, and nothing is saved or emailed.
+  r = await send({ status: 'needs_info', notify: true, from: { status: 'new', priority: 'none' } });
+  assert.equal(r.res.status, 409);
+  assert.match(r.body.error, /changed somewhere else/);
+  const d = (await call(getOne, env, await req('/api/admin/tickets/GC-1001'), { id: 'GC-1001' })).body;
+  assert.equal(d.ticket.status, 'confirmed');
+  assert.equal(net.emails.length, 0);
+  assert.deepEqual(d.events.filter(function (e) { return e.kind === 'status' || e.kind === 'priority'; }).map(function (e) { return e.kind + ' ' + e.meta.from + '>' + e.meta.to; }),
+    ['priority none>high', 'status new>confirmed']);
 });
 
 test('ticket detail, status change with an email to the customer, priority, note and reply', async function () {
@@ -248,7 +322,7 @@ test('files: downloads are attachments with nosniff, screenshots can show inline
   assert.equal((await call(getFile, env, await req('/api/admin/files/' + png.id + '?lines=errors'), { id: png.id })).res.status, 400);
   assert.equal((await call(getFile, env, await req('/api/admin/files/nothex'), { id: 'nothex' })).res.status, 404);
   assert.equal((await call(getFile, env, await req('/api/admin/files/' + 'a'.repeat(32)), { id: 'a'.repeat(32) })).res.status, 404);
-  assert.equal((await getFile(context(await req('/api/admin/files/' + log.id, { jwt: null }), env, { id: log.id }))).status, 403, 'needs the admin sign-in');
+  assert.equal((await getFile(context(await req('/api/admin/files/' + log.id, { jwt: null }), env, { id: log.id }))).status, 401, 'needs the admin sign-in');
 });
 
 test('delete: needs the number typed, removes the ticket, history and files, and numbers are never reused', async function () {
@@ -270,6 +344,30 @@ test('delete: needs the number typed, removes the ticket, history and files, and
   assert.equal((await res.json()).ticket, 'GC-1004');
 });
 
+test('delete: files are removed from storage first (even ones with no database row), and a storage failure keeps the ticket', async function () {
+  const env = baseEnv();
+  await seed(env);
+  await env.FILES.put('tickets/GC-1001/' + 'f'.repeat(32) + '/orphan.log', new TextEncoder().encode('left behind'));
+  await env.FILES.put('tickets/GC-10010/x/other.log', new TextEncoder().encode('another ticket'));
+  env.FILES.failDeletes = true;
+  let r = await call(deleteOne, env, await req('/api/admin/tickets/GC-1001', { method: 'DELETE', body: { confirm: 'GC-1001' } }), { id: 'GC-1001' });
+  assert.equal(r.res.status, 502);
+  assert.equal((await call(getOne, env, await req('/api/admin/tickets/GC-1001'), { id: 'GC-1001' })).res.status, 200, 'still there to try again');
+  env.FILES.failDeletes = false;
+  r = await call(deleteOne, env, await req('/api/admin/tickets/GC-1001', { method: 'DELETE', body: { confirm: 'GC-1001' } }), { id: 'GC-1001' });
+  assert.equal(r.res.status, 200);
+  assert.deepEqual(Array.from(env.FILES.store.keys()), ['tickets/GC-10010/x/other.log']);
+
+  const noFiles = Object.assign({}, env, { FILES: undefined });
+  const ctx = context(ticketRequest({ email: 'x@example.com', files: [{ name: 'shot.png', bytes: PNG }] }), env);
+  assert.equal((await postTicket(ctx)).status, 201);
+  await ctx.settle();
+  r = await call(deleteOne, noFiles, await req('/api/admin/tickets/GC-1004', { method: 'DELETE', body: { confirm: 'GC-1004' } }), { id: 'GC-1004' });
+  assert.equal(r.res.status, 503, 'files it can\'t reach are never left behind silently');
+  r = await call(deleteOne, noFiles, await req('/api/admin/tickets/GC-1002', { method: 'DELETE', body: { confirm: 'GC-1002' } }), { id: 'GC-1002' });
+  assert.equal(r.res.status, 200, 'a ticket with no files can go without storage');
+});
+
 test('the admin page puts ticket text in with textContent only', function () {
   const js = fs.readFileSync(path.join(ROOT, 'admin', 'admin.js'), 'utf8');
   assert.doesNotMatch(js, /innerHTML|outerHTML|insertAdjacentHTML|document\.write|eval\(|new Function/);
@@ -287,6 +385,18 @@ test('"Copy for development" gives version, track, car, session, steps, expected
     { actual: 'The spotter went quiet.', expected: 'I expected it to keep calling.' });
   assert.deepEqual({ ...dev.splitExpected('It crashed.\nExpected: no crash') }, { actual: 'It crashed.', expected: 'no crash' });
   assert.deepEqual({ ...dev.splitExpected('It just crashes') }, { actual: 'It just crashes', expected: '' });
+  assert.deepEqual({ ...dev.splitExpected('After pitting the spotter went quiet.\nExpected: it keeps calling cars\nActual: silence until I restart Grid Central') },
+    { actual: 'After pitting the spotter went quiet.\nsilence until I restart Grid Central', expected: 'it keeps calling cars' });
+  assert.deepEqual({ ...dev.splitExpected('It crashed when I pit. I expect it is because of the update.') },
+    { actual: 'It crashed when I pit. I expect it is because of the update.', expected: '' }, 'a guess is not an expectation');
+  assert.deepEqual({ ...dev.splitExpected('It crashed. I\'d expect it to keep running.') }, { actual: 'It crashed.', expected: 'I\'d expect it to keep running.' });
+  assert.deepEqual({ ...dev.parseSession('Official race at Daytona in the Mustang GT3') }, { car: 'Mustang GT3', track: 'Daytona', kind: 'Official race' });
+  assert.deepEqual({ ...dev.parseSession('Practice at Spa') }, { car: '', track: 'Spa', kind: 'Practice' });
+  assert.deepEqual({ ...dev.parseSession('Porsche 963 at Spa in the rain') }, { car: 'Porsche 963', track: 'Spa in the rain', kind: '' });
+  const failed = dev.devText({ ticket: { number: 'GC-1002', type: 'bug', summary: 's', answers: {} }, form: { name: 'Bug report', fields: [] }, files: [] },
+    [{ filename: 'companion.log', failed: true }]);
+  assert.ok(failed.indexOf('companion.log: couldn\'t be read') >= 0, failed);
+  assert.equal(failed.indexOf('(error lines)'), -1);
 
   const answers = bugAnswers();
   const text = dev.devText({

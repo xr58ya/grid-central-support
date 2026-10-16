@@ -6,7 +6,8 @@
   var app = document.getElementById('app');
   var toastEl = document.getElementById('toast');
   var META = null;          // /api/admin/me: who's signed in, form labels, statuses
-  var listState = null;     // the list's tickets so far, for "Load more"
+  var listState = null;     // the list's filters and tickets so far, for "Load more"; null when a ticket is shown
+  var drafts = {};          // unsent reply and note text, by ticket number, so redrawing a ticket keeps it
 
   // ---- small helpers ----
 
@@ -101,6 +102,18 @@
     return Promise.reject(new Error('no clipboard'));
   }
 
+  // Copies text that's still being prepared. Safari and iPhones only allow copying during the click itself, so
+  // where the browser can, the copy starts now and the text follows when it's ready.
+  function copyWhenReady(textPromise) {
+    if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+      try {
+        var item = new window.ClipboardItem({ 'text/plain': textPromise.then(function (t) { return new Blob([t], { type: 'text/plain' }); }) });
+        return navigator.clipboard.write([item]).catch(function () { return textPromise.then(copyText); });
+      } catch (e) { /* this browser wants the text first */ }
+    }
+    return textPromise.then(copyText);
+  }
+
   function showError(err) {
     clear(app);
     app.appendChild(h('div', { 'class': 'banner bad' }, err.message || String(err)));
@@ -129,16 +142,29 @@
     else showList(r.params);
   }
 
+  // Whether the page still shows this ticket (an answer that arrives after the owner has moved on is dropped).
+  function showing(number) {
+    return parseHash().path.toUpperCase() === number;
+  }
+
   // ---- the ticket list ----
 
   var FILTERS = ['q', 'type', 'status', 'area', 'version', 'priority'];
 
-  function setListHash(f) {
+  // The list's address keeps its filters, so Back from a ticket returns to the same list. No status means open.
+  function listHash(v) {
     var p = new URLSearchParams();
-    FILTERS.forEach(function (k) { if (f[k]) p.set(k, f[k]); });
+    FILTERS.forEach(function (k) { if (v[k]) p.set(k, v[k]); });
     var s = p.toString();
-    var target = '#/' + (s ? '?' + s : '');
-    if (location.hash !== target) location.hash = target; else route();
+    return '#/' + (s ? '?' + s : '');
+  }
+
+  function listFilters(params) {
+    var f = {};
+    FILTERS.forEach(function (k) { f[k] = params.get(k) || ''; });
+    if (!params.has('status')) f.status = 'open';
+    if (params.get('status') === 'all') f.status = '';
+    return f;
   }
 
   function setupBanners() {
@@ -164,10 +190,7 @@
 
   function showList(params) {
     document.title = 'Tickets · Grid Central Support admin';
-    var f = {};
-    FILTERS.forEach(function (k) { f[k] = params.get(k) || ''; });
-    if (!params.has('status')) f.status = 'open';
-    if (params.get('status') === 'all') f.status = '';
+    var f = listFilters(params);
 
     clear(app);
     setupBanners().forEach(function (b) { app.appendChild(b); });
@@ -181,11 +204,16 @@
     var areaSel = select('area', f.area, 'All areas', (META.areas || []).map(function (a) { return { id: a, label: a }; }));
     var prioSel = select('priority', f.priority, 'Any priority', META.priorities);
 
+    // Filters change the results only: the form stays as it is, so the box being typed in keeps its focus and
+    // text. replaceState updates the address without a hashchange (and without a history entry per pause).
     function apply() {
-      setListHash({
+      if (!bar.isConnected) return; // a ticket was opened before the typing pause ended
+      var target = listHash({
         q: search.value.trim(), type: typeSel.value, status: statusSel.value || 'all', area: areaSel.value,
         version: version.value.trim(), priority: prioSel.value
       });
+      if (location.hash !== target) history.replaceState(null, '', target);
+      loadList(listFilters(parseHash().params));
     }
     var timer = null;
     function later() { clearTimeout(timer); timer = setTimeout(apply, 450); }
@@ -193,7 +221,7 @@
     version.addEventListener('input', later);
     [typeSel, statusSel, areaSel, prioSel].forEach(function (s) { s.addEventListener('change', apply); });
 
-    var filters = h('form', { 'class': 'filters', role: 'search', onsubmit: function (e) { e.preventDefault(); apply(); } }, [
+    var bar = h('form', { 'class': 'filters', role: 'search', onsubmit: function (e) { e.preventDefault(); apply(); } }, [
       h('label', null, ['Search', search]),
       h('label', null, ['Type', typeSel]),
       h('label', null, ['Status', statusSel]),
@@ -201,42 +229,58 @@
       h('label', null, ['Version', version]),
       h('label', null, ['Priority', prioSel])
     ]);
-    app.appendChild(filters);
+    app.appendChild(bar);
     var chips = h('div', { 'class': 'chips', 'aria-label': 'Status' });
     app.appendChild(chips);
     var holder = h('div', null, h('p', { 'class': 'muted' }, 'Loading…'));
     app.appendChild(holder);
 
-    listState = { filters: f, tickets: [], offset: 0 };
-    loadPage(holder, chips, f, 0, statusSel);
+    function loadList(filters) {
+      listState = { filters: filters, tickets: [], holder: holder, chips: chips, statusSel: statusSel };
+      loadPage(listState, null);
+    }
+    loadList(f);
   }
 
-  function query(f, offset) {
+  function query(f, before) {
     var p = new URLSearchParams();
     FILTERS.forEach(function (k) { if (f[k]) p.set(k, f[k]); });
-    if (offset) p.set('offset', String(offset));
+    if (before) p.set('before', String(before));
     return '/api/admin/tickets?' + p.toString();
   }
 
-  function loadPage(holder, chips, f, offset, statusSel) {
-    api(query(f, offset)).then(function (data) {
-      drawChips(chips, data.counts || {}, f, statusSel);
-      listState.tickets = listState.tickets.concat(data.tickets);
+  // One page of the list. "Load more" asks for the tickets numbered below the last one shown, so a ticket that
+  // arrives or goes in between can't make one show twice or go missing.
+  function loadPage(state, before) {
+    var holder = state.holder;
+    api(query(state.filters, before)).then(function (data) {
+      if (state !== listState) return; // the filters changed, or a ticket was opened, while this was loading
+      drawChips(state.chips, data.counts || {}, state.filters, state.statusSel);
+      state.tickets = state.tickets.concat(data.tickets);
       clear(holder);
-      if (!listState.tickets.length) {
-        holder.appendChild(h('div', { 'class': 'empty' }, 'No tickets match.'));
+      if (!state.tickets.length) {
+        var empty = h('div', { 'class': 'empty' }, state.filters.status === 'open' ? 'No open tickets match.' : 'No tickets match.');
+        if (state.filters.status) {
+          // A search for a closed ticket (by number or email) is hidden by the status filter: offer to look wider.
+          empty.appendChild(h('p', null, h('button', {
+            'class': 'btn secondary', type: 'button',
+            onclick: function () { state.statusSel.value = ''; state.statusSel.dispatchEvent(new Event('change')); }
+          }, 'Search every status')));
+        }
+        holder.appendChild(empty);
         return;
       }
-      holder.appendChild(drawTable(listState.tickets));
+      holder.appendChild(drawTable(state.tickets));
       if (data.more) {
         var btn = h('button', { 'class': 'btn secondary', type: 'button' }, 'Load more');
         btn.addEventListener('click', function () {
           busy(btn, true, 'Loading…');
-          loadPage(holder, chips, f, offset + data.tickets.length, statusSel);
+          loadPage(state, state.tickets[state.tickets.length - 1].id);
         });
         holder.appendChild(h('div', { 'class': 'more' }, btn));
       }
     }).catch(function (err) {
+      if (state !== listState) return;
       if (err.status === 401 || err.status === 403 || err.status === 0) showError(err);
       else { clear(holder); holder.appendChild(h('div', { 'class': 'banner bad' }, err.message)); }
     });
@@ -244,6 +288,7 @@
 
   function drawChips(chips, counts, f, statusSel) {
     clear(chips);
+    chips.appendChild(h('span', { 'class': 'chips-label' }, 'All tickets:'));
     var open = 0, all = 0;
     META.statuses.forEach(function (s) { all += counts[s.id] || 0; if (s.id !== 'closed') open += counts[s.id] || 0; });
     var items = [{ id: 'open', label: 'Open', n: open }].concat(META.statuses.map(function (s) {
@@ -290,15 +335,24 @@
   // ---- one ticket ----
 
   function showTicket(number) {
+    listState = null;
     document.title = number + ' · Grid Central Support admin';
     clear(app);
     app.appendChild(h('a', { 'class': 'back', href: '#/' }, '← All tickets'));
     app.appendChild(h('p', { 'class': 'muted' }, 'Loading ' + number + '…'));
-    api('/api/admin/tickets/' + encodeURIComponent(number)).then(drawTicket).catch(showError);
+    api('/api/admin/tickets/' + encodeURIComponent(number)).then(drawTicket, function (err) {
+      if (showing(number)) showError(err);
+    });
+  }
+
+  function draftOf(number) {
+    if (!drafts[number]) drafts[number] = { reply: '', note: '' };
+    return drafts[number];
   }
 
   function drawTicket(d) {
     var t = d.ticket;
+    if (!showing(t.number)) return; // the owner has gone to the list or another ticket meanwhile
     var form = d.form || formOf(t.type);
     document.title = t.number + ' · ' + t.summary + ' · Grid Central Support admin';
     clear(app);
@@ -417,7 +471,9 @@
   }
 
   function replyCard(t) {
-    var text = h('textarea', { rows: 6, placeholder: 'Write to the customer. It\'s emailed to ' + t.email + ' and kept in the history.' });
+    var draft = draftOf(t.number);
+    var text = h('textarea', { rows: 6, value: draft.reply, placeholder: 'Write to the customer. It\'s emailed to ' + t.email + ' and kept in the history.' });
+    text.addEventListener('input', function () { draft.reply = text.value; });
     var btn = h('button', { 'class': 'btn', type: 'button' }, 'Email reply to customer');
     btn.addEventListener('click', function () {
       var body = text.value.trim();
@@ -425,11 +481,13 @@
       if (!confirm('Email this reply to ' + t.email + '?')) return;
       busy(btn, true, 'Sending…');
       api('/api/admin/tickets/' + encodeURIComponent(t.number) + '/reply', { method: 'POST', body: { body: body } }).then(function (d) {
+        draft.reply = '';
         toast('Reply emailed to ' + t.email + '.');
         drawTicket(d);
       }).catch(function (err) {
         busy(btn, false);
-        if (err.data && err.data.ticket) { drawTicket(err.data); }
+        // A reply that didn't go is still saved in the history, to copy and send again.
+        if (err.data && err.data.ticket) { draft.reply = ''; drawTicket(err.data); }
         toast(err.message, true);
       });
     });
@@ -437,13 +495,16 @@
   }
 
   function noteCard(t) {
-    var text = h('textarea', { rows: 3, placeholder: 'Only the Grid Central team sees notes. They are never emailed.' });
+    var draft = draftOf(t.number);
+    var text = h('textarea', { rows: 3, value: draft.note, placeholder: 'Only the Grid Central team sees notes. They are never emailed.' });
+    text.addEventListener('input', function () { draft.note = text.value; });
     var btn = h('button', { 'class': 'btn secondary', type: 'button' }, 'Add private note');
     btn.addEventListener('click', function () {
       var body = text.value.trim();
       if (!body) { toast('Write the note first.', true); text.focus(); return; }
       busy(btn, true, 'Saving…');
       api('/api/admin/tickets/' + encodeURIComponent(t.number) + '/notes', { method: 'POST', body: { body: body } }).then(function (d) {
+        draft.note = '';
         toast('Note added.');
         drawTicket(d);
       }).catch(function (err) { busy(btn, false); toast(err.message, true); });
@@ -480,9 +541,11 @@
       if (status.value === t.status && prio.value === t.priority) { toast('Nothing changed.'); return; }
       if (notify.checked && !confirm('Email ' + t.email + ' that ' + t.number + ' is now "' + label(META.statuses, status.value) + '"?')) return;
       busy(btn, true, 'Saving…');
-      api('/api/admin/tickets/' + encodeURIComponent(t.number), {
-        method: 'PATCH', body: { status: status.value, priority: prio.value, notify: notify.checked, message: message.value }
-      }).then(function (d) {
+      // Only what changed here, with what the page showed, so a change made elsewhere is never undone.
+      var body = { notify: notify.checked, message: message.value, from: { status: t.status, priority: t.priority } };
+      if (status.value !== t.status) body.status = status.value;
+      if (prio.value !== t.priority) body.priority = prio.value;
+      api('/api/admin/tickets/' + encodeURIComponent(t.number), { method: 'PATCH', body: body }).then(function (d) {
         toast(d.warning ? d.warning : 'Saved.' + (notify.checked ? ' The customer has been emailed.' : ''), !!d.warning);
         drawTicket(d);
       }).catch(function (err) { busy(btn, false); toast(err.message, true); });
@@ -503,30 +566,46 @@
     var t = d.ticket;
     var area = h('textarea', { 'class': 'mono', rows: 16, 'aria-label': 'Summary for development' });
     var panel = h('div', { 'class': 'stack dev hidden' }, [
-      h('p', { 'class': 'muted small' }, 'Check the track, car, expected and actual lines, edit anything here, then copy it again if needed.'),
+      h('p', { 'class': 'muted small' }, 'Check the track, car, expected and actual lines, edit anything here, then press Copy again.'),
       area
     ]);
     var copyAgain = h('button', { 'class': 'btn secondary hidden', type: 'button' }, 'Copy again');
     var btn = h('button', { 'class': 'btn', type: 'button' }, 'Copy for development');
-    function copyArea() {
-      copyText(area.value).then(function () { toast('Copied. Paste it to development.'); },
-        function () { area.select(); toast('Couldn\'t copy automatically: the text is selected, press Ctrl+C.', true); });
+    var problems = [];
+    function copied(ok) {
+      if (!ok) {
+        area.focus();
+        area.setSelectionRange(0, area.value.length);
+        toast('Couldn\'t copy automatically. Press Copy again, or copy the text below yourself.', true);
+      } else if (problems.length) {
+        toast('Copied, but ' + problems.join(' ') + (problems.length > 1 ? ' Their' : ' Its') + ' lines are missing from the text.', true);
+      } else {
+        toast('Copied. Paste it to development.');
+      }
     }
     btn.addEventListener('click', function () {
       busy(btn, true, 'Reading logs…');
+      problems = [];
       var logs = d.files.filter(function (f) { return f.kind === 'log'; });
-      Promise.all(logs.map(function (f) {
-        return api('/api/admin/files/' + encodeURIComponent(f.id) + '?lines=errors')
-          .catch(function () { return { filename: f.filename, lines: ['(couldn\'t read this log)'] }; });
+      var ready = Promise.all(logs.map(function (f) {
+        return api('/api/admin/files/' + encodeURIComponent(f.id) + '?lines=errors').catch(function (err) {
+          problems.push(f.filename + ' couldn\'t be read: ' + err.message);
+          return { filename: f.filename, failed: true };
+        });
       })).then(function (lines) {
         busy(btn, false);
         area.value = window.GCDev.devText(d, lines);
         panel.classList.remove('hidden');
         copyAgain.classList.remove('hidden');
-        copyArea();
+        // From now on Copy again copies the text as edited here; making it again would throw the edits away.
+        btn.classList.add('hidden');
+        return area.value;
       });
+      copyWhenReady(ready).then(function () { copied(true); }, function () { copied(false); });
     });
-    copyAgain.addEventListener('click', copyArea);
+    copyAgain.addEventListener('click', function () {
+      copyText(area.value).then(function () { copied(true); }, function () { copied(false); });
+    });
     return h('section', { 'class': 'card' }, [
       h('h2', null, 'Development'),
       h('p', { 'class': 'muted small' }, 'A summary to pass on: version, track, car, session, steps, expected, actual, how often, and companion.log lines.'),
@@ -538,12 +617,14 @@
   function deleteCard(t) {
     var btn = h('button', { 'class': 'btn danger', type: 'button' }, 'Delete ticket…');
     btn.addEventListener('click', function () {
-      var typed = prompt('This deletes ' + t.number + ', its history and its files for good (for example when the customer asks).\n\nType ' + t.number + ' to delete it.');
+      var typed = prompt('This deletes ' + t.number + ', its history and its files for good (for example when the customer asks).\n\n' +
+        'It can\'t delete the emails about it: afterwards, search your inbox for ' + t.number + ' and delete those too.\n\nType ' + t.number + ' to delete it.');
       if (typed == null) return;
       if (typed.trim().toUpperCase() !== t.number) { toast('Not deleted: the number didn\'t match.', true); return; }
       busy(btn, true, 'Deleting…');
-      api('/api/admin/tickets/' + encodeURIComponent(t.number), { method: 'DELETE', body: { confirm: t.number } }).then(function (r) {
-        toast(t.number + ' deleted.' + (r.filesLeft ? ' ' + r.filesLeft + ' file(s) are still in storage: remove them in R2.' : ''), !!r.filesLeft);
+      api('/api/admin/tickets/' + encodeURIComponent(t.number), { method: 'DELETE', body: { confirm: t.number } }).then(function () {
+        delete drafts[t.number];
+        toast(t.number + ' deleted. Now search your inbox for ' + t.number + ' and delete the emails about it.');
         location.hash = '#/';
       }).catch(function (err) { busy(btn, false); toast(err.message, true); });
     });

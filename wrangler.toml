@@ -12,7 +12,7 @@
 #   TURNSTILE_SITE_KEY   Turnstile site key (public, but kept with the rest)
 #   TURNSTILE_SECRET     Turnstile secret key
 #   RESEND_API_KEY       Resend API key, for sending email
-#   OWNER_EMAIL          where new-ticket emails go
+#   OWNER_EMAIL          where new-ticket emails go (comma separated for more than one)
 #   ADMIN_EMAILS         who may use /admin (comma separated), the same people as the Access policy
 #   ACCESS_TEAM_DOMAIN   the Zero Trust team domain, for example myteam.cloudflareaccess.com
 #   ACCESS_AUD           the Access application's "Application Audience (AUD) Tag"

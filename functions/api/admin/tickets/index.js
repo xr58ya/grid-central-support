@@ -1,5 +1,6 @@
-// GET /api/admin/tickets?type=&status=&priority=&area=&version=&q=&offset=
-// Tickets newest first, 50 at a time, plus the number of tickets in each status.
+// GET /api/admin/tickets?type=&status=&priority=&area=&version=&q=&before=
+// Tickets newest first, 50 at a time, plus the number of tickets in each status (of all tickets, whatever the
+// filters). before=<number> gives the next 50 after the ticket with that number, for "Load more".
 
 import { adminRoute } from '../../../../lib/admin.js';
 import { fail, json } from '../../../../lib/http.js';
@@ -42,9 +43,9 @@ export const onRequestGet = adminRoute(async function ({ request, env }) {
     filters.q = q;
     filters.number = parseTicketNumber(q);
   }
-  const offset = Math.max(0, Math.min(100000, parseInt(p.get('offset') || '0', 10) || 0));
+  const before = p.get('before') ? parseTicketNumber(p.get('before')) : null;
 
-  const list = await listTickets(env.DB, filters, PAGE, offset);
+  const list = await listTickets(env.DB, filters, PAGE, before);
   const counts = await statusCounts(env.DB);
-  return json({ tickets: list.tickets, more: list.more, offset: offset, counts: counts });
+  return json({ tickets: list.tickets, more: list.more, counts: counts });
 });

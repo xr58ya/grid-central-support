@@ -4,23 +4,44 @@
 (function (root) {
   'use strict';
 
+  // Words for the kind of session, which people sometimes put where the car would go ("Practice at Spa").
+  var SESSION_WORDS = /^(?:(?:official|open|hosted|league|team|private)\s+)*(?:practice|qualifying|quali|qualy|race|time trial|test(?:ing)?|replay|warm[- ]?up|session)s?$/i;
+
   // "Porsche 963 at Spa, team race" -> { car: "Porsche 963", track: "Spa", kind: "team race" }
+  // "Official race at Daytona in the Mustang GT3" -> { car: "Mustang GT3", track: "Daytona", kind: "Official race" }
   function parseSession(text) {
     var s = String(text || '').trim();
     var m = /^(.+?)\s+(?:at|@|on)\s+([^,;]+?)\s*(?:[,;]\s*(.+))?$/i.exec(s);
     if (!m) return { car: '', track: '', kind: '' };
-    return { car: m[1].trim(), track: m[2].trim(), kind: (m[3] || '').trim() };
+    var car = m[1].trim(), track = m[2].trim(), kind = (m[3] || '').trim();
+    if (SESSION_WORDS.test(car)) {
+      kind = kind ? car + ', ' + kind : car;
+      var c = /^(.+?)\s+(?:in|with)\s+(?:the\s+|a\s+|an\s+|my\s+)?(.+)$/i.exec(track);
+      car = c ? c[2].trim() : '';
+      if (c) track = c[1].trim();
+    }
+    return { car: car, track: track, kind: kind };
   }
 
-  // The bug form asks for the problem and what was expected in one box. If the customer wrote "I expected ..."
-  // or "It should ...", split it there; otherwise everything is the actual behaviour.
+  var ACTUAL_LABEL = /\n\s*actual(?: result| behaviou?r)?\s*[:\-]\s*/i;
+
+  // The bug form asks for the problem and what was expected in one box. If the customer wrote "I expected ...",
+  // "Expected: ..." or "It should ...", split it there; otherwise everything is the actual behaviour. An "Actual:"
+  // line after the expected part goes back to the actual behaviour. ("I expect it's because ..." is a guess, not
+  // what they expected, so a bare present-tense "I expect" doesn't split.)
   function splitExpected(text) {
     var s = String(text || '').trim();
-    var re = /(^|[.!?]\s+|\n\s*)((?:expected(?: result| behaviou?r)?\s*[:\-]|i(?:'d| would)? expect(?:ed)?\b|it should(?:n't| not)?\b|should have\b|instead,? it should\b)[\s\S]*)$/i;
+    var re = /(^|[.!?]\s+|\n\s*)((?:expected(?: result| behaviou?r)?\s*[:\-]|i expected\b|i(?:'d| would) (?:have )?expect(?:ed)?\b|it should(?:n't| not)?\b|should have\b|instead,? it should\b)[\s\S]*)$/i;
     var m = re.exec(s);
-    if (!m || m.index + m[1].length === 0) return { actual: s, expected: '' };
-    var actual = s.slice(0, m.index + m[1].length).trim();
+    if (!m || m.index + m[1].length === 0) return { actual: s.replace(/^actual(?: result| behaviou?r)?\s*[:\-]\s*/i, ''), expected: '' };
+    var actual = s.slice(0, m.index + m[1].length).trim().replace(/^actual(?: result| behaviou?r)?\s*[:\-]\s*/i, '');
     var expected = m[2].replace(/^expected(?: result| behaviou?r)?\s*[:\-]\s*/i, '').trim();
+    var later = ACTUAL_LABEL.exec(expected);
+    if (later) {
+      var rest = expected.slice(later.index + later[0].length).trim();
+      expected = expected.slice(0, later.index).trim();
+      if (rest) actual = actual ? actual + '\n' + rest : rest;
+    }
     return { actual: actual, expected: expected };
   }
 
@@ -32,7 +53,8 @@
 
   /**
    * detail: the ticket detail from /api/admin/tickets/<id> ({ ticket, form, files }).
-   * logLines: [{ filename, lines: [...], partial }] from the attached logs.
+   * logLines: [{ filename, lines: [...], partial }] from the attached logs, or { filename, failed: true } for one
+   * that couldn't be read.
    */
   function devText(detail, logLines) {
     var t = detail.ticket;
@@ -72,6 +94,10 @@
     var logs = [];
     if (a.logs) logs.push('Pasted by the customer:\n' + String(a.logs).trim());
     (logLines || []).forEach(function (l) {
+      if (l.failed) {
+        logs.push(l.filename + ': couldn\'t be read (open it in the support admin under ' + t.number + ').');
+        return;
+      }
       if (!l.lines || !l.lines.length) {
         logs.push(l.filename + ': no lines that look like errors' + (l.partial ? ' in its last 1 MB' : '') + '.');
         return;

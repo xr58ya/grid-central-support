@@ -70,15 +70,29 @@ export function makeR2() {
         httpMetadata: o.opts.httpMetadata
       };
     },
+    failDeletes: false,
     delete: async function (keys) {
+      if (this.failDeletes) throw new Error('R2 is down');
       [].concat(keys).forEach(function (k) { store.delete(k); });
+    },
+    // Like R2: up to `limit` keys (default 1000) after the cursor, in key order.
+    list: async function (opts) {
+      const o = opts || {};
+      const keys = Array.from(store.keys()).filter(function (k) { return k.startsWith(o.prefix || ''); }).sort();
+      const start = o.cursor ? keys.indexOf(o.cursor) + 1 : 0;
+      const page = keys.slice(start, start + (o.limit || 1000));
+      const truncated = start + page.length < keys.length;
+      return { objects: page.map(function (k) { return { key: k, size: store.get(k).buf.length }; }), truncated: truncated, cursor: truncated ? page[page.length - 1] : undefined };
     }
   };
 }
 
-// The fake internet: Turnstile accepts the token "good-token"; Resend records emails (or fails when told to).
+// The fake internet: Turnstile accepts the token "good-token" (done on support.getgridcentral.com) and
+// "other-site-token" (done on another site); Resend records emails, refuses any request without a User-Agent
+// (as the real one does) and fails when told to.
 export function installFetch(state) {
   state.emails = [];
+  state.turnstileDown = false;
   state.turnstileCalls = 0;
   state.keyFetches = 0;
   globalThis.fetch = async function (input, init) {
@@ -87,10 +101,16 @@ export function installFetch(state) {
       state.turnstileCalls++;
       const token = init.body.get('response');
       if (init.body.get('secret') !== 'test-turnstile-secret') return Response.json({ success: false, 'error-codes': ['invalid-input-secret'] });
-      return Response.json(token === 'good-token' ? { success: true, hostname: 'support.getgridcentral.com' } : { success: false, 'error-codes': ['invalid-input-response'] });
+      if (state.turnstileDown) return new Response('busy', { status: 503 });
+      if (token === 'good-token') return Response.json({ success: true, hostname: 'support.getgridcentral.com' });
+      if (token === 'other-site-token') return Response.json({ success: true, hostname: 'grid-central-support.pages.dev' });
+      if (token === 'used-token') return Response.json({ success: false, 'error-codes': ['timeout-or-duplicate'] });
+      return Response.json({ success: false, 'error-codes': ['invalid-input-response'] });
     }
     if (url === 'https://api.resend.com/emails') {
       const body = JSON.parse(init.body);
+      const userAgent = Object.keys(init.headers || {}).find(function (k) { return k.toLowerCase() === 'user-agent'; });
+      if (!userAgent || !init.headers[userAgent]) return new Response('{"statusCode":403,"name":"missing_user_agent"}', { status: 403 });
       if (state.resendDown) return new Response('{"message":"internal error"}', { status: 500 });
       state.emails.push({ body: body, headers: init.headers });
       return Response.json({ id: 'email-' + state.emails.length });
@@ -177,5 +197,5 @@ export function ticketRequest(opts) {
   fd.append('payload', JSON.stringify({ type: opts.type || 'bug', email: opts.email || 'driver@example.com', answers: opts.answers || bugAnswers() }));
   fd.append('turnstile', opts.token === undefined ? 'good-token' : opts.token);
   (opts.files || []).forEach(function (f) { fd.append('files', new File([f.bytes], f.name, { type: f.type || 'application/octet-stream' })); });
-  return new Request('https://support.getgridcentral.com/api/tickets', { method: 'POST', body: fd, headers: { 'CF-Connecting-IP': '203.0.113.9' } });
+  return new Request((opts.site || 'https://support.getgridcentral.com') + '/api/tickets', { method: 'POST', body: fd, headers: { 'CF-Connecting-IP': '203.0.113.9' } });
 }

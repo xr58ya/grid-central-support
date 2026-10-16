@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy · Grid Central Support</title>
+<script>
+  // Once this is on main, the old GitHub Pages copy of the page sends people to the support site.
+  if (/\.github\.io$/i.test(location.hostname)) location.replace('https://support.getgridcentral.com/privacy.html');
+</script>
 <meta name="description" content="What Grid Central Support keeps when you send a report, and why.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,19 +69,26 @@
 
   <h2>Why</h2>
   <p>Only to understand the problem or idea, fix Grid Central, and reply to you. Your answers and files are private:
-    only the Grid Central support team can see them. Nothing you send here is posted publicly.</p>
+    only the Grid Central support team can see them. When we confirm a problem, we may list a short description of it
+    on our public GitHub tracker, written by us: never your email address or files, and without names or file paths
+    from your logs.</p>
 
   <h2>Who handles it for us</h2>
   <ul>
     <li><b>Cloudflare</b> runs this site and stores tickets and files. Its Turnstile check, the "are you human" box on
       the form, looks at your browser and connection to keep out spam.</li>
-    <li><b>Resend</b> sends our emails to you.</li>
+    <li><b>Resend</b> sends our emails: your ticket number and our replies to you, and the support team's copy of
+      each new ticket (with your answers and email address). It keeps a record of sent emails for a limited time.</li>
+    <li><b>Google</b>: our support inbox is Gmail. It receives that copy of each new ticket, and your emails to us.
+      The font on these pages also comes from Google Fonts, so your browser asks Google for it, which shows Google
+      your IP address.</li>
   </ul>
 
   <h2>How long we keep it</h2>
   <p>As long as it helps us fix and improve Grid Central. If you'd like to see what you sent, or have it deleted,
     email <a href="mailto:support.gridcentral@gmail.com">support.gridcentral@gmail.com</a> with your ticket number
-    (for example GC-1001) from the address you used.</p>
+    (for example GC-1001) from the address you used. We'll delete the ticket, its files and its history, and the
+    emails about it in our inbox. Resend's record of the emails goes when its limited time is up.</p>
 
   <p class="note"><b>Never send</b> passwords, payment details or your iRacing login, in a report or an email.
     We will never ask for them.</p>

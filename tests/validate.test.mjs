@@ -104,6 +104,9 @@ test('file names are made safe for storage keys and download headers', function 
   assert.equal(safeFileName(''), 'file');
   assert.equal(safeFileName('a'.repeat(300) + '.png').length, 100);
   assert.ok(safeFileName('a'.repeat(300) + '.png').endsWith('.png'));
+  assert.equal(safeFileName('スクリーンショット.png'), 'file.png', 'a name in another script keeps its extension');
+  assert.equal(safeFileName('Снимок экрана.png'), 'file.png');
+  assert.equal(safeFileName('Снимок экрана (1).png'), '1_.png');
   assert.equal(contentDisposition('attachment', 'companion.log'), 'attachment; filename="companion.log"; filename*=UTF-8\'\'companion.log');
 });
 
