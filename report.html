@@ -99,9 +99,10 @@
   </div>
 
   <p class="note">
-    <b>Two ways to send it.</b> <b>Post on GitHub</b> opens our public tracker with your answers filled in: you pick
-    from GitHub's lists again and press <b>Create</b> (a free GitHub account is needed, and anyone can read it). <b>Send by email</b>
-    opens your email app instead, so only we see it. Before posting, please
+    <b>How it's sent.</b> <b>Post on GitHub</b> opens our public tracker with your answers filled in: you pick
+    from GitHub's lists again and press <b>Create</b> (a free GitHub account is needed, and anyone can read it). We're told
+    straight away. Logs, beta codes or anything private? Email them to
+    <a href="mailto:support.gridcentral@gmail.com">support.gridcentral@gmail.com</a> instead. Before posting, please
     <a href="https://github.com/xr58ya/grid-central-support/issues?q=is%3Aissue" target="_blank" rel="noopener">search existing reports</a>.
   </p>
 
@@ -110,7 +111,6 @@
     <div id="fields"></div>
     <div class="actions">
       <button type="submit" class="primary" data-send="github">Post on GitHub</button>
-      <button type="submit" class="secondary" data-send="email">Send by email</button>
       <button type="button" class="ghost" id="copy">Copy my answers</button>
     </div>
     <p class="after" id="after"></p>
@@ -139,9 +139,8 @@
     bug: {
       heading: 'Report a problem',
       lead: 'Something in Grid Central broken or not working as expected? The more detail you give, the faster it can be fixed.',
-      template: 'bug_report.yml', prefix: '[Bug]: ', subject: 'Grid Central: problem report',
-      after: 'Screenshots or a video? Drag them into the GitHub page before you press Create, or attach them to your email. The full companion.log goes by email only, because GitHub is public.',
-      attach: 'companion.log and any screenshots',
+      template: 'bug_report.yml', prefix: '[Bug]: ',
+      after: 'Screenshots or a video? Drag them into the GitHub page before you press Create. The full companion.log goes by email only, to ' + EMAIL + ', because GitHub is public.',
       fields: [
         { id: 'summary', type: 'input', label: 'Short summary', required: true, placeholder: 'Spotter stops calling cars after pitting' },
         { id: 'version', type: 'input', label: 'Grid Central version', required: true, hint: VERSION_HINT, placeholder: '0.5.9.2' },
@@ -158,9 +157,8 @@
     feature: {
       heading: 'Suggest a feature',
       lead: 'An idea that would make Grid Central better on track or on stream? Tell us the problem behind it as well as the idea.',
-      template: 'feature_request.yml', prefix: '[Feature]: ', subject: 'Grid Central: feature idea',
-      after: 'Sketches or screenshots? Drag them into the GitHub page before you press Create, or attach them to your email.',
-      attach: 'any sketches or screenshots',
+      template: 'feature_request.yml', prefix: '[Feature]: ',
+      after: 'Sketches or screenshots? Drag them into the GitHub page before you press Create.',
       fields: [
         { id: 'summary', type: 'input', label: 'Short summary', required: true, placeholder: 'Show when my teammate is about to pit' },
         { id: 'area', type: 'multi', label: 'Which part of Grid Central?', required: true, options: AREAS.concat(['Something new']) },
@@ -174,15 +172,14 @@
     help: {
       heading: 'Get setup help',
       lead: 'Stuck installing or setting something up? The training guide may already answer it, but we\'re happy to walk you through it.',
-      template: 'setup_help.yml', prefix: '[Help]: ', subject: 'Grid Central: help',
-      after: 'A screenshot of where you\'re stuck helps a lot: drag it into the GitHub page before you press Create, or attach it to your email. Beta code or account problem? Use Send by email, so your code stays private.',
-      attach: 'a screenshot of where you\'re stuck',
+      template: 'setup_help.yml', prefix: '[Help]: ',
+      after: 'A screenshot of where you\'re stuck helps a lot: drag it into the GitHub page before you press Create. Beta code or account problem? Email ' + EMAIL + ' instead, so your code stays private.',
       fields: [
         { id: 'summary', type: 'input', label: 'Short summary', required: true, placeholder: 'Can\'t connect OBS' },
         { id: 'version', type: 'input', label: 'Grid Central version', required: true, hint: VERSION_HINT, placeholder: '0.5.9.2' },
         { id: 'area', type: 'multi', label: 'What do you need help with?', required: true, options: AREAS.concat(['Other / not sure']) },
         { id: 'goal', type: 'textarea', label: 'What are you trying to set up?', required: true },
-        { id: 'tried', type: 'textarea', label: 'What have you tried so far?', required: true, hint: 'The steps you followed and where you got stuck. Never post a beta code on GitHub: use Send by email for those.' },
+        { id: 'tried', type: 'textarea', label: 'What have you tried so far?', required: true, hint: 'The steps you followed and where you got stuck. Never post a beta code on GitHub: email those to ' + EMAIL + '.' },
         { id: 'os', type: 'input', label: 'Windows version', placeholder: 'Windows 11 23H2' }
       ]
     }
@@ -343,13 +340,6 @@
       .map(function (f) { return '"' + f.label + '" (' + (f.type === 'multi' ? a[f.id].join('; ') : a[f.id]) + ')'; });
   }
 
-  function emailUrl(a) {
-    var spec = FORMS[current];
-    var body = asText(a) + '\n\n(Attach ' + spec.attach + ' to this email.)';
-    return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(spec.subject + ': ' + a.summary) +
-      '&body=' + encodeURIComponent(body);
-  }
-
   function say(msg, cls) {
     statusEl.className = cls || '';
     statusEl.textContent = '';
@@ -388,32 +378,19 @@
     if (e.key === 'Enter' && e.target.matches('input[type="text"]')) e.preventDefault();
   });
 
-  var sendWith = 'github';
-  form.querySelectorAll('button[type="submit"]').forEach(function (b) {
-    b.addEventListener('click', function () { sendWith = b.dataset.send; });
-  });
-
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var a = readAnswers();
     if (!validate(a)) { say('Some answers are missing: they\'re marked in red above.', 'warn'); return; }
-    if (sendWith === 'email') {
-      var mail = emailUrl(a);
-      var tip = mail.length > 1900 ? ' Long reports can get cut short by some email apps, so check nothing is missing.' : '';
-      say('Your email app should open with everything filled in. Attach ' + FORMS[current].attach + ', then send it.' + tip +
-        ' If no email app opens, press Copy my answers and email them to ' + EMAIL + '.', 'ok');
-      location.href = mail;
-    } else {
-      var url = githubUrl(a);
-      if (url.length > 7500) {
-        say('That report is too long to pass to GitHub in one go. Shorten the longest answer, or use Send by email.', 'warn');
-        return;
-      }
-      var lists = pickLists(a);
-      say('GitHub is opening in a new tab with your answers filled in. GitHub can\'t fill in its pick-lists, so choose ' +
-        lists.join(' and ') + ' again there, then press Create.', 'ok');
-      window.open(url, '_blank', 'noopener');
+    var url = githubUrl(a);
+    if (url.length > 7500) {
+      say('That report is too long to pass to GitHub in one go. Shorten the longest answer, or email it to ' + EMAIL + '.', 'warn');
+      return;
     }
+    var lists = pickLists(a);
+    say('GitHub is opening in a new tab with your answers filled in. GitHub can\'t fill in its pick-lists, so choose ' +
+      lists.join(' and ') + ' again there, then press Create.', 'ok');
+    window.open(url, '_blank', 'noopener');
   });
 
   $('copy').addEventListener('click', function () {
