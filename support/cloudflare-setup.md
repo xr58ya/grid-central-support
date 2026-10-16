@@ -35,8 +35,9 @@ Each ticket sends two emails (one to the customer, one to you), so Resend's free
 - A payment card. Cloudflare asks for one before it turns on R2 storage (and maybe Zero Trust), even on the free
   plans. You aren't charged unless you go over the free amounts.
 - The address **support.gridcentral@gmail.com** open in another tab, for verification emails.
-- Ask development to review and merge the `claude/own-domain` branch. Steps 1 to 7 can be done before that;
-  step 8 needs it merged into `main`.
+- Ask development to review the `claude/own-domain` branch and put it on a branch of its own for Cloudflare, for
+  example `cloudflare` (not `main` yet: merging into `main` would also change the form on the current GitHub Pages
+  site). Steps 1 to 7 can be done before that; step 8 needs that branch.
 
 ---
 
@@ -142,9 +143,9 @@ support.gridcentral@gmail.com.
 
 ## 8. Create the Pages project (the website)
 
-Wait until development has merged the `claude/own-domain` work into `main`, and the database ID from step 3 is in
-`wrangler.toml` on `main`. (If it isn't, the first build stops with an error about `database_id`. That does no harm:
-fix the ID and press **Retry deployment**.)
+Wait until development has given you the Cloudflare branch (for example `cloudflare`, see "Before you start") with
+the database ID from step 3 in its `wrangler.toml`. (If the ID isn't there, the first build stops with an error about
+`database_id`. That does no harm: fix the ID and press **Retry deployment**.)
 
 1. In the left menu, open **Workers & Pages** → **Create application** → the **Pages** tab → **Import an existing Git
    repository** (or **Connect to Git**).
@@ -153,7 +154,8 @@ fix the ID and press **Retry deployment**.)
 3. Select `grid-central-support` and press **Begin setup**.
 4. Fill in:
    - **Project name**: `grid-central-support`
-   - **Production branch**: `main`
+   - **Production branch**: the Cloudflare branch from development, for example `cloudflare` (it becomes `main` when
+     you go live)
    - **Framework preset**: **None**
    - **Build command**: `npm run build`
    - **Build output directory**: `dist`
@@ -246,8 +248,11 @@ Nothing in the steps above makes the site public. When you're happy with it and 
    change the public hostname to path `admin`, and add a second hostname: subdomain `support`, domain
    `getgridcentral.com`, path `api/admin`. Save. (The AUD tag stays the same, so no secrets change.)
 2. Check in a private window: the home page and report form open without signing in; `/admin` asks you to sign in.
-3. Tell the help desk and development, so the links in the app, the GitHub README and the guide can point to
-   https://support.getgridcentral.com, and testers can be told.
+3. Tell the help desk and development. Development merges the work into `main`; then, in **Workers & Pages** →
+   **grid-central-support** → **Settings** → **Builds** → **Branch control**, change the **Production branch** to
+   `main`. Once it's in `main`, the old GitHub Pages copy of the form can't send any more (it asks people to email
+   instead), so point the links in the app, the GitHub README and the guide to https://support.getgridcentral.com
+   and tell testers.
 
 To undo it, put the Access application back to the whole site (an empty path).
 
@@ -255,7 +260,7 @@ To undo it, put the Access application back to the whole site (an empty path).
 
 | What you see | What to do |
 |---|---|
-| The build fails with a message about `database_id` | The database ID isn't in `wrangler.toml` on `main` yet (step 3). |
+| The build fails with a message about `database_id` | The database ID isn't in `wrangler.toml` on the production branch yet (step 3). |
 | The form says "Sending from this page isn't available right now" | `TURNSTILE_SITE_KEY` or `TURNSTILE_SECRET` is missing, or you haven't pressed **Retry deployment** since adding them. |
 | The "are you human" box shows an error | The site's address isn't in the Turnstile widget's **Hostnames** (step 5). |
 | The admin says "isn't set up yet" | One of `ADMIN_EMAILS`, `ACCESS_TEAM_DOMAIN` or `ACCESS_AUD` is missing. Add it and **Retry deployment**. |
