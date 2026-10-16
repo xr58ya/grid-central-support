@@ -15,16 +15,19 @@
     --line: #2b2e2f; --accent: #d2ff50; --accent-text: #141a08; --chip: #1f2223;
   }
   * { box-sizing: border-box; }
-  .logo, header strong, h1, h2, h3 { font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .logo, h1, h2, h3 { font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif; }
   body { margin: 0; background: var(--bg); color: var(--text);
     font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   a { color: var(--accent); }
   .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
   header { border-bottom: 1px solid var(--line); background: var(--panel); }
   header .wrap { display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
-  .logo { width: 30px; height: 30px; border-radius: 7px; background: var(--accent);
-    display: grid; place-items: center; color: var(--accent-text); font-weight: 800; font-size: 14px; }
-  header strong { font-size: 17px; letter-spacing: .2px; }
+  .logo { width: 33px; height: 33px; flex: 0 0 33px; border-radius: 9px; background: var(--accent); color: var(--accent-text);
+    display: grid; place-items: center; font-weight: 700; font-size: 21px; letter-spacing: -2px; }
+  .wordmark { display: grid; gap: 2px; font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-weight: 700; font-size: 16px; line-height: 1.1; letter-spacing: 1.8px; text-transform: uppercase; color: var(--text); }
+  .wordmark span { font: 600 9px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; letter-spacing: 1.45px; color: #818580; }
+  header a.home { display: flex; align-items: center; gap: 11px; text-decoration: none; }
   header nav { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
   header nav a { color: var(--muted); text-decoration: none; }
   header nav a:hover { color: var(--text); }
@@ -64,8 +67,7 @@
 <body>
 <header>
   <div class="wrap">
-    <div class="logo">GC</div>
-    <strong>Grid Central Support</strong>
+    <a class="home" href="./" aria-label="Grid Central Support home"><div class="logo" aria-hidden="true">GC</div><span class="wordmark">Grid Central<span>Support</span></span></a>
     <nav>
       <a href="#help">Get help</a>
       <a href="#guide">Training guide</a>
