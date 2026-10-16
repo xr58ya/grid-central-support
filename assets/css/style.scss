@@ -29,3 +29,6 @@ body { background: #101112; color: #eef0ea; }
 .project-name, .main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6 {
   font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
+
+// The site name in the header, styled like the app's GRID CENTRAL wordmark.
+.project-name { font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; }
