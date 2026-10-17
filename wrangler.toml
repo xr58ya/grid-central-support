@@ -1,4 +1,8 @@
-# Cloudflare Pages: the own-domain support site (support.gridcentral.store). NOT LIVE YET.
+# Cloudflare Pages: the own-domain support site. NOT LIVE YET. One project, two custom domains:
+#   help.gridcentral.store   public pages, training guide (/guide), report form API (/api/tickets, /api/config)
+#   admin.gridcentral.store  the admin (page at /, API at /api/admin/*), locked by Cloudflare Access
+# functions/_middleware.js sends each request to the right one (addresses in lib/site.js). gridcentral.store itself
+# (the website) and api.gridcentral.store (payments) belong to development and aren't served from here.
 # Step-by-step setup for the owner: support/cloudflare-setup.md.
 #
 #   Build command:           npm run build
@@ -13,9 +17,9 @@
 #   TURNSTILE_SECRET     Turnstile secret key
 #   RESEND_API_KEY       Resend API key, for sending email
 #   OWNER_EMAIL          where new-ticket emails go (comma separated for more than one)
-#   ADMIN_EMAILS         who may use /admin (comma separated), the same people as the Access policy
+#   ADMIN_EMAILS         who may use the admin (comma separated), the same people as the Access policy
 #   ACCESS_TEAM_DOMAIN   the Zero Trust team domain, for example myteam.cloudflareaccess.com
-#   ACCESS_AUD           the Access application's "Application Audience (AUD) Tag"
+#   ACCESS_AUD           the "Application Audience (AUD) Tag" of the Access application for admin.gridcentral.store
 # Optional: MAIL_FROM (default "Grid Central Support <support@gridcentral.store>"),
 #           MAIL_REPLY_TO (default support@gridcentral.store).
 

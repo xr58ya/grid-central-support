@@ -1,5 +1,6 @@
 # Cloudflare Pages: headers for the static pages (copied into dist/ by npm run build; GitHub Pages ignores it).
-# The API functions set their own headers.
+# The API functions set their own headers, and so does the admin page at / on admin.gridcentral.store
+# (ADMIN_PAGE_HEADERS in lib/site.js, kept the same as the /admin rules below).
 
 /*
   X-Content-Type-Options: nosniff

@@ -2,11 +2,13 @@
 
 import { test, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
 import { onRequestPost } from '../functions/api/tickets.js';
 import { onRequestGet as config } from '../functions/api/config.js';
 import { onRequest as siteMiddleware } from '../functions/_middleware.js';
 import { createTicket, sendLimit, senderKey } from '../lib/tickets.js';
-import { MIGRATION, baseEnv, bugAnswers, context, installFetch, makeD1, ticketRequest, PNG } from './helpers.mjs';
+import { MIGRATION, ROOT, baseEnv, bugAnswers, context, installFetch, makeAssets, makeD1, ticketRequest, PNG } from './helpers.mjs';
 
 const net = {};
 beforeEach(function () { net.resendDown = false; installFetch(net); });
@@ -59,7 +61,7 @@ test('a bug report with files is stored as GC-1001, files go to R2, and both ema
   assert.match(owner.text, /From: driver@example.com/);
   assert.match(owner.text, /Steps to reproduce:\n1\. Join a race/);
   assert.match(owner.text, /companion\.log \(1 KB\)/);
-  assert.match(owner.text, /^Answer in the admin: https:\/\/support\.gridcentral\.store\/admin\/#\/GC-1001\n\(Replying to this email doesn't reach the customer\.\)/);
+  assert.match(owner.text, /^Answer in the admin: https:\/\/admin\.gridcentral\.store\/#\/GC-1001\n\(Replying to this email doesn't reach the customer\.\)/);
   assert.equal(owner.reply_to, undefined);
   for (const e of net.emails) {
     assert.equal(e.headers['User-Agent'], 'grid-central-support/1.0', 'Resend refuses requests without one');
@@ -146,30 +148,111 @@ test('the Turnstile check must pass, and nothing is stored when it fails', async
   assert.equal((await post(env, { token: 'other-site-token', site: 'http://localhost:8788' })).res.status, 201);
 });
 
-test('email links always point at support.gridcentral.store, and OWNER_EMAIL can list several addresses', async function () {
+test('email links point at the admin and help addresses, and OWNER_EMAIL can list several addresses', async function () {
   const env = baseEnv({ OWNER_EMAIL: 'support.gridcentral@gmail.com, me@example.com' });
   const { res } = await post(env, { site: 'https://abc123.grid-central-support.pages.dev' });
   assert.equal(res.status, 201);
   const owner = net.emails.find(function (e) { return e.body.to.length === 2; });
   assert.ok(owner, 'one owner email to both addresses');
   assert.deepEqual(owner.body.to, ['support.gridcentral@gmail.com', 'me@example.com']);
-  assert.match(owner.body.text, /https:\/\/support\.gridcentral\.store\/admin\/#\/GC-1001/);
-  assert.doesNotMatch(owner.body.text + JSON.stringify(net.emails), /pages\.dev/);
+  assert.match(owner.body.text, /^Answer in the admin: https:\/\/admin\.gridcentral\.store\/#\/GC-1001$/m);
+  assert.doesNotMatch(owner.body.text, /\/admin\/#/);
+  const ack = net.emails.find(function (e) { return e.body.to[0] === 'driver@example.com'; });
+  assert.match(ack.body.text, /\nhttps:\/\/help\.gridcentral\.store$/, 'the customer gets the help address');
+  assert.doesNotMatch(ack.body.text, /admin\.gridcentral/, 'never the admin address');
+  assert.doesNotMatch(JSON.stringify(net.emails), /pages\.dev|localhost/);
+  assert.equal(owner.body.from, 'Grid Central Support <support@gridcentral.store>');
 });
 
-test('only support.gridcentral.store (and localhost) serves the site: pages.dev addresses forward, their API is closed', async function () {
-  const run = async function (url) { return siteMiddleware(context(new Request(url), baseEnv())); };
-  let res = await run('https://grid-central-support.pages.dev/report.html?type=bug');
-  assert.equal(res.status, 301);
-  assert.equal(res.headers.get('Location'), 'https://support.gridcentral.store/report.html?type=bug');
-  res = await run('https://abc123.grid-central-support.pages.dev/admin/');
-  assert.equal(res.headers.get('Location'), 'https://support.gridcentral.store/admin/');
-  for (const u of ['https://grid-central-support.pages.dev/api/tickets', 'https://abc123.grid-central-support.pages.dev/api/config', 'https://grid-central-support.pages.dev/api']) {
-    res = await run(u);
+function siteRun(url, env) {
+  return siteMiddleware(context(new Request(url), env || baseEnv()));
+}
+
+test('help.gridcentral.store serves the public pages and the form API; admin paths go to the admin address', async function () {
+  for (const u of ['https://help.gridcentral.store/', 'https://help.gridcentral.store/report.html?type=bug', 'https://help.gridcentral.store/guide/',
+    'https://help.gridcentral.store/privacy.html', 'https://help.gridcentral.store/api/tickets', 'https://help.gridcentral.store/api/config',
+    'https://help.gridcentral.store/administration.html']) {
+    assert.equal(await (await siteRun(u)).text(), 'next', u);
+  }
+  const cases = [
+    ['https://help.gridcentral.store/admin', 'https://admin.gridcentral.store/'],
+    ['https://help.gridcentral.store/admin/', 'https://admin.gridcentral.store/'],
+    ['https://help.gridcentral.store/admin/index.html?x=1', 'https://admin.gridcentral.store/?x=1'],
+    ['https://help.gridcentral.store/admin/admin.js', 'https://admin.gridcentral.store/admin/admin.js']
+  ];
+  for (const [from, to] of cases) {
+    const res = await siteRun(from);
+    assert.equal(res.status, 302, from);
+    assert.equal(res.headers.get('Location'), to, from);
+  }
+  for (const u of ['https://help.gridcentral.store/api/admin', 'https://help.gridcentral.store/api/admin/me', 'https://help.gridcentral.store/api/admin/tickets/GC-1001']) {
+    const res = await siteRun(u);
+    assert.equal(res.status, 404, u);
+    assert.equal((await res.json()).ok, false, u);
+  }
+});
+
+test('admin.gridcentral.store serves the admin page at / and the admin API; public pages go to the help address', async function () {
+  const env = baseEnv({ ASSETS: makeAssets() });
+  let res = await siteRun('https://admin.gridcentral.store/', env);
+  assert.equal(res.status, 200);
+  assert.equal(await res.text(), 'asset /admin/', 'the admin page from dist/admin/');
+  assert.deepEqual(env.ASSETS.asked, ['https://admin.gridcentral.store/admin/']);
+  assert.equal(res.headers.get('Cache-Control'), 'no-store');
+  assert.equal(res.headers.get('X-Robots-Tag'), 'noindex, nofollow');
+  assert.match(res.headers.get('Content-Security-Policy'), /frame-ancestors 'none'/);
+  // The same headers as the /admin rules in _headers.
+  const rules = fs.readFileSync(path.join(ROOT, '_headers'), 'utf8');
+  assert.ok(rules.indexOf('Content-Security-Policy: ' + res.headers.get('Content-Security-Policy') + '\n') >= 0, 'CSP matches _headers');
+
+  for (const u of ['https://admin.gridcentral.store/admin/admin.js', 'https://admin.gridcentral.store/admin/admin.css',
+    'https://admin.gridcentral.store/api/admin/me', 'https://admin.gridcentral.store/api/admin/tickets?status=new',
+    'https://admin.gridcentral.store/.well-known/acme-challenge/abc']) {
+    assert.equal(await (await siteRun(u, env)).text(), 'next', u);
+  }
+  for (const u of ['https://admin.gridcentral.store/admin', 'https://admin.gridcentral.store/admin/', 'https://admin.gridcentral.store/admin/index.html']) {
+    res = await siteRun(u, env);
+    assert.equal(res.status, 301, u);
+    assert.equal(res.headers.get('Location'), 'https://admin.gridcentral.store/', u);
+  }
+  const cases = [
+    ['https://admin.gridcentral.store/report.html?type=bug', 'https://help.gridcentral.store/report.html?type=bug'],
+    ['https://admin.gridcentral.store/privacy.html', 'https://help.gridcentral.store/privacy.html'],
+    ['https://admin.gridcentral.store/guide/01-getting-started.html', 'https://help.gridcentral.store/guide/01-getting-started.html'],
+    ['https://admin.gridcentral.store/index.html', 'https://help.gridcentral.store/index.html']
+  ];
+  for (const [from, to] of cases) {
+    res = await siteRun(from, env);
+    assert.equal(res.status, 302, from);
+    assert.equal(res.headers.get('Location'), to, from);
+  }
+  for (const u of ['https://admin.gridcentral.store/api/tickets', 'https://admin.gridcentral.store/api/config', 'https://admin.gridcentral.store/api']) {
+    res = await siteRun(u, env);
     assert.equal(res.status, 404, u);
   }
-  for (const u of ['https://support.gridcentral.store/api/tickets', 'http://localhost:8788/report.html', 'http://127.0.0.1:8788/api/config']) {
-    assert.equal(await (await run(u)).text(), 'next', u);
+  assert.equal(env.ASSETS.asked.length, 1, 'only / is served from the admin files');
+});
+
+test('other addresses (pages.dev) forward to the right address and close the whole API; localhost serves everything', async function () {
+  const cases = [
+    ['https://grid-central-support.pages.dev/report.html?type=bug', 'https://help.gridcentral.store/report.html?type=bug'],
+    ['https://grid-central-support.pages.dev/', 'https://help.gridcentral.store/'],
+    ['https://abc123.grid-central-support.pages.dev/guide/', 'https://help.gridcentral.store/guide/'],
+    ['https://abc123.grid-central-support.pages.dev/admin/', 'https://admin.gridcentral.store/'],
+    ['https://abc123.grid-central-support.pages.dev/admin/admin.css', 'https://admin.gridcentral.store/admin/admin.css']
+  ];
+  for (const [from, to] of cases) {
+    const res = await siteRun(from);
+    assert.equal(res.status, 301, from);
+    assert.equal(res.headers.get('Location'), to, from);
+  }
+  for (const u of ['https://grid-central-support.pages.dev/api/tickets', 'https://abc123.grid-central-support.pages.dev/api/config',
+    'https://grid-central-support.pages.dev/api', 'https://grid-central-support.pages.dev/api/admin/me']) {
+    assert.equal((await siteRun(u)).status, 404, u);
+  }
+  for (const u of ['http://localhost:8788/', 'http://localhost:8788/report.html', 'http://127.0.0.1:8788/api/config', 'http://localhost:8788/admin/',
+    'http://localhost:8788/api/admin/me', 'http://localhost:8788/api/tickets', 'http://[::1]:8788/guide/']) {
+    assert.equal(await (await siteRun(u)).text(), 'next', u);
   }
 });
 
@@ -195,7 +278,7 @@ test('a big upload without a Content-Length is cut off at the size limit', async
       controller.enqueue(chunk);
     }
   });
-  const request = new Request('https://support.gridcentral.store/api/tickets', {
+  const request = new Request('https://help.gridcentral.store/api/tickets', {
     method: 'POST', body: body, duplex: 'half', headers: { 'Content-Type': 'multipart/form-data; boundary=x' }
   });
   assert.equal(request.headers.get('Content-Length'), null);
@@ -289,13 +372,13 @@ test('a counter set back below an existing ticket skips past it instead of stopp
 
 test('requests that aren\'t the form are refused', async function () {
   const env = baseEnv();
-  const json = new Request('https://support.gridcentral.store/api/tickets', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+  const json = new Request('https://help.gridcentral.store/api/tickets', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
   assert.equal((await onRequestPost(context(json, env))).status, 415);
   const fd = new FormData();
   fd.append('payload', 'not json');
-  const bad = new Request('https://support.gridcentral.store/api/tickets', { method: 'POST', body: fd });
+  const bad = new Request('https://help.gridcentral.store/api/tickets', { method: 'POST', body: fd });
   assert.equal((await onRequestPost(context(bad, env))).status, 400);
-  const huge = new Request('https://support.gridcentral.store/api/tickets', { method: 'POST', body: fd, headers: { 'Content-Length': String(40 * 1024 * 1024) } });
+  const huge = new Request('https://help.gridcentral.store/api/tickets', { method: 'POST', body: fd, headers: { 'Content-Length': String(40 * 1024 * 1024) } });
   assert.equal((await onRequestPost(context(huge, env))).status, 413);
 });
 

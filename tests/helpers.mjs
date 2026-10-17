@@ -87,7 +87,7 @@ export function makeR2() {
   };
 }
 
-// The fake internet: Turnstile accepts the token "good-token" (done on support.gridcentral.store) and
+// The fake internet: Turnstile accepts the token "good-token" (done on help.gridcentral.store) and
 // "other-site-token" (done on another site); Resend records emails, refuses any request without a User-Agent
 // (as the real one does) and fails when told to.
 export function installFetch(state) {
@@ -102,7 +102,7 @@ export function installFetch(state) {
       const token = init.body.get('response');
       if (init.body.get('secret') !== 'test-turnstile-secret') return Response.json({ success: false, 'error-codes': ['invalid-input-secret'] });
       if (state.turnstileDown) return new Response('busy', { status: 503 });
-      if (token === 'good-token') return Response.json({ success: true, hostname: 'support.gridcentral.store' });
+      if (token === 'good-token') return Response.json({ success: true, hostname: 'help.gridcentral.store' });
       if (token === 'other-site-token') return Response.json({ success: true, hostname: 'grid-central-support.pages.dev' });
       if (token === 'used-token') return Response.json({ success: false, 'error-codes': ['timeout-or-duplicate'] });
       return Response.json({ success: false, 'error-codes': ['invalid-input-response'] });
@@ -161,6 +161,19 @@ export function baseEnv(overrides) {
   }, overrides || {});
 }
 
+// The static files (env.ASSETS): answers with the path it was asked for, so a test can see which file was served.
+export function makeAssets() {
+  const asked = [];
+  return {
+    asked: asked,
+    fetch: async function (request) {
+      const url = new URL(request.url);
+      asked.push(url.href);
+      return new Response('asset ' + url.pathname, { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=0' } });
+    }
+  };
+}
+
 // A Pages Functions context. Promises given to waitUntil are kept so a test can wait for them.
 export function context(request, env, params) {
   const waits = [];
@@ -197,5 +210,5 @@ export function ticketRequest(opts) {
   fd.append('payload', JSON.stringify({ type: opts.type || 'bug', email: opts.email || 'driver@example.com', answers: opts.answers || bugAnswers() }));
   fd.append('turnstile', opts.token === undefined ? 'good-token' : opts.token);
   (opts.files || []).forEach(function (f) { fd.append('files', new File([f.bytes], f.name, { type: f.type || 'application/octet-stream' })); });
-  return new Request((opts.site || 'https://support.gridcentral.store') + '/api/tickets', { method: 'POST', body: fd, headers: { 'CF-Connecting-IP': '203.0.113.9' } });
+  return new Request((opts.site || 'https://help.gridcentral.store') + '/api/tickets', { method: 'POST', body: fd, headers: { 'CF-Connecting-IP': '203.0.113.9' } });
 }

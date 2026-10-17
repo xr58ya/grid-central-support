@@ -1,5 +1,5 @@
 // Grid Central Support admin. Every piece of ticket text goes into the page with textContent (never as HTML),
-// so nothing a customer types can run here. The pages are /admin/#/ (the list) and /admin/#/GC-1001 (a ticket).
+// so nothing a customer types can run here. The pages are https://admin.gridcentral.store/#/ (the list) and /#/GC-1001 (a ticket); /admin/#/... on localhost.
 (function () {
   'use strict';
 

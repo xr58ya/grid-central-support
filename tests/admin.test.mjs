@@ -18,7 +18,7 @@ import { ADMIN, AUD, PNG, ROOT, baseEnv, bugAnswers, context, installFetch, make
 
 const net = {};
 let key, otherKey;
-const SITE = 'https://support.gridcentral.store';
+const SITE = 'https://admin.gridcentral.store';
 
 before(async function () {
   key = await makeAccessKey('k1');
@@ -158,6 +158,22 @@ test('admin changes must come from the admin page (same origin)', async function
   assert.equal(r.res.status, 403);
   r = await call(addNote, env, await req('/api/admin/tickets/GC-1001/notes', { method: 'POST', body: { body: 'x' }, origin: 'https://evil.example' }), { id: 'GC-1001' });
   assert.equal(r.res.status, 403);
+  // The help address is another origin: its pages can't make admin changes either.
+  r = await call(addNote, env, await req('/api/admin/tickets/GC-1001/notes', { method: 'POST', body: { body: 'x' }, origin: 'https://help.gridcentral.store' }), { id: 'GC-1001' });
+  assert.equal(r.res.status, 403);
+  // Only the admin address counts, even if a request reached the API on another address with its own origin.
+  const pages = 'https://grid-central-support.pages.dev';
+  r = await call(addNote, env, await req('/api/admin/tickets/GC-1001/notes', { method: 'POST', body: { body: 'x' }, site: pages, origin: pages }), { id: 'GC-1001' });
+  assert.equal(r.res.status, 403);
+  r = await call(addNote, env, await req('/api/admin/tickets/GC-1001/notes', { method: 'POST', body: { body: 'x' } }), { id: 'GC-1001' });
+  assert.equal(r.res.status, 200, 'from https://admin.gridcentral.store');
+  // wrangler dev: the same localhost address is the admin page's origin.
+  const local = baseEnv({ DB: env.DB, FILES: env.FILES, LOCAL_DEV_ADMIN: ADMIN });
+  const lh = 'http://localhost:8788';
+  r = await call(addNote, local, await req('/api/admin/tickets/GC-1001/notes', { method: 'POST', body: { body: 'x' }, site: lh, origin: lh, email: null, jwt: null }), { id: 'GC-1001' });
+  assert.equal(r.res.status, 200, 'localhost');
+  r = await call(addNote, local, await req('/api/admin/tickets/GC-1001/notes', { method: 'POST', body: { body: 'x' }, site: lh, email: null, jwt: null }), { id: 'GC-1001' });
+  assert.equal(r.res.status, 403, 'localhost needs its own origin, not the live admin\'s');
   const plain = await req('/api/admin/tickets/GC-1001/notes', { method: 'POST' });
   const textBody = new Request(plain, { body: '{"body":"x"}', headers: Object.assign(Object.fromEntries(plain.headers), { 'Content-Type': 'text/plain' }) });
   r = await call(addNote, env, textBody, { id: 'GC-1001' });

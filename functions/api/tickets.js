@@ -16,7 +16,7 @@ import { verifyTurnstile } from '../../lib/turnstile.js';
 import { addEvent, addFile, createTicket, deleteTicket, sendLimit } from '../../lib/tickets.js';
 import { randomId, storageKey } from '../../lib/files.js';
 import { PUBLIC_SUPPORT_EMAIL, ackEmail, ownerEmail, sendEmail } from '../../lib/email.js';
-import { SITE_HOST, SITE_URL, isLocalHost } from '../../lib/site.js';
+import { HELP_HOST, HELP_URL, adminTicketUrl, isLocalHost } from '../../lib/site.js';
 
 const MAX_BODY_BYTES = FILE_LIMITS.maxTotalBytes + 1024 * 1024;
 const MAX_PAYLOAD_CHARS = 120000;
@@ -88,9 +88,9 @@ export const onRequestPost = guarded(async function (context) {
     accepted.push({ file: file, name: r.name, kind: r.kind, contentType: r.contentType });
   }
 
-  // The check must have been done on the support site itself (any address works when testing on localhost).
+  // The check must have been done on the help address itself (any address works when testing on localhost).
   const local = isLocalHost(new URL(request.url).hostname);
-  const human = await verifyTurnstile(env, form.get('turnstile'), request.headers.get('CF-Connecting-IP'), local ? null : SITE_HOST);
+  const human = await verifyTurnstile(env, form.get('turnstile'), request.headers.get('CF-Connecting-IP'), local ? null : HELP_HOST);
   if (!human.ok) {
     console.warn('Turnstile refused:', human.reason);
     if (human.retry) return fail(403, 'The "are you human" check didn\'t go through. Please do it again and press Send.', { retryCheck: true });
@@ -133,15 +133,16 @@ export const onRequestPost = guarded(async function (context) {
   }
 
   const ticket = Object.assign({ id: id }, checked.value);
-  context.waitUntil(sendNewTicketEmails(env, ticket, stored, SITE_URL));
+  context.waitUntil(sendNewTicketEmails(env, ticket, stored));
   return json({ ok: true, ticket: number, files: stored.length, warnings: warnings }, 201);
 });
 
 // Acknowledgement to the customer and a heads-up to the owner, sent at the same time (Cloudflare only waits about
 // 30 seconds for this after the answer has gone back). Each result goes in the ticket's history.
-async function sendNewTicketEmails(env, ticket, files, siteUrl) {
-  const jobs = [{ to: 'customer', purpose: 'acknowledgement', msg: ackEmail(ticket, siteUrl) }];
-  jobs.push({ to: 'owner', purpose: 'new ticket', msg: emailList(env.OWNER_EMAIL).length ? ownerEmail(env, ticket, files, siteUrl) : null });
+// The customer's email links to the help address, the owner's to the ticket on the admin address.
+async function sendNewTicketEmails(env, ticket, files) {
+  const jobs = [{ to: 'customer', purpose: 'acknowledgement', msg: ackEmail(ticket, HELP_URL) }];
+  jobs.push({ to: 'owner', purpose: 'new ticket', msg: emailList(env.OWNER_EMAIL).length ? ownerEmail(env, ticket, files, adminTicketUrl) : null });
   const results = await Promise.all(jobs.map(function (job) {
     return job.msg ? sendEmail(env, job.msg) : { ok: false, error: 'OWNER_EMAIL isn\'t set.' };
   }));
