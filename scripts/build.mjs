@@ -9,10 +9,11 @@ import { Marked } from 'marked';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { PRIVACY_URL } from '../lib/site.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist');
-const STATIC_FILES = ['index.html', 'report.html', 'privacy.html', '_headers'];
+const STATIC_FILES = ['index.html', 'report.html', '_headers'];
 const STATIC_DIRS = ['admin'];
 const SUPPORT_EMAIL = 'support.gridcentral@gmail.com';
 
@@ -105,7 +106,7 @@ function header(home) {
 function footer(home) {
   return `<footer class="wrap">
   Something missing, wrong or unclear? <a href="${home}report.html?type=help">Ask for setup help</a> or email
-  <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>. <a href="${home}privacy.html">Privacy</a>
+  <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>. <a href="${PRIVACY_URL}">Privacy</a>
 </footer>`;
 }
 

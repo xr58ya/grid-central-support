@@ -170,7 +170,7 @@ function siteRun(url, env) {
 
 test('help.gridcentral.store serves the public pages and the form API; admin paths go to the admin address', async function () {
   for (const u of ['https://help.gridcentral.store/', 'https://help.gridcentral.store/report.html?type=bug', 'https://help.gridcentral.store/guide/',
-    'https://help.gridcentral.store/privacy.html', 'https://help.gridcentral.store/api/tickets', 'https://help.gridcentral.store/api/config',
+    'https://help.gridcentral.store/api/tickets', 'https://help.gridcentral.store/api/config',
     'https://help.gridcentral.store/administration.html']) {
     assert.equal(await (await siteRun(u)).text(), 'next', u);
   }
@@ -184,6 +184,12 @@ test('help.gridcentral.store serves the public pages and the form API; admin pat
     const res = await siteRun(from);
     assert.equal(res.status, 302, from);
     assert.equal(res.headers.get('Location'), to, from);
+  }
+  // One privacy policy for Grid Central, on the website.
+  for (const u of ['https://help.gridcentral.store/privacy', 'https://help.gridcentral.store/privacy.html']) {
+    const res = await siteRun(u);
+    assert.equal(res.status, 301, u);
+    assert.equal(res.headers.get('Location'), 'https://gridcentral.store/privacy', u);
   }
   for (const u of ['https://help.gridcentral.store/api/admin', 'https://help.gridcentral.store/api/admin/me', 'https://help.gridcentral.store/api/admin/tickets/GC-1001']) {
     const res = await siteRun(u);

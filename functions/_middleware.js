@@ -1,13 +1,13 @@
 // Runs before every request. One Pages project answers on two addresses (lib/site.js):
 //   help.gridcentral.store   public pages and /api/tickets, /api/config. /admin forwards to the admin address,
-//                            /api/admin/* answers "not found".
+//                            /privacy to the website's privacy policy, and /api/admin/* answers "not found".
 //   admin.gridcentral.store  the admin page at / and /api/admin/*. Public pages forward to the help address, the rest
 //                            of /api answers "not found".
 // Any other address (the *.pages.dev ones Cloudflare also gives the project, which have no Access lock in front of
 // them) forwards pages to the right address and answers "not found" for the whole API.
 // localhost (npx wrangler pages dev) serves everything as it is, the admin at /admin/.
 
-import { ADMIN_ASSET_DIR, ADMIN_HOST, ADMIN_PAGE_HEADERS, ADMIN_URL, HELP_HOST, HELP_URL, isLocalHost } from '../lib/site.js';
+import { ADMIN_ASSET_DIR, ADMIN_HOST, ADMIN_PAGE_HEADERS, ADMIN_URL, HELP_HOST, HELP_URL, PRIVACY_URL, isLocalHost } from '../lib/site.js';
 import { fail } from '../lib/http.js';
 
 function under(pathname, prefix) {
@@ -53,6 +53,7 @@ export async function onRequest(context) {
   if (url.hostname === HELP_HOST) {
     if (under(p, '/api/admin')) return fail(404, 'Not found.');
     if (under(p, '/admin')) return Response.redirect(toAdmin(url), 302);
+    if (p === '/privacy' || p === '/privacy.html') return Response.redirect(PRIVACY_URL, 301);
     return context.next();
   }
 

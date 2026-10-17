@@ -6,8 +6,9 @@ Everything is clicked together in websites; you don't need to install or type an
 
 The support site uses two addresses. Both come from the same Cloudflare project, so you only set it up once:
 
-- **help.gridcentral.store**: the support home page, the report form, the privacy page and the training guide (at
-  help.gridcentral.store/guide). This is the address testers will use.
+- **help.gridcentral.store**: the support home page, the report form and the training guide (at
+  help.gridcentral.store/guide). This is the address testers will use. Its privacy link goes to the website's
+  privacy policy (gridcentral.store/privacy), which development looks after.
 - **admin.gridcentral.store**: the admin, where you read and answer tickets. Only you can open it, now and after
   going live. Development may later add membership pages to it; the lock stays the same.
 
@@ -261,7 +262,7 @@ sign-in to the **Grid Central admin** application.
 | `TURNSTILE_SITE_KEY` | Turnstile's **Site Key** (step 5) |
 | `TURNSTILE_SECRET` | Turnstile's **Secret Key** (step 5) |
 | `RESEND_API_KEY` | Resend's API key (step 6) |
-| `OWNER_EMAIL` | Where "new ticket" emails should go: `support.gridcentral@gmail.com` (the privacy page says copies go to that Gmail inbox). More than one? Separate them with commas. |
+| `OWNER_EMAIL` | Where "new ticket" emails should go: `support.gridcentral@gmail.com` (the website's privacy policy should say copies go to that Gmail inbox). More than one? Separate them with commas. |
 | `ADMIN_EMAILS` | The email address you sign in to the admin with (step 10.3). More than one? Separate them with commas. |
 | `ACCESS_TEAM_DOMAIN` | From step 10, for example `gridcentral.cloudflareaccess.com` |
 | `ACCESS_AUD` | From step 10.4, the **Grid Central admin** application's "Application Audience (AUD) Tag" |
@@ -307,21 +308,24 @@ emails too: the "New bug report" email and any emails from the customer.
 
 Nothing in the steps above makes the site public. When you're happy with it and want testers to use it:
 
-1. In **Zero Trust** → **Access controls** → **Applications**, delete the **Support site (testing lock)**
+1. First check that the website's privacy policy is live at https://gridcentral.store/privacy and has the help
+   desk's part (what the form keeps, and Cloudflare, Resend and Gmail). The report form links to it. If it isn't
+   there yet, ask development before going on.
+2. In **Zero Trust** → **Access controls** → **Applications**, delete the **Support site (testing lock)**
    application (open it → **Delete**, or **⋯** → **Delete**). Leave **Grid Central admin** and **Certificate
    renewal** exactly as they are. No secrets change.
-2. Check in a private window: https://help.gridcentral.store and its report form open without signing in;
+3. Check in a private window: https://help.gridcentral.store and its report form open without signing in;
    https://admin.gridcentral.store still asks you to sign in.
-3. In **Workers & Pages** → **grid-central-support** → **Settings** → **Builds** → **Branch control**, change the
+4. In **Workers & Pages** → **grid-central-support** → **Settings** → **Builds** → **Branch control**, change the
    **Production branch** to `main` and save. The site stays as it is until the next step.
-4. On GitHub, merge the `claude/own-domain` pull request into `main`, the same way as earlier support-site changes
+5. On GitHub, merge the `claude/own-domain` pull request into `main`, the same way as earlier support-site changes
    (ask the help desk to open it if there isn't one). Merging starts a new build from `main`: check that the newest
    deployment under **Deployments** finishes.
-5. From then on, the old GitHub Pages address (xr58ya.github.io/grid-central-support) sends people to
+6. From then on, the old GitHub Pages address (xr58ya.github.io/grid-central-support) sends people to
    https://help.gridcentral.store. Ask the help desk to point the GitHub README and the guide there, and
    development to update the link in the app (and on the website, if it links to support), then tell testers.
 
-To undo it before step 3, make the **Support site (testing lock)** application again (step 10.5).
+To undo it before step 4, make the **Support site (testing lock)** application again (step 10.5).
 
 ## If something goes wrong
 

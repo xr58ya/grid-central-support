@@ -25,7 +25,7 @@ test('guide Markdown: headings get anchors, raw tags show as text, links point a
 test('npm run build writes every page, and every link between them works', async function () {
   await build();
   const dist = path.join(ROOT, 'dist');
-  const expect = ['index.html', 'report.html', 'privacy.html', '404.html', '_headers', 'admin/index.html', 'admin/admin.js',
+  const expect = ['index.html', 'report.html', '404.html', '_headers', 'admin/index.html', 'admin/admin.js',
     'admin/devtext.js', 'admin/admin.css', 'assets/guide.css', 'guide/index.html', 'guide/01-getting-started.html', 'guide/06-paint-shop.html'];
   for (const f of expect) assert.ok(fs.existsSync(path.join(dist, f)), f);
   assert.equal(fs.existsSync(path.join(dist, 'functions')), false, 'the API is not copied into the static files');
@@ -62,7 +62,7 @@ test('GitHub Pages leaves the Cloudflare-only files out', function () {
 });
 
 test('no secrets, beta codes or private addresses in the files that get published', function () {
-  const files = ['wrangler.toml', 'report.html', 'privacy.html', 'index.html', '_headers', 'admin/admin.js', 'admin/index.html',
+  const files = ['wrangler.toml', 'report.html', 'index.html', '_headers', 'admin/admin.js', 'admin/index.html',
     'lib/email.js', 'support/cloudflare-setup.md', 'README.md'];
   for (const f of files) {
     const text = fs.readFileSync(path.join(ROOT, f), 'utf8');
