@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact Grid Central Support</title>
+<script>
+  // Once this is on main, the old GitHub Pages copy of the page sends people to help.gridcentral.store.
+  if (/\.github\.io$/i.test(location.hostname)) location.replace('https://help.gridcentral.store/report.html' + location.search + location.hash);
+</script>
 <meta name="description" content="Report a problem, suggest a feature or ask for setup help with Grid Central.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +20,8 @@
     --field: #0c0d0e; --edge: #666b66; --bad: #ff6464;
   }
   * { box-sizing: border-box; }
-  .logo, h1 { font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  [hidden] { display: none !important; }
+  .logo, h1, h2 { font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif; }
   body { margin: 0; background: var(--bg); color: var(--text);
     font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   a { color: var(--accent); }
@@ -47,7 +52,7 @@
   .field > label, .field > legend { display: block; font-weight: 600; margin-bottom: 4px; padding: 0; }
   .req { color: var(--accent); margin-left: 3px; }
   .hint { display: block; color: var(--muted); font-size: 14px; margin-bottom: 8px; }
-  input[type="text"], select, textarea { width: 100%; font: inherit; font-size: 15px; color: var(--text);
+  input[type="text"], input[type="email"], select, textarea { width: 100%; font: inherit; font-size: 15px; color: var(--text);
     background: var(--field); border: 1px solid var(--edge); border-radius: 8px; padding: 10px 12px; }
   textarea { min-height: 110px; resize: vertical; }
   textarea.code { font-family: ui-monospace, "SF Mono", Consolas, monospace; font-size: 13px; }
@@ -59,7 +64,7 @@
     border: 1px solid var(--edge); border-radius: 999px; padding: 6px 12px; font-size: 14px; cursor: pointer; }
   .chips input { accent-color: var(--accent); margin: 0; }
   .chips label:has(input:checked) { border-color: var(--accent); color: var(--accent); }
-  .field.invalid input[type="text"], .field.invalid select, .field.invalid textarea { border-color: var(--bad); }
+  .field.invalid input[type="text"], .field.invalid input[type="email"], .field.invalid select, .field.invalid textarea { border-color: var(--bad); }
   .field.invalid .chips label { border-color: var(--bad); }
   .error { color: var(--bad); font-size: 14px; margin-top: 6px; display: none; }
   .field.invalid .error { display: block; }
@@ -74,9 +79,33 @@
   #status:empty { margin: 0; }
   #status.ok { color: var(--accent); }
   #status.warn { color: var(--bad); }
+  .common { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 20px; }
+  .drop { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; background: var(--field); border: 1px dashed var(--edge);
+    border-radius: 8px; padding: 12px; font-size: 14px; color: var(--muted); }
+  .drop.over { border-color: var(--accent); color: var(--text); }
+  .drop input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .drop label.pick { font-weight: 600; color: var(--accent); border: 1px solid var(--accent); border-radius: 8px;
+    padding: 7px 14px; cursor: pointer; }
+  .drop:focus-within label.pick { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .field.invalid .drop { border-color: var(--bad); }
+  .files { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
+  .files li { display: flex; align-items: center; gap: 10px; background: var(--chip); border-radius: 8px; padding: 7px 10px; font-size: 14px; }
+  .files li span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .files li small { color: var(--muted); }
+  .files button { font: inherit; font-size: 13px; color: var(--muted); background: none; border: 1px solid var(--line);
+    border-radius: 6px; padding: 3px 9px; cursor: pointer; }
+  .files button:hover { color: var(--text); }
+  #turnstile { min-height: 65px; }
+  .actions button[disabled] { opacity: 0.6; cursor: progress; }
+  .done { background: var(--panel); border: 1px solid var(--accent); border-radius: 12px; padding: 22px; }
+  .done .number { font-family: "Space Grotesk", system-ui, sans-serif; font-size: 30px; font-weight: 700;
+    color: var(--accent); letter-spacing: 1px; margin: 4px 0 12px; }
+  .done p { margin: 0 0 10px; }
+  .done ul { color: var(--bad); margin: 0 0 10px; padding-left: 20px; }
+  .done .actions a { align-self: center; color: var(--muted); }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .legend-req { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
-  footer { color: var(--muted); font-size: 14px; padding: 36px 0 48px; }
+  footer.wrap { color: var(--muted); font-size: 14px; padding: 36px 16px 48px; }
   @media (max-width: 560px) { form { padding: 16px; } .actions button { flex: 1 1 100%; } }
 </style>
 </head>
@@ -98,49 +127,80 @@
     <button type="button" data-type="help" aria-pressed="false">Get setup help</button>
   </div>
 
-  <p class="note">
-    <b>How it's sent.</b> <b>Post on GitHub</b> opens our public tracker with your answers filled in: you pick
-    from GitHub's lists again and press <b>Create</b> (a free GitHub account is needed, and anyone can read it). We're told
-    straight away. Logs, beta codes or anything private? Email them to
-    <a href="mailto:support.gridcentral@gmail.com">support.gridcentral@gmail.com</a> instead. Before posting, please
-    <a href="https://github.com/xr58ya/grid-central-support/issues?q=is%3Aissue" target="_blank" rel="noopener">search existing reports</a>.
+  <p class="note" id="how">
+    <b>Private.</b> Your answers and any files come straight to the Grid Central team and only we can see them.
+    We'll email you a ticket number and reply to you there.
+    <a href="https://gridcentral.store/privacy">What we keep and why</a>.
   </p>
 
   <form id="form" novalidate>
     <p class="legend-req"><span aria-hidden="true">*</span> marks the answers we need.</p>
     <div id="fields"></div>
-    <div class="actions">
-      <button type="submit" class="primary" data-send="github">Post on GitHub</button>
-      <button type="button" class="ghost" id="copy">Copy my answers</button>
+    <div class="common">
+      <div class="field" data-id="email">
+        <label for="f-email">Your email address<span class="req" aria-hidden="true">*</span><span class="sr"> (required)</span></label>
+        <span class="hint" id="f-email-hint">We'll send your ticket number here and reply to you. Only the Grid Central team sees it.</span>
+        <input type="email" id="f-email" name="email" autocomplete="email" inputmode="email" maxlength="254"
+          placeholder="you@example.com" aria-required="true" aria-describedby="f-email-hint">
+        <div class="error" id="f-email-err">Please enter your email address, so we can reply.</div>
+      </div>
+      <div class="field" data-id="files" id="files-field">
+        <label for="f-files">Attach files</label>
+        <span class="hint" id="f-files-hint"></span>
+        <div class="drop" id="drop">
+          <input type="file" id="f-files" multiple aria-describedby="f-files-hint">
+          <label class="pick" for="f-files">Choose files</label>
+          <span>or drag them here</span>
+        </div>
+        <ul class="files" id="file-list"></ul>
+        <div class="error" id="f-files-err"></div>
+      </div>
+      <div class="field" data-id="check" id="check-field" hidden>
+        <div id="turnstile"></div>
+        <div class="error" id="check-err">Please complete the "are you human" check.</div>
+      </div>
     </div>
-    <p class="after" id="after"></p>
+    <div class="actions">
+      <button type="submit" class="primary" id="send">Send</button>
+      <button type="button" class="ghost" id="copy" hidden>Copy my answers</button>
+    </div>
     <div id="status" role="status" aria-live="polite"></div>
   </form>
+
+  <section class="done" id="done" hidden tabindex="-1" aria-label="Your ticket number">
+    <p>Your ticket number is</p>
+    <p class="number" id="done-number"></p>
+    <p id="done-email"></p>
+    <ul id="done-warnings" hidden></ul>
+    <div class="actions">
+      <button type="button" class="secondary" id="again">Send another</button>
+      <a href="./">Support home</a>
+    </div>
+  </section>
 </main>
 
 <footer class="wrap">
-  GitHub is public: never post beta codes, email addresses or full logs there, send those by email instead.
-  Never include passwords, payment details or your iRacing login anywhere. Questions? Email
-  <a href="mailto:support.gridcentral@gmail.com">support.gridcentral@gmail.com</a>.
+  Never include passwords, payment details or your iRacing login, in a report or an email. Questions? Email
+  <a href="mailto:support.gridcentral@gmail.com">support.gridcentral@gmail.com</a>. <a href="https://gridcentral.store/privacy">Privacy</a>
 </footer>
 
 <script>
 (function () {
-  var REPO = 'https://github.com/xr58ya/grid-central-support/issues/new';
   var EMAIL = 'support.gridcentral@gmail.com';
+  var API = '/api/tickets';
+  // FORMS:start (tests/run.mjs reads this block: it must match lib/forms.js and .github/ISSUE_TEMPLATE/*.yml)
   var AREAS = ['Install or update', 'Setup wizard', 'Dashboard / main app', 'Overlays (in-game or OBS)',
     'Phone companion', 'Talkback / voice / commentary', 'Engineer, strategy or coach',
     'Telemetry, lap data or debrief', 'Team hub or online features', 'Paint / spray booth', 'Discord link',
     'Account, beta code or plan', 'Translations'];
   var VERSION_HINT = 'Shown at the bottom right of the app, for example "V 0.5.9.2 · BETA".';
 
-  // These mirror .github/ISSUE_TEMPLATE/*.yml: the ids must match the forms' field ids so GitHub fills them in.
+  // The field ids match .github/ISSUE_TEMPLATE/*.yml, and the server's list in lib/forms.js.
   var FORMS = {
     bug: {
       heading: 'Report a problem',
       lead: 'Something in Grid Central broken or not working as expected? The more detail you give, the faster it can be fixed.',
-      template: 'bug_report.yml', prefix: '[Bug]: ',
-      after: 'Screenshots or a video? Drag them into the GitHub page before you press Create. The full companion.log goes by email only, to ' + EMAIL + ', because GitHub is public.',
+      attach: 'companion.log helps a lot, and so do screenshots or a short video. To find companion.log: open the Start menu, find Grid Central, right-click it and choose Open file location.',
       fields: [
         { id: 'summary', type: 'input', label: 'Short summary', required: true, placeholder: 'Spotter stops calling cars after pitting' },
         { id: 'version', type: 'input', label: 'Grid Central version', required: true, hint: VERSION_HINT, placeholder: '0.5.9.2' },
@@ -151,14 +211,13 @@
         { id: 'session', type: 'input', label: 'iRacing session details', hint: 'Car, track and session type if it matters (practice, race, team race, replay).', placeholder: 'Porsche 963 at Spa, team race' },
         { id: 'os', type: 'input', label: 'Windows version', required: true, placeholder: 'Windows 11 23H2' },
         { id: 'hardware', type: 'textarea', label: 'Hardware and setup', hint: 'Monitors or VR, phone model if using the phone companion, streaming software if using overlays.', small: true },
-        { id: 'logs', type: 'textarea', label: 'Error messages from companion.log', code: true, hint: 'Paste only the error lines. GitHub is public, and the full log shows your Windows user name and other drivers\' names, so email the full log instead. Never paste emails or beta codes.' }
+        { id: 'logs', type: 'textarea', label: 'Error messages from companion.log', code: true, hint: 'Paste any error lines here, or attach the whole companion.log below.' }
       ]
     },
     feature: {
       heading: 'Suggest a feature',
       lead: 'An idea that would make Grid Central better on track or on stream? Tell us the problem behind it as well as the idea.',
-      template: 'feature_request.yml', prefix: '[Feature]: ',
-      after: 'Sketches or screenshots? Drag them into the GitHub page before you press Create.',
+      attach: 'Sketches or screenshots of how you picture it, or of another app that does it.',
       fields: [
         { id: 'summary', type: 'input', label: 'Short summary', required: true, placeholder: 'Show when my teammate is about to pit' },
         { id: 'area', type: 'multi', label: 'Which part of Grid Central?', required: true, options: AREAS.concat(['Something new']) },
@@ -172,18 +231,25 @@
     help: {
       heading: 'Get setup help',
       lead: 'Stuck installing or setting something up? The training guide may already answer it, but we\'re happy to walk you through it.',
-      template: 'setup_help.yml', prefix: '[Help]: ',
-      after: 'A screenshot of where you\'re stuck helps a lot: drag it into the GitHub page before you press Create. Beta code or account problem? Email ' + EMAIL + ' instead, so your code stays private.',
+      attach: 'A screenshot of where you\'re stuck helps a lot.',
       fields: [
         { id: 'summary', type: 'input', label: 'Short summary', required: true, placeholder: 'Can\'t connect OBS' },
         { id: 'version', type: 'input', label: 'Grid Central version', required: true, hint: VERSION_HINT, placeholder: '0.5.9.2' },
         { id: 'area', type: 'multi', label: 'What do you need help with?', required: true, options: AREAS.concat(['Other / not sure']) },
         { id: 'goal', type: 'textarea', label: 'What are you trying to set up?', required: true },
-        { id: 'tried', type: 'textarea', label: 'What have you tried so far?', required: true, hint: 'The steps you followed and where you got stuck. Never post a beta code on GitHub: email those to ' + EMAIL + '.' },
+        { id: 'tried', type: 'textarea', label: 'What have you tried so far?', required: true, hint: 'The steps you followed and where you got stuck.' },
         { id: 'os', type: 'input', label: 'Windows version', placeholder: 'Windows 11 23H2' }
       ]
     }
   };
+  // FORMS:end
+
+  // Longest answers the server takes (lib/forms.js MAX_LENGTH).
+  var MAX_TEXT = { textarea: 8000, logs: 20000 };
+
+  // Used until /api/config answers; the server checks again either way.
+  var LIMITS = { maxFiles: 5, maxFileBytes: 10 * 1024 * 1024, maxTotalBytes: 25 * 1024 * 1024,
+    accept: ['.log', '.txt', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.mp4', '.webm'] };
 
   var params = new URLSearchParams(location.search);
   var has = function (k) { return Object.prototype.hasOwnProperty.call(FORMS, k); };
@@ -192,7 +258,13 @@
   if (params.get('version')) saved.version = params.get('version').replace(/^v\s*/i, '');
 
   var $ = function (id) { return document.getElementById(id); };
-  var form = $('form'), fieldsEl = $('fields'), statusEl = $('status');
+  var form = $('form'), fieldsEl = $('fields'), statusEl = $('status'), sendBtn = $('send'), copyBtn = $('copy');
+  var emailInput = $('f-email'), fileInput = $('f-files'), fileList = $('file-list');
+  var chosen = [];          // File objects to attach
+  var ready = false;        // the server is set up to take tickets
+  var siteKey = null, widget = null, token = '';
+  var checkFailed = false;  // the "are you human" check couldn't load
+  var busy = false;
 
   function el(tag, attrs, text) {
     var n = document.createElement(tag);
@@ -201,11 +273,21 @@
     return n;
   }
 
+  function size(bytes) {
+    return bytes >= 1024 * 1024 ? String(+(bytes / 1024 / 1024).toFixed(1)) + ' MB' : Math.max(1, Math.round(bytes / 1024)) + ' KB';
+  }
+
+  function attachHint() {
+    $('f-files-hint').textContent = FORMS[current].attach + ' Up to ' + LIMITS.maxFiles + ' files, ' + size(LIMITS.maxFileBytes) +
+      ' each and ' + size(LIMITS.maxTotalBytes) + ' in all: ' + LIMITS.accept.join(' ') + '. Only the Grid Central team can open them.';
+    fileInput.setAttribute('accept', LIMITS.accept.join(','));
+  }
+
   function render() {
     var spec = FORMS[current];
     $('title').textContent = spec.heading;
     $('lead').textContent = spec.lead;
-    $('after').textContent = spec.after;
+    attachHint();
     document.title = spec.heading + ' · Grid Central Support';
     document.querySelectorAll('.tabs button').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.dataset.type === current));
@@ -229,7 +311,7 @@
       if (f.hint) wrap.appendChild(el('span', { 'class': 'hint', id: id + '-hint' }, f.hint));
       var control;
       if (f.type === 'input') {
-        control = el('input', { type: 'text', id: id, name: f.id });
+        control = el('input', { type: 'text', id: id, name: f.id, maxlength: f.id === 'summary' ? '150' : '200' });
       } else if (f.type === 'textarea') {
         control = el('textarea', { id: id, name: f.id, rows: f.small ? 3 : 5 });
         if (f.code) control.className = 'code';
@@ -239,11 +321,11 @@
         f.options.forEach(function (o) { control.appendChild(el('option', { value: o }, o)); });
       } else {
         control = el('div', { 'class': 'chips' });
-        var chosen = saved[f.id] || [];
+        var picked = saved[f.id] || [];
         f.options.forEach(function (o) {
           var lab = el('label');
           var box = el('input', { type: 'checkbox', name: f.id, value: o });
-          if (chosen.indexOf(o) >= 0) box.checked = true;
+          if (picked.indexOf(o) >= 0) box.checked = true;
           lab.appendChild(box);
           lab.appendChild(document.createTextNode(o));
           control.appendChild(lab);
@@ -283,10 +365,17 @@
     });
   }
 
-  function setInvalid(wrap, bad) {
+  function fieldWrap(id) {
+    return form.querySelector('.field[data-id="' + id + '"]');
+  }
+
+  function setInvalid(wrap, bad, message) {
+    if (!wrap) return;
     wrap.classList.toggle('invalid', bad);
-    var err = wrap.querySelector('.error').id;
-    var targets = wrap.tagName === 'FIELDSET' ? [wrap] : [wrap.querySelector('input, select, textarea')];
+    var errEl = wrap.querySelector('.error');
+    if (bad && message) errEl.textContent = message;
+    var err = errEl.id;
+    var targets = wrap.tagName === 'FIELDSET' ? [wrap] : [wrap.querySelector('input, select, textarea')].filter(Boolean);
     targets.forEach(function (t) {
       var ids = (t.getAttribute('aria-describedby') || '').split(' ').filter(function (x) { return x && x !== err; });
       if (bad) ids.push(err);
@@ -295,21 +384,79 @@
     });
   }
 
+  function focusFirst(wrap) {
+    if (!wrap) return;
+    var target = wrap.querySelector('input:not([type="file"]), select, textarea') || wrap.querySelector('input');
+    wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (target) target.focus({ preventScroll: true });
+  }
+
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   function validate(a) {
     var firstBad = null;
     FORMS[current].fields.forEach(function (f) {
-      var wrap = fieldsEl.querySelector('[data-id="' + f.id + '"]');
+      var wrap = fieldWrap(f.id);
       var empty = f.type === 'multi' ? !a[f.id].length : !a[f.id];
+      var message = f.type === 'multi' ? 'Pick at least one.' : 'Please fill this in.';
       var bad = !!(f.required && empty);
-      setInvalid(wrap, bad);
+      var max = f.type === 'textarea' ? (f.id === 'logs' ? MAX_TEXT.logs : MAX_TEXT.textarea) : 0;
+      if (!bad && max && a[f.id].length > max) {
+        bad = true;
+        message = 'Please keep this under ' + max + ' characters (it has ' + a[f.id].length + ').' +
+          (f.id === 'logs' ? ' Paste only the error lines, or attach companion.log as a file instead.' : '');
+      }
+      setInvalid(wrap, bad, message);
       if (bad && !firstBad) firstBad = wrap;
     });
-    if (firstBad) {
-      var target = firstBad.querySelector('input, select, textarea');
-      firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      if (target) target.focus({ preventScroll: true });
-    }
+    var email = emailInput.value.trim();
+    var emailBad = !email || !EMAIL_RE.test(email);
+    setInvalid(fieldWrap('email'), emailBad, email ? 'That doesn\'t look like an email address.' : 'Please enter your email address, so we can reply.');
+    if (emailBad && !firstBad) firstBad = fieldWrap('email');
+    var fileErr = checkFiles(chosen);
+    setInvalid(fieldWrap('files'), !!fileErr, fileErr);
+    if (fileErr && !firstBad) firstBad = fieldWrap('files');
+    focusFirst(firstBad);
     return !firstBad;
+  }
+
+  // Files: the same limits the server uses, so most problems show before anything is sent.
+  function checkFiles(list) {
+    if (list.length > LIMITS.maxFiles) return 'Attach up to ' + LIMITS.maxFiles + ' files.';
+    var total = 0;
+    for (var i = 0; i < list.length; i++) {
+      var f = list[i];
+      var ext = (/\.[A-Za-z0-9]+$/.exec(f.name) || [''])[0].toLowerCase();
+      if (LIMITS.accept.indexOf(ext) < 0) return f.name + ': only ' + LIMITS.accept.join(' ') + ' files can be attached.';
+      if (!f.size) return f.name + ' is empty.';
+      if (f.size > LIMITS.maxFileBytes) return f.name + ' is bigger than ' + size(LIMITS.maxFileBytes) + '. Email it to ' + EMAIL + ' instead.';
+      total += f.size;
+    }
+    if (total > LIMITS.maxTotalBytes) return 'The files add up to more than ' + size(LIMITS.maxTotalBytes) + '.';
+    return '';
+  }
+
+  function addFiles(list) {
+    Array.prototype.forEach.call(list || [], function (f) {
+      var dupe = chosen.some(function (c) { return c.name === f.name && c.size === f.size; });
+      if (!dupe) chosen.push(f);
+    });
+    showFiles();
+  }
+
+  function showFiles() {
+    fileList.innerHTML = '';
+    chosen.forEach(function (f, i) {
+      var li = el('li');
+      li.appendChild(el('span', null, f.name));
+      li.appendChild(el('small', null, size(f.size)));
+      var rm = el('button', { type: 'button', 'aria-label': 'Remove ' + f.name }, 'Remove');
+      rm.addEventListener('click', function () { chosen.splice(i, 1); showFiles(); });
+      li.appendChild(rm);
+      fileList.appendChild(li);
+    });
+    var err = checkFiles(chosen);
+    setInvalid(fieldWrap('files'), !!err, err);
   }
 
   function asText(a) {
@@ -324,26 +471,173 @@
     return lines.join('\n').trim();
   }
 
-  function githubUrl(a) {
-    var spec = FORMS[current];
-    var q = ['template=' + encodeURIComponent(spec.template), 'title=' + encodeURIComponent(spec.prefix + a.summary)];
-    spec.fields.forEach(function (f) {
-      // GitHub only fills in text boxes from the link, not its pick-lists, so those are left out.
-      if (f.id === 'summary' || f.type === 'multi' || f.type === 'select') return;
-      if (a[f.id]) q.push(encodeURIComponent(f.id) + '=' + encodeURIComponent(a[f.id]));
-    });
-    return REPO + '?' + q.join('&');
-  }
-
-  function pickLists(a) {
-    return FORMS[current].fields.filter(function (f) { return f.type === 'multi' || f.type === 'select'; })
-      .map(function (f) { return '"' + f.label + '" (' + (f.type === 'multi' ? a[f.id].join('; ') : a[f.id]) + ')'; });
-  }
-
   function say(msg, cls) {
     statusEl.className = cls || '';
     statusEl.textContent = '';
     setTimeout(function () { statusEl.textContent = msg; }, 50);
+  }
+
+  // When the form can't send (the site isn't set up, or sending failed), answers can still be copied into an email.
+  function offerCopy() {
+    copyBtn.hidden = false;
+  }
+
+  function setBusy(on) {
+    busy = on;
+    sendBtn.disabled = on;
+    sendBtn.textContent = on ? 'Sending…' : 'Send';
+  }
+
+  var CHECK_FAILED = 'The "are you human" check couldn\'t load (a browser extension or firewall may be blocking ' +
+    'challenges.cloudflare.com). Reload the page to try again, or press Copy my answers and email them to ' + EMAIL + '.';
+
+  // Turnstile, Cloudflare's "are you human" check. Loaded once the server has said which site key to use.
+  function loadCheck() {
+    window.gcTurnstileReady = function () {
+      $('check-field').hidden = false;
+      widget = window.turnstile.render('#turnstile', {
+        sitekey: siteKey,
+        theme: 'dark',
+        action: 'ticket',
+        callback: function (t) { token = t; checkFailed = false; setInvalid($('check-field'), false); },
+        'expired-callback': function () { token = ''; },
+        'error-callback': function () {
+          token = '';
+          checkFailed = true;
+          say(CHECK_FAILED, 'warn');
+          offerCopy();
+        }
+      });
+    };
+    var s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=gcTurnstileReady';
+    s.async = true;
+    s.defer = true;
+    s.onerror = function () {
+      checkFailed = true;
+      say(CHECK_FAILED, 'warn');
+      offerCopy();
+    };
+    document.head.appendChild(s);
+  }
+
+  function resetCheck() {
+    token = '';
+    if (window.turnstile && widget != null) { try { window.turnstile.reset(widget); } catch (e) { /* reload instead */ } }
+  }
+
+  function unavailable() {
+    ready = false;
+    $('how').innerHTML = '';
+    $('how').appendChild(el('b', null, 'Sending from this page isn\'t available right now. '));
+    $('how').appendChild(document.createTextNode('Fill in the form, press Copy my answers and paste them into an email to ' +
+      EMAIL + '. Attach companion.log or screenshots to the email.'));
+    sendBtn.hidden = true;
+    $('files-field').hidden = true;
+    offerCopy();
+  }
+
+  function loadConfig() {
+    fetch('/api/config', { headers: { 'Accept': 'application/json' }, cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (c) {
+        if (!c || !c.sending || !c.turnstileSiteKey) { unavailable(); return; }
+        ready = true;
+        siteKey = c.turnstileSiteKey;
+        if (c.files) {
+          LIMITS = c.files;
+        } else {
+          $('files-field').hidden = true;
+          LIMITS.maxFiles = 0;
+        }
+        attachHint();
+        loadCheck();
+      })
+      .catch(unavailable);
+  }
+
+  function showDone(res, email) {
+    form.hidden = true;
+    document.querySelector('.tabs').hidden = true;
+    $('how').hidden = true;
+    $('title').textContent = 'Thanks, it\'s sent';
+    $('lead').textContent = '';
+    $('done-number').textContent = res.ticket;
+    $('done-email').textContent = 'We\'re emailing it to ' + email + ' and will reply there. If it isn\'t in your inbox in a few minutes, check your spam folder.';
+    var w = $('done-warnings');
+    w.innerHTML = '';
+    (res.warnings || []).forEach(function (m) { w.appendChild(el('li', null, m)); });
+    w.hidden = !(res.warnings || []).length;
+    $('done').hidden = false;
+    $('done').focus();
+    window.scrollTo(0, 0);
+  }
+
+  function handleAnswer(status, body, email) {
+    setBusy(false);
+    if (status === 201 && body && body.ok) { showDone(body, email); return; }
+    resetCheck();
+    var msg = (body && body.error) || '';
+    if (status === 400 && body && body.fields) {
+      var first = null;
+      Object.keys(body.fields).forEach(function (id) {
+        var wrap = fieldWrap(id);
+        if (!wrap) return;
+        setInvalid(wrap, true, body.fields[id]);
+        if (!first) first = wrap;
+      });
+      focusFirst(first);
+      say(msg || 'Some answers need a change: they\'re marked in red above.', 'warn');
+      return;
+    }
+    if (status === 403 && body && body.retryCheck) {
+      setInvalid($('check-field'), true, 'Please do the check again.');
+      say(msg, 'warn');
+      return;
+    }
+    // With attachments, a dropped connection or an error page from Cloudflare is usually the upload being too big
+    // or too slow, and trying again the same way won't help.
+    if (chosen.length && (status === 0 || (status >= 500 && !body))) {
+      say('Your report couldn\'t be sent (error ' + (status || 'no connection') + '). Try sending it without the attachments ' +
+        '(remove them above), then email them to ' + EMAIL + ' with your ticket number.', 'warn');
+      offerCopy();
+      return;
+    }
+    say((msg || 'Your report couldn\'t be sent (error ' + (status || 'no connection') + ').') +
+      ' Please try again in a minute. If it keeps failing, press Copy my answers and email them to ' + EMAIL + '.', 'warn');
+    offerCopy();
+  }
+
+  function send(a, email) {
+    var fd = new FormData();
+    fd.append('payload', JSON.stringify({ type: current, email: email, answers: a }));
+    fd.append('turnstile', token);
+    chosen.forEach(function (f) { fd.append('files', f, f.name); });
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', API);
+    // Gives up only when nothing has moved for a while, however long a big upload on a slow line takes.
+    var idle = null;
+    function stall(ms) { clearTimeout(idle); idle = setTimeout(function () { xhr.abort(); }, ms); }
+    if (chosen.length) {
+      xhr.upload.onprogress = function (e) {
+        stall(90000);
+        // Shown on the button, not in the status line, so screen readers aren't read every percent.
+        if (e.lengthComputable) sendBtn.textContent = 'Sending… ' + Math.round(e.loaded / e.total * 100) + '%';
+      };
+      xhr.upload.onload = function () { stall(120000); };
+    }
+    xhr.onload = function () {
+      clearTimeout(idle);
+      var body = null;
+      try { body = JSON.parse(xhr.responseText); } catch (e) { /* not our answer */ }
+      handleAnswer(xhr.status, body, email);
+    };
+    xhr.onerror = xhr.onabort = function () { clearTimeout(idle); handleAnswer(0, null, email); };
+    setBusy(true);
+    statusEl.className = '';
+    statusEl.textContent = 'Sending…';
+    stall(90000);
+    xhr.send(fd);
   }
 
   document.querySelector('.tabs').addEventListener('click', function (e) {
@@ -367,37 +661,63 @@
   });
 
   ['input', 'change'].forEach(function (type) {
-    fieldsEl.addEventListener(type, function (e) {
+    form.addEventListener(type, function (e) {
+      if (e.target === fileInput) return;
       var wrap = e.target.closest('.field');
       if (wrap && wrap.classList.contains('invalid')) setInvalid(wrap, false);
     });
   });
 
-  // Enter in a one-line box would send with the first button (GitHub): only a button press sends.
-  fieldsEl.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' && e.target.matches('input[type="text"]')) e.preventDefault();
+  // Enter in a one-line box would send the form: only the Send button sends.
+  form.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && e.target.matches('input[type="text"], input[type="email"]')) e.preventDefault();
+  });
+
+  fileInput.addEventListener('change', function () {
+    addFiles(fileInput.files);
+    fileInput.value = '';
+  });
+  // A file dropped anywhere on the page is attached (when attaching is on), instead of the browser opening it and
+  // leaving the page with the answers typed so far.
+  window.addEventListener('dragover', function (e) { e.preventDefault(); });
+  window.addEventListener('drop', function (e) {
+    e.preventDefault();
+    if (e.target.closest && e.target.closest('#drop')) return;
+    if (!form.hidden && !$('files-field').hidden && e.dataTransfer && e.dataTransfer.files.length) addFiles(e.dataTransfer.files);
+  });
+  var drop = $('drop');
+  ['dragenter', 'dragover'].forEach(function (t) {
+    drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('over'); });
+  });
+  ['dragleave', 'drop'].forEach(function (t) {
+    drop.addEventListener(t, function () { drop.classList.remove('over'); });
+  });
+  drop.addEventListener('drop', function (e) {
+    e.preventDefault();
+    if (e.dataTransfer) addFiles(e.dataTransfer.files);
   });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (busy) return;
     var a = readAnswers();
     if (!validate(a)) { say('Some answers are missing: they\'re marked in red above.', 'warn'); return; }
-    var url = githubUrl(a);
-    if (url.length > 7500) {
-      say('That report is too long to pass to GitHub in one go. Shorten the longest answer, or email it to ' + EMAIL + '.', 'warn');
+    if (!ready) { say('Sending isn\'t available right now: press Copy my answers and email them to ' + EMAIL + '.', 'warn'); offerCopy(); return; }
+    if (checkFailed) { say(CHECK_FAILED, 'warn'); offerCopy(); return; }
+    if ($('check-field').hidden) { say('The "are you human" check is still loading. Wait a moment, then press Send again.', 'warn'); return; }
+    if (!token) {
+      setInvalid($('check-field'), true, 'Please complete the "are you human" check.');
+      say('Please complete the "are you human" check just above Send.', 'warn');
       return;
     }
-    var lists = pickLists(a);
-    say('GitHub is opening in a new tab with your answers filled in. GitHub can\'t fill in its pick-lists, so choose ' +
-      lists.join(' and ') + ' again there, then press Create.', 'ok');
-    window.open(url, '_blank', 'noopener');
+    send(a, emailInput.value.trim());
   });
 
-  $('copy').addEventListener('click', function () {
+  copyBtn.addEventListener('click', function () {
     var a = readAnswers();
     var text = (a.summary ? a.summary + '\n\n' : '') + asText(a);
     if (!text) { say('Fill in some answers first.', 'warn'); return; }
-    var done = function () { say('Copied. Paste it into an email to ' + EMAIL + ' or anywhere you like.', 'ok'); };
+    var done = function () { say('Copied. Paste it into an email to ' + EMAIL + ' and attach any files there.', 'ok'); };
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(done, function () { say('Couldn\'t copy automatically: select your answers and copy them instead.', 'warn'); });
     } else {
@@ -405,7 +725,21 @@
     }
   });
 
+  $('again').addEventListener('click', function () {
+    saved = {};
+    chosen = [];
+    showFiles();
+    $('done').hidden = true;
+    form.hidden = false;
+    $('how').hidden = false;
+    document.querySelector('.tabs').hidden = false;
+    render();
+    resetCheck();
+    window.scrollTo(0, 0);
+  });
+
   render();
+  loadConfig();
 })();
 </script>
 </body>

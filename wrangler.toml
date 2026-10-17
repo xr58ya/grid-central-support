@@ -1,0 +1,41 @@
+# Cloudflare Pages: the own-domain support site. NOT LIVE YET. One project, two custom domains:
+#   help.gridcentral.store   public pages, training guide (/guide), report form API (/api/tickets, /api/config)
+#   admin.gridcentral.store  the admin (page at /, API at /api/admin/*), locked by Cloudflare Access
+# functions/_middleware.js sends each request to the right one (addresses in lib/site.js). gridcentral.store itself
+# (the website) and api.gridcentral.store (payments) belong to development and aren't served from here.
+# Step-by-step setup for the owner: support/cloudflare-setup.md.
+#
+#   Build command:           npm run build
+#   Build output directory:  dist
+#
+# npm run build (scripts/build.mjs) copies the pages and the admin into dist/ and turns guide/*.md into HTML.
+# Cloudflare finds the API in functions/ (next to this file) by itself.
+#
+# Never put secrets or email addresses in this file. These are added in the Cloudflare dashboard
+# (Workers & Pages > grid-central-support > Settings > Variables and Secrets), as type "Secret":
+#   TURNSTILE_SITE_KEY   Turnstile site key (public, but kept with the rest)
+#   TURNSTILE_SECRET     Turnstile secret key
+#   RESEND_API_KEY       Resend API key, for sending email
+#   OWNER_EMAIL          where new-ticket emails go (comma separated for more than one)
+#   ADMIN_EMAILS         who may use the admin (comma separated), the same people as the Access policy
+#   ACCESS_TEAM_DOMAIN   the Zero Trust team domain, for example myteam.cloudflareaccess.com
+#   ACCESS_AUD           the "Application Audience (AUD) Tag" of the Access application for admin.gridcentral.store
+# Optional: MAIL_FROM (default "Grid Central Support <support@gridcentral.store>"),
+#           MAIL_REPLY_TO (default support@gridcentral.store).
+
+name = "grid-central-support"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-09-01"
+
+# Tickets, their history and file records. The database ID isn't a secret: it only works with the owner's
+# Cloudflare login. Replace the placeholder with the ID shown on the database's page in the dashboard.
+[[d1_databases]]
+binding = "DB"
+database_name = "grid-central-support"
+database_id = "REPLACE-WITH-THE-D1-DATABASE-ID"
+migrations_dir = "migrations"
+
+# Attachments (companion.log, screenshots). Private bucket: files are only read through /api/admin/files.
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "grid-central-support-files"

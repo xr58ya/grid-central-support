@@ -1,0 +1,65 @@
+/* Training guide and other generated pages: Grid Central's dark colours and lime, like index.html. */
+:root {
+  color-scheme: dark;
+  --bg: #101112; --panel: #17191a; --text: #eef0ea; --muted: #8b9089;
+  --line: #2b2e2f; --accent: #d2ff50; --accent-text: #141a08; --chip: #1f2223;
+}
+* { box-sizing: border-box; }
+.logo, h1, h2, h3, h4 { font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--accent); }
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+header { border-bottom: 1px solid var(--line); background: var(--panel); }
+header .wrap { max-width: 960px; display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
+header a.home { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+.logo { width: 33px; height: 33px; flex: 0 0 33px; border-radius: 9px; background: var(--accent); color: var(--accent-text);
+  display: grid; place-items: center; font-weight: 700; font-size: 21px; letter-spacing: -2px; }
+.wordmark { display: grid; gap: 2px; font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 700; font-size: 16px; line-height: 1.1; letter-spacing: 1.8px; text-transform: uppercase; color: var(--text); }
+.wordmark span { font: 600 9px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; letter-spacing: 1.45px; color: #818580; }
+header nav { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
+header nav a { color: var(--muted); text-decoration: none; }
+header nav a:hover { color: var(--text); }
+
+.crumbs { color: var(--muted); font-size: 14px; margin: 24px 0 0; }
+.crumbs a { color: var(--muted); }
+.crumbs a:hover { color: var(--text); }
+
+.doc { overflow-wrap: break-word; }
+.doc h1 { font-size: clamp(28px, 5vw, 38px); line-height: 1.15; margin: 18px 0 14px; color: var(--text); }
+.doc h2 { font-size: 24px; line-height: 1.25; margin: 44px 0 12px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--accent); }
+.doc h3 { font-size: 19px; margin: 30px 0 8px; color: var(--accent); }
+.doc h4 { font-size: 16px; margin: 22px 0 6px; }
+.doc h2, .doc h3, .doc h4 { scroll-margin-top: 16px; }
+.doc p, .doc ul, .doc ol { margin: 0 0 14px; }
+.doc li { margin: 4px 0; }
+.doc li > ul, .doc li > ol { margin: 4px 0 0; }
+.doc strong { color: #ffffff; }
+.doc code { font-family: ui-monospace, "SF Mono", Consolas, monospace; font-size: 0.9em; background: var(--chip);
+  border-radius: 5px; padding: 1px 5px; }
+.doc pre { background: var(--chip); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; overflow-x: auto; }
+.doc pre code { background: none; padding: 0; }
+.doc blockquote { margin: 0 0 14px; padding: 4px 16px; border-left: 3px solid var(--line); color: var(--muted); }
+.doc hr { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
+.doc table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; margin: 0 0 18px; font-size: 15px; }
+.doc th, .doc td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+.doc th { background: var(--panel); font-weight: 600; }
+.doc tr:nth-child(even) td { background: #141617; }
+
+.toc { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin: 0 0 24px; }
+.toc-title { margin: 0 0 6px; font-weight: 600; color: var(--muted); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+.toc ol { margin: 0; padding-left: 20px; columns: 2 260px; column-gap: 28px; font-size: 15px; }
+.toc li { margin: 3px 0; break-inside: avoid; }
+.toc a { color: var(--text); text-decoration: none; }
+.toc a:hover { color: var(--accent); }
+
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; }
+.pager a { flex: 0 1 48%; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px;
+  text-decoration: none; color: var(--text); }
+.pager a:hover { border-color: var(--accent); }
+.pager a span { display: block; color: var(--muted); font-size: 13px; }
+.pager .next { text-align: right; margin-left: auto; }
+
+footer.wrap { color: var(--muted); font-size: 14px; padding: 36px 16px 48px; }
+@media (max-width: 560px) { header nav { gap: 12px; font-size: 14px; } .pager { flex-direction: column; } .pager a { flex-basis: auto; } }

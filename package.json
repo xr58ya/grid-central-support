@@ -1,0 +1,18 @@
+{
+  "name": "grid-central-support",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Grid Central support site: static pages, training guide and the ticket API for Cloudflare Pages.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test --no-warnings=ExperimentalWarning tests/*.test.mjs",
+    "dev": "node scripts/build.mjs && npx wrangler pages dev"
+  },
+  "dependencies": {
+    "marked": "18.0.14"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

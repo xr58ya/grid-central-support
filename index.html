@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Grid Central Support</title>
+<script>
+  // Once this is on main, the old GitHub Pages copy of the page sends people to help.gridcentral.store.
+  if (/\.github\.io$/i.test(location.hostname)) location.replace('https://help.gridcentral.store/' + location.hash);
+</script>
 <meta name="description" content="Report a problem, suggest a feature, get setup help, or learn how every part of Grid Central works.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,11 +109,9 @@
       </a>
     </div>
     <div class="note">
-      <b>Reports go on GitHub.</b> It's public, needs a free GitHub account, and lets others add a 👍 to
-      the same problem. Logs, beta codes or anything private go by email instead:
-      <a href="mailto:support.gridcentral@gmail.com">support.gridcentral@gmail.com</a>.
-      Before you post, <a href="https://github.com/xr58ya/grid-central-support/issues?q=is%3Aissue">search existing reports</a>:
-      if yours is there, add a 👍 and any extra detail.
+      <b>Reports are private.</b> Your answers and any files you attach (such as companion.log or screenshots) come
+      straight to the Grid Central team, and we reply by email. Problems we've confirmed are listed on
+      <a href="https://github.com/xr58ya/grid-central-support/issues?q=is%3Aissue">GitHub</a>, without your details.
     </div>
   </section>
 
@@ -153,7 +155,7 @@
       <p>Press Ctrl+F5. If it's still missing, close every Grid Central window and open it again.</p></details>
     <details><summary>The companion closed or overlays stopped</summary>
       <ol><li>Open the Start menu, find Grid Central, right-click it and choose <b>Open file location</b>.</li>
-      <li>Email <b>companion.log</b> (and companion-previous.log, if it's there) to support.gridcentral@gmail.com with the track, car and what you were doing.</li></ol></details>
+      <li><a href="report.html?type=bug">Report the problem</a> and attach <b>companion.log</b> (and companion-previous.log, if it's there), with the track, car and what you were doing.</li></ol></details>
   </section>
 
   <section id="contact">
@@ -169,7 +171,7 @@
 <footer class="wrap">
   Grid Central is in closed beta. Get the latest version from the
   <a href="https://github.com/xr58ya/grid-central/releases/latest">download page</a> or the
-  <a href="https://xr58ya.github.io/grid-central/">Grid Central website</a>.
+  <a href="https://xr58ya.github.io/grid-central/">Grid Central website</a>. <a href="https://gridcentral.store/privacy">Privacy</a>
 </footer>
 </body>
 </html>

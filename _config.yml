@@ -1,3 +1,20 @@
 title: Grid Central Support
 description: Report a problem, suggest a feature, or learn how every part of Grid Central works.
 theme: jekyll-theme-cayman
+# The Cloudflare Pages version (support/cloudflare-setup.md) lives in these files. GitHub Pages leaves them out.
+exclude:
+  - admin/
+  - functions/
+  - lib/
+  - migrations/
+  - scripts/
+  - support/
+  - tests/
+  - dist/
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - wrangler.toml
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
