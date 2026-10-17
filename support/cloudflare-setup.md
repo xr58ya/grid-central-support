@@ -12,9 +12,11 @@ The support site uses two addresses. Both come from the same Cloudflare project,
   going live. Development may later add membership pages to it; the lock stays the same.
 
 > **The rest of gridcentral.store isn't part of this.** gridcentral.store itself is for the Grid Central website
-> and api.gridcentral.store for the payments server; development looks after both. This guide never asks you to add,
-> change or delete a DNS record for either of them. If Cloudflare or another site offers to change those, say no
-> and ask development.
+> and api.gridcentral.store for the payments server; development looks after both. This guide never adds, changes or
+> deletes their website or payments records. The one exception is step 7: Email Routing adds email records (MX and
+> TXT) to gridcentral.store. They don't affect the website, but check with development first that they aren't
+> setting up email for gridcentral.store somewhere else. If Cloudflare or another site offers to change anything
+> else for those two, say no and ask development.
 
 > **Don't go live until you decide to.** From step 10 until the last section ("Going live"), both addresses are
 > locked so only you can open them. Cloudflare's own address for the project (`grid-central-support.pages.dev`)
@@ -152,8 +154,8 @@ Wait until gridcentral.store is **Active** (step 2).
 Customers' replies to Grid Central's emails go to support@gridcentral.store. This forwards them to
 support.gridcentral@gmail.com. Wait until gridcentral.store is **Active** (step 2).
 
-> If gridcentral.store already receives email somewhere else (for example Google Workspace), stop here and ask the
-> help desk first: turning on Email Routing would replace that.
+> If gridcentral.store already receives email somewhere else (for example Google Workspace), or development plans to
+> set that up, stop here and ask the help desk first: turning on Email Routing would replace that.
 
 1. In Cloudflare, open **gridcentral.store** → **Email** → **Email Routing**, and press **Get started** (or
    **Enable Email Routing**).
@@ -203,8 +205,8 @@ the form can't send and the admin is closed, because the keys aren't in yet (ste
    domain**.
 4. Wait until both say **Active** (a few minutes) before going on.
 
-These are the only two DNS records this guide adds for the website (Cloudflare adds them for you). Don't add any for
-gridcentral.store itself or for `api`.
+These are the only two records this guide adds for the support site (Cloudflare adds them for you). Don't add any
+website records for gridcentral.store itself or for `api`.
 
 ## 10. Lock both addresses with Cloudflare Access
 
