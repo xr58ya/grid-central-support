@@ -80,7 +80,7 @@ Run the new Setup. Your laps, settings, paints and strategy data are kept (they'
 2. Press **Unlock**. It shows "Checking…" while it checks the code online.
 3. When the code is accepted, the window closes and the setup wizard starts.
 
-After that you go straight in, and the code is re-checked in the background at each start. Offline, it keeps working for up to **30 days**. The code also gives your Grid Central account 6 months of Driver free from release day (see "Your account and plans").
+After that you go straight in, and the code is re-checked in the background at each start. Offline, it keeps working for up to **30 days**. The code also lets your Grid Central account start 6 months of Driver free from release day (see "Your account and plans").
 
 **Tip.** If you don't have a code, ask whoever invited you to the beta, or email support.gridcentral@gmail.com.
 
@@ -183,7 +183,7 @@ The footer shows your version (for example **V 0.5.9.2 · BETA**).
 
 ## Your account and plans
 
-**What it does.** An account (email and password) gives a **7-day free trial** of Driver, no card needed, and carries your beta code's free months and later your subscription. One PC per subscription. Your laps, settings and paints stay on your PC.
+**What it does.** An account (email and password) gives a **7-day free trial** of Driver, no card needed, and carries your beta code and later your subscription. One PC per subscription. Your laps, settings and paints stay on your PC.
 
 **Where to find it.** **Settings → Account**, in the **Account** panel. The chip at the top right of the panel shows your status.
 
@@ -194,21 +194,23 @@ The footer shows your version (for example **V 0.5.9.2 · BETA**).
 1. Start the companion (it tells Grid Central which PC this is).
 2. In **Settings → Account**, enter **EMAIL** and **PASSWORD** (at least 8 characters for a new account).
 3. Press **Create account**, or **Sign in** if you have one. The panel shows "Signed in as …".
-4. Beta tester? If **BETA TESTER? ENTER YOUR BETA CODE FOR 6 MONTHS OF DRIVER FREE** shows, enter your code and press **Use code**. A new account made on the PC where you unlocked the beta gets the code automatically.
+4. Beta tester? If **BETA TESTER? ENTER YOUR BETA CODE FOR 6 MONTHS OF DRIVER FREE** shows, enter your code and press **Use code**. A new account made on the PC where you unlocked the beta gets the code automatically. From release day, you start the free months yourself (see "Beta testers' free months").
 
 | Control | What it does |
 |---|---|
 | **Create account** | New account; starts the trial if this PC hasn't had one. |
 | **Forgot password?** | Type your email first; a reset link is emailed. |
+| **Start your 6 free months** | For beta testers, from release day for 30 days: opens the checkout in your browser (see "Beta testers' free months"). |
 | **Move my subscription here** | Shown when it's on another PC; moves it here (that PC goes to Rookie). |
 | **Subscribe** | Greyed out ("Coming soon"). |
 | **Sign out** | Signs you out on this PC. |
-| **Use code** | Adds a beta code (6 months of Driver free from release day; one account per code). |
+| **Use code** | Adds a beta code (from release day, it lets you start 6 months of Driver free; one account per code). |
 
 | Status chip | What it means |
 |---|---|
 | **NOT SIGNED IN**, **ROOKIE** | No account, or no plan: you're on Rookie, the free plan. |
-| **TRIAL · N DAYS LEFT**, **BETA TESTER**, **DRIVER**, **RACE TEAM** | Your plan; the line below says when it ends. The trial and a beta code give Driver. With your own Driver subscription and a seat in a team on Race Team, it says **RACE TEAM** and gives both dates. |
+| **TRIAL · N DAYS LEFT**, **DRIVER**, **RACE TEAM** | Your plan; the line below says when it ends. The trial gives Driver, and so do a beta code's free months once you've started them. With your own Driver subscription and a seat in a team on Race Team, it says **RACE TEAM** and gives both dates. |
+| **BETA TESTER** | Your account has a beta code, and its free months haven't started. The line below says when you can start them (see "Beta testers' free months"). |
 | **+ BROADCAST** after the plan, for example **DRIVER + BROADCAST** | You have the Broadcast add-on too. |
 | **IN USE ON ANOTHER PC** | Your subscription is on another PC. Press **Move my subscription here**. |
 | **NEEDS A CHECK** | Not checked online for 30 days. Connect to the internet. |
@@ -217,13 +219,14 @@ The account is checked at start and every 6 hours, and works offline for up to 3
 
 ### Beta testers' free months
 
-A beta code gives **Driver** free for **6 months from release day** (the day Grid Central goes on sale), whenever you entered your code. It doesn't include Race Team or the Broadcast add-on.
+A beta code lets you start **6 months of Driver free** from release day (the day Grid Central goes on sale). The free months don't start by themselves: you start them at checkout, with a card, within 30 days of release day. When they end, Driver is **$6.99 a month** for as long as you stay subscribed. Each account can start them once, and they don't include Race Team or the Broadcast add-on.
 
-- Until Grid Central goes on sale, the line under the chip reads "Thanks for testing! Driver is free for 6 months from release day."
-- Once it goes on sale, the line shows the end date: "Thanks for testing! Driver is free until …".
-- From 30 days before the end, it reads "Your free months as a beta tester end on …" with the date, then "Subscribe before then to keep Driver at your beta tester price." The same message pops up once 30 days before the end and once 7 days before.
-- The beta tester price is for testers who entered their code by 30 days after release day. Codes entered later get the same message without "at your beta tester price".
-- When the free months end, you're on Rookie unless you subscribe or drive for a team on Race Team.
+- Until Grid Central goes on sale, the chip says **BETA TESTER** and the line under it reads "Thanks for testing! From release day you can start 6 months of Driver free at checkout (a card is needed), then keep Driver at $6.99 a month for as long as you stay subscribed."
+- From release day, for 30 days, the panel has a **Start your 6 free months** button, and the line reads "Thanks for testing! Start your 6 free months of Driver by …: a card is needed at checkout, and nothing is charged until they end. Then it's $6.99 a month for as long as you stay subscribed."
+- **Start your 6 free months** opens the checkout in your browser: "The checkout is open in your browser. Your free months start as soon as it's done." Grid Central looks for your new plan by itself over the next few minutes.
+- During the free months, the chip says **DRIVER** and the line reads "Driver is free until …, then $6.99 a month."
+- From 30 days before they end, it reads "Your free months end on …. After that, Driver is $6.99 a month on the card you gave at checkout, unless you cancel before then." The same message pops up once 30 days before the end and once 7 days before.
+- If you don't start them within the 30 days, the offer closes.
 
 ### The plans
 
@@ -231,10 +234,10 @@ Once Grid Central goes on sale, it has three plans and an add-on:
 
 | Plan | What you get |
 |---|---|
-| **Rookie** (free) | Your spotter with a simple radar, the dashboard, your lap times, the in-game overlay with the core widgets (**Relative**, **Standings** and **Flags**), car painting and your Discord status. |
-| **Driver** | Everything in Rookie, plus the engineer and coach on the radio, talkback, race strategy, race setups, lap comparison and telemetry, the full radar, every overlay widget and OBS overlays, the whole paint shop (helmet and suit, finishes, Spray Booth, Live in iRacing, car numbers), the phone pit wall and Discord posts. The 7-day free trial and a beta code give Driver. |
-| **Race Team** | For teams and leagues: every driver in the team gets Driver on their own PC, plus team races, shared laps, view-only phone links for teammates, talking to your crew by voice, the team hub (hosted with no setup, or on your own free hosting) and the League room with its bot. It's for 3 drivers, and you can add 5 more at a time. |
-| **Broadcast add-on** | For streaming, on top of Driver or Race Team: AI race commentary with natural voices (the **Broadcast** page), OBS control from Grid Central and your phone (the **OBS Studio** panel and **Add to OBS**), and going-live posts on Discord. If a team has it, every driver in the team gets it. It isn't part of the trial or the beta code. |
+| **Rookie** (free) | Your spotter with a simple radar, your session and track map, lap times and ratings, the in-game overlay with the core widgets (**Relative**, **Standings** and **Flags**), every livery tool (the Spray Booth, finishes, Live in iRacing, helmet and suit included) and your Discord status. |
+| **Driver** | Everything in Rookie, plus the engineer and coach on the radio, talkback, race strategy, race setups, lap comparison and telemetry, the full radar, every overlay widget and OBS overlays, the phone pit wall on one phone at a time, talking to your crew by voice, and Discord posts. The 7-day free trial and a beta code's free months give Driver. |
+| **Race Team** | For teams and leagues: every driver in the team gets Driver on their own PC, plus team races, shared laps, the phone pit wall for your whole crew and view-only phone links for friends and viewers, the team hub (hosted with no setup, or on your own free hosting) and the League room with its bot. It's for 3 drivers, and you can add 5 more at a time. |
+| **Broadcast add-on** | For streaming, on top of Driver or Race Team: AI race commentary with natural voices (the **Broadcast** page), OBS control from Grid Central and your phone (the **OBS Studio** panel and **Add to OBS**), and going-live posts on Discord. If a team has it, every driver in the team gets it. It isn't part of the trial or the beta code's free months. |
 
 Once plans are on sale, areas your plan doesn't include are dimmed, with a label naming the plan they need, for example **DRIVER · Race strategy**, **RACE TEAM · The team hub** or **BROADCAST · OBS control**. Single buttons, switches and menu items get a small tag instead (**DRIVER**, **RACE TEAM** or **BROADCAST**); a menu item with a tag still opens its page. A few small buttons, such as the ones on each lap in **Lap data**, show no tag. Clicking anything locked opens a window that says which plan it's part of, for example "PART OF GRID CENTRAL DRIVER". Its first button is **Start your 7-day free trial** (for Driver) or **Create account** (for Race Team and the add-on) when you aren't signed in, and **See your account** when you are (or **Move my subscription here** if your subscription is on another PC). **Not now** closes it.
 
@@ -267,6 +270,9 @@ The chip at the top right shows **NO TEAM** when you aren't in a team, **NO SEAT
 | "Use a password of at least 8 characters." | Choose a longer password. |
 | "Couldn't reach the account server. Check your internet connection." | Go online and try again. |
 | "That code isn't valid, or it has already been used." | Check the beta code. Each code works on one account only. |
+| "Couldn't reach Grid Central's server. Check your internet connection." | Go online and press **Start your 6 free months** again. |
+| "You've already started your beta tester offer." | Each account can start its free months once. |
+| "The beta tester offer has closed." | It could be started for 30 days from release day. |
 | "Team codes look like XXXX-XXXX-XXXX." / "That team code isn't right. Check it with your team owner." | Check the code with your team owner. |
 | "No free seat: the team is full or has no seats yet." | Ask the team owner to free or buy a seat. |
 | "This account has been turned off." | Contact support.gridcentral@gmail.com. |
@@ -425,7 +431,7 @@ These panels are covered in full in the Phone and Team hub chapters. Here is a s
 | Control | What it does | Default |
 |---|---|---|
 | **Let my phone connect** | Turns on the phone pit wall and shows a QR code. If Windows asks, allow Grid Central on *private* networks. Needs the companion running ("Start the companion first."). | Off |
-| **Crew** / **View only** | Which link the QR code is for: Crew (with pit menu and radio buttons) or View only. View only needs Race Team. | Crew |
+| **Crew** / **View only** | Which link the QR code is for: Crew (with pit menu and radio buttons) or View only. View only needs Race Team. On Driver, the crew link works on one phone at a time. | Crew |
 | **Copy link** | Copies the phone link. | n/a |
 | **New pairing code** | Makes a new code. Phones that used this link before are disconnected, but the other link keeps working. | n/a |
 
@@ -543,7 +549,7 @@ Start with the top-bar status and the companion window. Most problems come down 
 | **Engineer speaks English after switching language** | Install a voice for that language in Windows **Settings → Time & language → Speech**, then pick it under **Voice**. |
 | **The in-game overlay doesn't show over iRacing** | Set iRacing to windowed or borderless. Full screen covers everything else. On Rookie, only the **Relative**, **Standings** and **Flags** widgets are drawn. A design with none of them (such as **Minimal HUD**) shows them in their usual places. |
 | **Talkback doesn't hear me** | Check the microphone and button in **Settings → Voice & radio → Talkback**, and that the status shows **READY**. Hold the button a moment before speaking. If it says "Press Set button, then press the wheel button or key you want to talk with.", set a button first. On Rookie the status stays **OFF**, because talkback is part of Driver. |
-| **Phone can't connect** | Allow GridCentral.exe on **private** networks when Windows asks. Set your Wi-Fi to Private in Windows **Settings → Network & internet**. Make sure the phone is on the same Wi-Fi. On Rookie, phones can't connect: the phone pit wall is part of Driver. |
+| **Phone can't connect** | Allow GridCentral.exe on **private** networks when Windows asks. Set your Wi-Fi to Private in Windows **Settings → Network & internet**. Make sure the phone is on the same Wi-Fi. On Rookie, phones can't connect: the phone pit wall is part of Driver. On Driver, the crew link works on one phone at a time: if the phone says **ON ANOTHER PHONE**, tap **Use it on this phone**. |
 | **"No QR code"** on the Phone panel | Type the link shown under it into your phone instead. |
 | **Windows or antivirus blocks GridCentral.exe** | The beta isn't signed yet. Choose **More info → Run anyway**, or allow it in your antivirus. |
 | **The companion closed, or overlays stopped** | Look at `companion.log` in the Grid Central folder (the run before is `companion-previous.log`) and send it with your report. |

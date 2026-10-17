@@ -2,7 +2,7 @@
 
 The **Paint** page (heading "Paint shop.", subtitle "Paint your car, helmet and suit, add numbers and logos, then drop them straight into iRacing.") is a livery painter built into Grid Central. You paint on iRacing's own template for your car, so everything lines up on the real car. One click puts the finished paint into iRacing. The **Spray Booth** shows your car in 3D while you work, and you can paint straight onto the 3D car.
 
-**Rookie and Driver.** Painting the car, Download TGA and Install to iRacing are on every plan, including Rookie, the free plan. **Helmet**, **Suit**, **Live in iRacing**, the **Spray Booth**, the **Finish** panel, the **Cut** tool, **Symmetry** (**⇋ Mirror**), the **CAR NUMBER** and **VERSIONS** panels in Setup, and the colour dots on template layers are part of Driver. On Rookie, those buttons have a **DRIVER** tag and those panels a **DRIVER** cover (the colour dots have no tag), and clicking one explains it's part of Driver. If your plan drops back to Rookie, Live in iRacing switches off, the paint shop goes back to the car, the Cut tool switches back to **Move**, and Symmetry pauses. Nothing you made is lost. During the beta everything is unlocked.
+**Plans.** Every livery tool is on every plan, including Rookie, the free plan: painting the car, **Helmet** and **Suit**, **Live in iRacing**, the **Spray Booth**, the **Finish** panel, the **Cut** tool, **Symmetry** (**⇋ Mirror**), the **CAR NUMBER** and **VERSIONS** panels in Setup, the colour dots on template layers, **Download TGA** and **Install to iRacing**. None of them has a plan label. Posting a Spray Booth photo to Discord is part of Driver, like Grid Central's other Discord posts.
 
 **The companion.** Most of the "it just works" parts need the Grid Central companion running on your PC: finding your car and template by themselves, one-click install, Live in iRacing, Versions, and checking that the paint is still there. Without it you can still paint, then download the file or pick the paint folder yourself.
 
@@ -18,7 +18,7 @@ The **Paint** page (heading "Paint shop.", subtitle "Paint your car, helmet and 
 6. **Pick a base look.** If your template has iRacing's patterns, the **PATTERNS** panel shows each one on your car: click one, then set **COLOUR 1**, **COLOUR 2** and **COLOUR 3**.
 7. **Add your number and name.** Press **# Add number** or **T Add text** (or the **Number** and **Text** tools). Type in the **TEXT** box and set the font, colours and size. Drag the item onto a door. Near one of the template's number or sponsor blocks, it snaps in and sizes itself to fit.
 8. **Add a sponsor logo** with the **Logo** tool (PNG, JPG, WebP, SVG or TGA).
-9. **Check it in 3D** (Driver): press **Spray Booth**, turn the car around and look for anything out of place. Press **Leave** when you're done.
+9. **Check it in 3D**: press **Spray Booth**, turn the car around and look for anything out of place. Press **Leave** when you're done.
 10. **Press Install to iRacing.** Look over the **BEFORE YOU INSTALL** list, then press **Install anyway** or **Fix first**. With the companion running, the card says "Installed. It's on your car now." If iRacing isn't running, it shows the next time you drive.
 
 ---
@@ -244,7 +244,7 @@ Every colour box in the paint shop has a small **▾** on its corner. Click it f
 
 ## Car number and number blocks
 
-**Where:** Setup → **CAR NUMBER** ("Where iRacing puts your number."). Shown for the car only. The **CAR NUMBER** panel is part of Driver.
+**Where:** Setup → **CAR NUMBER** ("Where iRacing puts your number."). Shown for the car only.
 
 **How it works.** **iRacing shows my number** is the same switch as in iRacing's Paint Shop. When it's on, iRacing paints your number into the template's number areas itself. So Grid Central keeps your text and logos out of those areas, and only shows your number as a preview on the sheet and the 3D car. When it's off, the areas are yours, for a number of your own.
 
@@ -268,7 +268,7 @@ Every colour box in the paint shop has a small **▾** on its corner. Click it f
 
 **Where:** click the car with **Move**, or click a layer in **Layers**. The panel reads **CAR PAINT LAYER** (or HELMET or SUIT).
 
-**Quick way** (Driver): the round colour dots before a template layer's name in Layers. Click one and pick a colour. A layer made of a few flat colours, like the pit box, gets one dot per colour, and each changes exactly the way iRacing reads them.
+**Quick way**: the round colour dots before a template layer's name in Layers. Click one and pick a colour. A layer made of a few flat colours, like the pit box, gets one dot per colour, and each changes exactly the way iRacing reads them.
 
 | Control | What it does | Default |
 |---|---|---|
@@ -296,7 +296,7 @@ If the car's 3D model is loaded (Spray Booth), gradients run front to back or to
 2. Click a tile to use that pattern. Only one pattern is used at a time, as in iRacing.
 3. Set **COLOUR 1**, **COLOUR 2** and **COLOUR 3**. They apply to every pattern, so you can switch patterns and keep your colours.
 
-The tiles show the 3D car once its model has been loaded in the Spray Booth. Until then you see "Load this car's 3D model in the Spray Booth to see the patterns on the car." and flat pictures of the sheet. On Rookie that note doesn't show, because the Spray Booth is part of Driver.
+The tiles show the 3D car once its model has been loaded in the Spray Booth. Until then you see "Load this car's 3D model in the Spray Booth to see the patterns on the car." and flat pictures of the sheet.
 
 ---
 
@@ -322,7 +322,7 @@ The tiles show the 3D car once its model has been loaded in the Spray Booth. Unt
 | **OPACITY** | Paint, Erase, Fill | 5–100% | 100% |
 | **TOLERANCE** | Fill, Area | 1–100 ("How different a colour can be and still be picked") | 25 |
 | **▣ In panel** | Paint, Erase, Fill | Stops at the outline of the panel you start on | On |
-| **✂︎ Cut panels** | Paint, Erase, Fill | Switches to the Cut tool (Driver) | — |
+| **✂︎ Cut panels** | Paint, Erase, Fill | Switches to the Cut tool | — |
 
 **In panel** and **Cut panels** show only with a template that has panel outlines (iRacing's PSD).
 
@@ -369,7 +369,7 @@ The panels come from the outlines in iRacing's PSD template: the mask and the wi
 2. Click the panels it should show on, on the sheet or on the 3D car. Click a panel again to take it off. Esc stops picking.
 3. **Whole car** goes back to everywhere. The layer list shows **ONLY ON 2** and so on.
 
-**Cut** (K, More tools; Driver). Templates often leave a door and the front guard as one panel.
+**Cut** (K, More tools). Templates often leave a door and the front guard as one panel.
 1. Pick **Cut**. The wire's lines show at full strength.
 2. Click along the gap from outline to outline, or around a door and back to your first click. The cut follows the template's lines.
 3. **Double-click** or **Enter** finishes the cut. **Esc** drops it. **Backspace** takes back the last click.
@@ -384,7 +384,7 @@ The panels come from the outlines in iRacing's PSD template: the mask and the wi
 
 **What it does.** Paint, Erase and Fill work on both sides of the car at once. In the Spray Booth, numbers, text and logos go on both sides as a pair: changing one's text, colours, font or size changes the other, and each keeps its own place and angle.
 
-**Where:** **⇋ Mirror** in the toolbar, or **S**. It's part of Driver, car only, and off for a new design. On Rookie, Symmetry you turned on earlier is kept but doesn't work until you have Driver again.
+**Where:** **⇋ Mirror** in the toolbar, or **S**. It's car only, and off for a new design.
 
 **If it doesn't work:** it needs your car chosen and its 3D model. "Symmetry on. It works once this car's 3D model is loaded (open the Spray Booth)." Open the booth once, and keep the stand-in in mind (see below).
 
@@ -400,7 +400,7 @@ Everything goes in one list: template layers, paint layers, numbers, text, logos
 |---|---|
 | Eye | Show or hide. Hidden layers aren't in the paint. |
 | 🔓︎ / 🔒︎ | Lock: stops it being painted, changed, moved or deleted |
-| Colour dots | Template layers only: recolour (see above). Part of Driver. |
+| Colour dots | Template layers only: recolour (see above). |
 | Name | Click to select, drag to reorder |
 | Tag | TEMPLATE · %, TEMPLATE PICTURE, PAINT · %, GUIDE, CAR SHAPE, HIDDEN, LOCKED, ONLY ON n |
 
@@ -412,7 +412,7 @@ Everything goes in one list: template layers, paint layers, numbers, text, logos
 
 ---
 
-## Finish (Driver)
+## Finish
 
 **What it does.** Sets how the car shines. Install saves it as iRacing's spec map, car_spec_ID.tga, next to the paint. It's car only: "iRacing only uses finishes (its spec map) on the car, not on helmets or suits."
 
@@ -439,7 +439,7 @@ Everything goes in one list: template layers, paint layers, numbers, text, logos
 
 ---
 
-## Helmet and suit (Driver)
+## Helmet and suit
 
 1. Switch **Car / Helmet / Suit** at the top. Each one keeps its own design, template and layers ("Painting your helmet.").
 2. Load iRacing's helmet or suit template (see *Getting the template*).
@@ -458,7 +458,7 @@ Everything goes in one list: template layers, paint layers, numbers, text, logos
 
 **Saving.** Your design saves itself in the browser as you work. If it can't, you see "Your design can't be saved in this browser. Download the TGA to keep it."
 
-**Versions** (Setup → **VERSIONS**, "Keep a copy to come back to."; needs the companion; part of Driver):
+**Versions** (Setup → **VERSIONS**, "Keep a copy to come back to."; needs the companion):
 1. Type a **Name (optional)** and press **Save version** (or Enter). It's saved as a .gcpaint file in Documents\Grid Central\Liveries\carfolder (Helmet and Suit have their own folders).
 2. **Open** goes back to a version. What you have now is saved as a version first. **Delete** removes one (this can't be undone). **Show the folder** opens it.
 3. Every Install saves one by itself ("Installed date time"). The newest 10 of those are kept.
@@ -499,7 +499,7 @@ Install and Download first check for things that won't come out as they look. Th
 
 **Download TGA ↓** saves car_ID.tga (and car_spec_ID.tga) to your Downloads ("Copy them into Documents\iRacing\paint\carfolder."). Use it to back up your paint, or to install it by hand.
 
-### Live in iRacing (Driver)
+### Live in iRacing
 
 1. Tick **Live in iRacing**. It asks first, because it replaces the paint file that's there.
 2. About a second after each change, the paint is sent to iRacing and reloaded on your car. Watch it in the garage or on track. The status bar shows "Live: sending to iRacing…", then "Live: updated in iRacing at …" (or "Live: saved at …").
@@ -524,7 +524,7 @@ Install and Download first check for things that won't come out as they look. Th
 
 ---
 
-## The Spray Booth (Driver)
+## The Spray Booth
 
 **What it does.** Your car in 3D in Grid Central, painted as you work. Every change shows on it straight away, and iRacing doesn't need to be open. The car stands on a turntable in a paint booth whose lights show in the paint.
 
@@ -594,7 +594,7 @@ The wheel settings are kept for each car, and they show in the booth only. In iR
 
 ### Photo
 
-Press **Photo** for a picture of the car as shown. Add **Say something about it (optional)**, then **Save picture** (saved to your Downloads as grid-central-car.jpg), **Post to Discord** (needs the companion and Discord connected), or **Back to the booth**.
+Press **Photo** for a picture of the car as shown. Add **Say something about it (optional)**, then **Save picture** (saved to your Downloads as grid-central-car.jpg), **Post to Discord** (needs the companion and Discord connected; part of Driver), or **Back to the booth**.
 
 **Esc** in the booth steps back one thing at a time: a logo waiting to be placed, the shortcut list, the photo, the big sheet, and then the booth itself.
 
