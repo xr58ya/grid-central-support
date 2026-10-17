@@ -50,8 +50,8 @@ test('a bug report with files is stored as GC-1001, files go to R2, and both ema
   assert.equal(net.emails.length, 2);
   const ack = net.emails.find(function (e) { return e.body.to[0] === 'driver@example.com'; }).body;
   const owner = net.emails.find(function (e) { return e.body.to[0] === 'owner-inbox@example.com'; }).body;
-  assert.equal(ack.from, 'Grid Central Support <support@getgridcentral.com>');
-  assert.equal(ack.reply_to, 'support@getgridcentral.com');
+  assert.equal(ack.from, 'Grid Central Support <support@gridcentral.store>');
+  assert.equal(ack.reply_to, 'support@gridcentral.store');
   assert.match(ack.subject, /^\[GC-1001\]/);
   assert.match(ack.text, /GC-1001/);
   assert.doesNotMatch(ack.text + ack.subject, /Spotter stops/, 'the confirmation repeats none of the sender\'s words');
@@ -59,7 +59,7 @@ test('a bug report with files is stored as GC-1001, files go to R2, and both ema
   assert.match(owner.text, /From: driver@example.com/);
   assert.match(owner.text, /Steps to reproduce:\n1\. Join a race/);
   assert.match(owner.text, /companion\.log \(1 KB\)/);
-  assert.match(owner.text, /^Answer in the admin: https:\/\/support\.getgridcentral\.com\/admin\/#\/GC-1001\n\(Replying to this email doesn't reach the customer\.\)/);
+  assert.match(owner.text, /^Answer in the admin: https:\/\/support\.gridcentral\.store\/admin\/#\/GC-1001\n\(Replying to this email doesn't reach the customer\.\)/);
   assert.equal(owner.reply_to, undefined);
   for (const e of net.emails) {
     assert.equal(e.headers['User-Agent'], 'grid-central-support/1.0', 'Resend refuses requests without one');
@@ -146,29 +146,29 @@ test('the Turnstile check must pass, and nothing is stored when it fails', async
   assert.equal((await post(env, { token: 'other-site-token', site: 'http://localhost:8788' })).res.status, 201);
 });
 
-test('email links always point at support.getgridcentral.com, and OWNER_EMAIL can list several addresses', async function () {
+test('email links always point at support.gridcentral.store, and OWNER_EMAIL can list several addresses', async function () {
   const env = baseEnv({ OWNER_EMAIL: 'support.gridcentral@gmail.com, me@example.com' });
   const { res } = await post(env, { site: 'https://abc123.grid-central-support.pages.dev' });
   assert.equal(res.status, 201);
   const owner = net.emails.find(function (e) { return e.body.to.length === 2; });
   assert.ok(owner, 'one owner email to both addresses');
   assert.deepEqual(owner.body.to, ['support.gridcentral@gmail.com', 'me@example.com']);
-  assert.match(owner.body.text, /https:\/\/support\.getgridcentral\.com\/admin\/#\/GC-1001/);
+  assert.match(owner.body.text, /https:\/\/support\.gridcentral\.store\/admin\/#\/GC-1001/);
   assert.doesNotMatch(owner.body.text + JSON.stringify(net.emails), /pages\.dev/);
 });
 
-test('only support.getgridcentral.com (and localhost) serves the site: pages.dev addresses forward, their API is closed', async function () {
+test('only support.gridcentral.store (and localhost) serves the site: pages.dev addresses forward, their API is closed', async function () {
   const run = async function (url) { return siteMiddleware(context(new Request(url), baseEnv())); };
   let res = await run('https://grid-central-support.pages.dev/report.html?type=bug');
   assert.equal(res.status, 301);
-  assert.equal(res.headers.get('Location'), 'https://support.getgridcentral.com/report.html?type=bug');
+  assert.equal(res.headers.get('Location'), 'https://support.gridcentral.store/report.html?type=bug');
   res = await run('https://abc123.grid-central-support.pages.dev/admin/');
-  assert.equal(res.headers.get('Location'), 'https://support.getgridcentral.com/admin/');
+  assert.equal(res.headers.get('Location'), 'https://support.gridcentral.store/admin/');
   for (const u of ['https://grid-central-support.pages.dev/api/tickets', 'https://abc123.grid-central-support.pages.dev/api/config', 'https://grid-central-support.pages.dev/api']) {
     res = await run(u);
     assert.equal(res.status, 404, u);
   }
-  for (const u of ['https://support.getgridcentral.com/api/tickets', 'http://localhost:8788/report.html', 'http://127.0.0.1:8788/api/config']) {
+  for (const u of ['https://support.gridcentral.store/api/tickets', 'http://localhost:8788/report.html', 'http://127.0.0.1:8788/api/config']) {
     assert.equal(await (await run(u)).text(), 'next', u);
   }
 });
@@ -195,7 +195,7 @@ test('a big upload without a Content-Length is cut off at the size limit', async
       controller.enqueue(chunk);
     }
   });
-  const request = new Request('https://support.getgridcentral.com/api/tickets', {
+  const request = new Request('https://support.gridcentral.store/api/tickets', {
     method: 'POST', body: body, duplex: 'half', headers: { 'Content-Type': 'multipart/form-data; boundary=x' }
   });
   assert.equal(request.headers.get('Content-Length'), null);
@@ -289,13 +289,13 @@ test('a counter set back below an existing ticket skips past it instead of stopp
 
 test('requests that aren\'t the form are refused', async function () {
   const env = baseEnv();
-  const json = new Request('https://support.getgridcentral.com/api/tickets', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+  const json = new Request('https://support.gridcentral.store/api/tickets', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
   assert.equal((await onRequestPost(context(json, env))).status, 415);
   const fd = new FormData();
   fd.append('payload', 'not json');
-  const bad = new Request('https://support.getgridcentral.com/api/tickets', { method: 'POST', body: fd });
+  const bad = new Request('https://support.gridcentral.store/api/tickets', { method: 'POST', body: fd });
   assert.equal((await onRequestPost(context(bad, env))).status, 400);
-  const huge = new Request('https://support.getgridcentral.com/api/tickets', { method: 'POST', body: fd, headers: { 'Content-Length': String(40 * 1024 * 1024) } });
+  const huge = new Request('https://support.gridcentral.store/api/tickets', { method: 'POST', body: fd, headers: { 'Content-Length': String(40 * 1024 * 1024) } });
   assert.equal((await onRequestPost(context(huge, env))).status, 413);
 });
 

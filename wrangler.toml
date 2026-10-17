@@ -1,4 +1,4 @@
-# Cloudflare Pages: the own-domain support site (support.getgridcentral.com). NOT LIVE YET.
+# Cloudflare Pages: the own-domain support site (support.gridcentral.store). NOT LIVE YET.
 # Step-by-step setup for the owner: support/cloudflare-setup.md.
 #
 #   Build command:           npm run build
@@ -16,8 +16,8 @@
 #   ADMIN_EMAILS         who may use /admin (comma separated), the same people as the Access policy
 #   ACCESS_TEAM_DOMAIN   the Zero Trust team domain, for example myteam.cloudflareaccess.com
 #   ACCESS_AUD           the Access application's "Application Audience (AUD) Tag"
-# Optional: MAIL_FROM (default "Grid Central Support <support@getgridcentral.com>"),
-#           MAIL_REPLY_TO (default support@getgridcentral.com).
+# Optional: MAIL_FROM (default "Grid Central Support <support@gridcentral.store>"),
+#           MAIL_REPLY_TO (default support@gridcentral.store).
 
 name = "grid-central-support"
 pages_build_output_dir = "dist"

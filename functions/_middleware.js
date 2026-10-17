@@ -1,4 +1,4 @@
-// Runs before every request. The site only works on support.getgridcentral.com (and localhost for wrangler dev):
+// Runs before every request. The site only works on support.gridcentral.store (and localhost for wrangler dev):
 // the *.pages.dev addresses Cloudflare also gives the project have no Access lock in front of them, so pages
 // there forward to the real address and the API there answers "not found".
 

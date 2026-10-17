@@ -1,4 +1,4 @@
-# Setting up support.getgridcentral.com on Cloudflare
+# Setting up support.gridcentral.store on Cloudflare
 
 This guide sets up Grid Central's own support site: the report form sends tickets to a private database instead of
 public GitHub issues, customers get an email with their ticket number, and you answer them from an admin page.
@@ -6,7 +6,7 @@ Everything is clicked together in websites; you don't need to install or type an
 
 > **Don't go live until you decide to.** From step 10 until the last section ("Going live"), the site is locked so
 > only you can open it. Cloudflare's own address for it (`grid-central-support.pages.dev`) only forwards to
-> support.getgridcentral.com, so it can't be used to get around the lock. Testers keep using the current support
+> support.gridcentral.store, so it can't be used to get around the lock. Testers keep using the current support
 > site and email as they do now. Nothing changes for them until you choose to switch, and you can stop at any step.
 
 > **Keys stay secret.** Some steps show you a key (Turnstile's secret key, Resend's API key). Copy it straight from
@@ -18,13 +18,13 @@ Everything is clicked together in websites; you don't need to install or type an
 
 | Part | What it does | Cost |
 |---|---|---|
-| Cloudflare (domain) | Runs getgridcentral.com's DNS | Free |
-| Cloudflare Pages | The support site, guide and admin at support.getgridcentral.com | Free |
+| Cloudflare (domain) | Runs gridcentral.store's DNS | Free |
+| Cloudflare Pages | The support site, guide and admin at support.gridcentral.store | Free |
 | D1 database | Tickets, their history and your notes | Free (5 GB) |
 | R2 storage | Attached files (logs, screenshots), private | Free up to 10 GB, needs a card on file |
 | Turnstile | The "are you human" box that keeps out spam | Free |
 | Access (Zero Trust) | The sign-in in front of the admin | Free up to 50 people |
-| Email Routing | support@getgridcentral.com forwards to support.gridcentral@gmail.com | Free |
+| Email Routing | support@gridcentral.store forwards to support.gridcentral@gmail.com | Free |
 | Resend | Sends the emails (ticket numbers, your replies) | Free: 3,000 a month, 100 a day |
 
 Each ticket sends two emails (one to the customer, one to you). So that your replies always have room within
@@ -35,7 +35,7 @@ the limit.
 ## Before you start
 
 - About an hour, plus waiting time while the domain moves over (usually under an hour, at most a day).
-- Your login for the company where you bought **getgridcentral.com** (your "registrar").
+- Your login for the company where you bought **gridcentral.store** (your "registrar").
 - A payment card. Cloudflare asks for one before it turns on R2 storage (and maybe Zero Trust), even on the free
   plans. You aren't charged unless you go over the free amounts.
 - The address **support.gridcentral@gmail.com** open in another tab, for verification emails.
@@ -54,10 +54,10 @@ the limit.
 4. Turn on two-factor sign-in: click your account icon (top right) → **Profile** → **Authentication** →
    **Two-Factor Authentication**, and follow the steps. This account will hold customer data, so please don't skip it.
 
-## 2. Add getgridcentral.com and change its nameservers
+## 2. Add gridcentral.store and change its nameservers
 
 1. In the Cloudflare dashboard, on the home page, press **Add a domain** (it may say **Onboard a domain**).
-2. Type `getgridcentral.com`, leave **Quick scan for DNS records** selected, and press **Continue**.
+2. Type `gridcentral.store`, leave **Quick scan for DNS records** selected, and press **Continue**.
 3. Choose the **Free** plan and press **Continue**.
 4. Cloudflare lists the DNS records it found. If the domain already has a website or email somewhere, check those
    records are listed (ask the help desk if you're unsure). Press **Continue to activation**.
@@ -67,8 +67,8 @@ the limit.
    "DNS" or "Manage domain"). If **DNSSEC** is switched on there, switch it off first.
 7. Choose "custom nameservers", replace the ones there with Cloudflare's two, and save.
 8. Back in Cloudflare, press **Check nameservers now**. It can take from a few minutes to a day. Cloudflare emails you
-   when getgridcentral.com is **Active**. You can carry on with steps 3 to 5 while you wait. Steps 6 and 7 need
-   getgridcentral.com to be **Active** first (until then the rest of the internet can't see the records you add).
+   when gridcentral.store is **Active**. You can carry on with steps 3 to 5 while you wait. Steps 6 and 7 need
+   gridcentral.store to be **Active** first (until then the rest of the internet can't see the records you add).
 
 ## 3. Create the database (D1)
 
@@ -105,7 +105,7 @@ If the Console shows an error, don't worry: send the help desk the error message
 1. In the left menu, open **Turnstile** (it may be under **Application security**).
 2. Press **Add widget**.
 3. **Widget name**: `Grid Central support form`.
-4. **Hostnames**: add `support.getgridcentral.com` only. (The form only sends from that address; the `pages.dev`
+4. **Hostnames**: add `support.gridcentral.store` only. (The form only sends from that address; the `pages.dev`
    address forwards there.)
 5. **Widget mode**: **Managed**. Pre-clearance: **No**.
 6. Press **Create**.
@@ -115,39 +115,39 @@ If the Console shows an error, don't worry: send the help desk the error message
 
 ## 6. Set up Resend (sending email)
 
-Wait until getgridcentral.com is **Active** (step 2).
+Wait until gridcentral.store is **Active** (step 2).
 
 1. Go to **resend.com** and sign up (you can use support.gridcentral@gmail.com). Turn on two-factor sign-in in your
    Resend account settings.
-2. Open **Domains** → **Add Domain**. Type `getgridcentral.com`, choose the region closest to you, and press **Add**.
+2. Open **Domains** → **Add Domain**. Type `gridcentral.store`, choose the region closest to you, and press **Add**.
 3. Resend lists a few DNS records (MX and TXT records, mostly for `send` and `resend._domainkey`).
    - If Resend offers to add them to Cloudflare for you (a button to sign in to Cloudflare), use it and approve.
-   - Otherwise add each one by hand: in Cloudflare, open **getgridcentral.com** → **DNS** → **Records** →
+   - Otherwise add each one by hand: in Cloudflare, open **gridcentral.store** → **DNS** → **Records** →
      **Add record**. Copy the **Type**, **Name** and **Content/Value** (and **Priority** for the MX record) exactly
      from Resend, leave TTL on **Auto**, and press **Save**. Repeat for each record.
-   - These records live on `send.getgridcentral.com` and `resend._domainkey`, so they don't clash with Email Routing
+   - These records live on `send.gridcentral.store` and `resend._domainkey`, so they don't clash with Email Routing
      in step 7.
 4. Back in Resend, press **Verify DNS Records**. It can take a few minutes. Wait until the domain says **Verified**.
 5. Open **API Keys** → **Create API Key**. Name: `Grid Central support site`. Permission: **Sending access**.
-   Domain: `getgridcentral.com`. Press **Add**.
+   Domain: `gridcentral.store`. Press **Add**.
 6. Resend shows the key **only once** (it starts with `re_`). Keep this tab open and go straight to step 11 to put it
    in Cloudflare, or come back and make a new key later if you lose it. Don't save it anywhere else.
 
-## 7. Forward support@getgridcentral.com to Gmail (Email Routing)
+## 7. Forward support@gridcentral.store to Gmail (Email Routing)
 
-Customers' replies to Grid Central's emails go to support@getgridcentral.com. This forwards them to
-support.gridcentral@gmail.com. Wait until getgridcentral.com is **Active** (step 2).
+Customers' replies to Grid Central's emails go to support@gridcentral.store. This forwards them to
+support.gridcentral@gmail.com. Wait until gridcentral.store is **Active** (step 2).
 
-> If getgridcentral.com already receives email somewhere else (for example Google Workspace), stop here and ask the
+> If gridcentral.store already receives email somewhere else (for example Google Workspace), stop here and ask the
 > help desk first: turning on Email Routing would replace that.
 
-1. In Cloudflare, open **getgridcentral.com** → **Email** → **Email Routing**, and press **Get started** (or
+1. In Cloudflare, open **gridcentral.store** → **Email** → **Email Routing**, and press **Get started** (or
    **Enable Email Routing**).
 2. **Custom address**: `support`. **Action**: **Send to an email**. **Destination**: `support.gridcentral@gmail.com`.
    Press **Create and continue**.
 3. Cloudflare emails support.gridcentral@gmail.com. Open that email and click **Verify email address**.
 4. Back in Cloudflare, press **Add records and enable**. Cloudflare adds the email records itself.
-5. Test it: from another email address, send a message to support@getgridcentral.com. It should arrive in the Gmail
+5. Test it: from another email address, send a message to support@gridcentral.store. It should arrive in the Gmail
    inbox within a minute or two.
 
 ## 8. Create the Pages project (the website)
@@ -174,16 +174,16 @@ has added the ID, Cloudflare starts a new build by itself. Open **Deployments** 
    **Builds** (or **Build & deployments**) → **Branch control** → set **Preview branches** to **None** → **Save**.
 
 Cloudflare also gives the project an address like `grid-central-support.pages.dev`. It only forwards to
-support.getgridcentral.com, so until step 9 it leads nowhere. That's expected.
+support.gridcentral.store, so until step 9 it leads nowhere. That's expected.
 
-## 9. Connect support.getgridcentral.com
+## 9. Connect support.gridcentral.store
 
 Do this before the lock in step 10: Cloudflare can't connect the address once a lock is already on it. Until step 10,
 anyone who finds the address only sees the public pages (the same as the current support site): the form can't
 send and the admin is closed, because the keys aren't in yet (step 11).
 
 1. Open **Workers & Pages** → **grid-central-support** → **Custom domains** → **Set up a custom domain**.
-2. Type `support.getgridcentral.com` and press **Continue**, then **Activate domain**. Cloudflare adds the DNS record
+2. Type `support.gridcentral.store` and press **Continue**, then **Activate domain**. Cloudflare adds the DNS record
    itself. Wait until it says **Active** (a few minutes) before going on.
 
 ## 10. Lock the site with Cloudflare Access
@@ -199,12 +199,12 @@ brackets are older ones.)
    **Access controls** → **Applications** → **Create new application** (or **Access** → **Applications** → **Add an
    application**) → **Self-hosted** (it may say **Self-hosted and private**).
    - **Application name**: `Certificate renewal`.
-   - **Add public hostname**: subdomain `support`, domain `getgridcentral.com`, path `.well-known/acme-challenge`.
+   - **Add public hostname**: subdomain `support`, domain `gridcentral.store`, path `.well-known/acme-challenge`.
    - Add a policy: **Policy name** `Everyone`, **Action** **Bypass**, **Include** → **Everyone**. Save the policy
      and the application. Leave this one in place for good.
 3. Create a second application the same way. **Application name**: `Grid Central support`. **Session duration**:
    24 hours.
-4. **Add public hostname**: subdomain `support`, domain `getgridcentral.com`, path **empty**.
+4. **Add public hostname**: subdomain `support`, domain `gridcentral.store`, path **empty**.
    (Empty path = the whole site, for testing.)
 5. Add a policy: **Policy name** `Owner only`, **Action** **Allow**, **Include** → **Emails** → your email address
    (the same one you'll put in `ADMIN_EMAILS`). Save the policy.
@@ -214,7 +214,7 @@ brackets are older ones.)
    get a sign-in code by email at the address in the policy. Save the application.
 7. Open the application again and find **Application Audience (AUD) Tag**. You'll copy it into `ACCESS_AUD` in
    step 11, and the team domain into `ACCESS_TEAM_DOMAIN`.
-8. Check it: open a private browser window and go to https://support.getgridcentral.com. You should see
+8. Check it: open a private browser window and go to https://support.gridcentral.store. You should see
    Cloudflare's sign-in page, not the site.
 
 The admin checks the sign-in itself as well, so it only opens for an address on `ADMIN_EMAILS` with a real Access
@@ -242,13 +242,13 @@ sign-in.
 
 ## 12. Try everything (still private)
 
-1. Open https://support.getgridcentral.com and sign in (with your Cloudflare login, or the code Cloudflare emails
+1. Open https://support.gridcentral.store and sign in (with your Cloudflare login, or the code Cloudflare emails
    you). The home page and the training guide open and look like the current support site.
 2. On **Report a problem**, fill in a test report with your own email address. Attach a screenshot and a small
    companion.log, tick the "are you human" box, and press **Send**. You should see a ticket number (GC-1001).
 3. Within a few minutes: the customer email ("We've got your report") arrives at the address you typed, and the
    "New bug report" email arrives at `OWNER_EMAIL`. Check spam if not.
-4. Open https://support.getgridcentral.com/admin. The ticket is in the list. Open it and check:
+4. Open https://support.gridcentral.store/admin. The ticket is in the list. Open it and check:
    - the answers and the files (press **Download**; screenshots show in the page),
    - **Status**: pick **Confirmed**, tick **Email the customer about the new status**, press **Save**, and check the
      email arrives,
@@ -277,7 +277,7 @@ Nothing in the steps above makes the site public. When you're happy with it and 
 
 1. In **Zero Trust** → **Access controls** → **Applications** → **Grid Central support** → **Configure** (or
    **Edit**), change the public hostname's path to `admin`, and add a second public hostname: subdomain `support`,
-   domain `getgridcentral.com`, path `api/admin`. Save. (The AUD tag stays the same, so no secrets change. Leave the
+   domain `gridcentral.store`, path `api/admin`. Save. (The AUD tag stays the same, so no secrets change. Leave the
    **Certificate renewal** application as it is.)
 2. Check in a private window: the home page and report form open without signing in; `/admin` asks you to sign in.
 3. In **Workers & Pages** → **grid-central-support** → **Settings** → **Builds** → **Branch control**, change the
@@ -286,7 +286,7 @@ Nothing in the steps above makes the site public. When you're happy with it and 
    (ask the help desk to open it if there isn't one). Merging starts a new build from `main`: check that the newest
    deployment under **Deployments** finishes.
 5. From then on, the old GitHub Pages address (xr58ya.github.io/grid-central-support) sends people to
-   https://support.getgridcentral.com. Ask the help desk to point the GitHub README and the guide there, and
+   https://support.gridcentral.store. Ask the help desk to point the GitHub README and the guide there, and
    development to update the link in the app, then tell testers.
 
 To undo it before step 3, put the Access application back to the whole site (an empty path).
@@ -296,7 +296,7 @@ To undo it before step 3, put the Access application back to the whole site (an 
 | What you see | What to do |
 |---|---|
 | The build fails with a message about `database_id` | The database ID isn't in `wrangler.toml` on the production branch yet (step 3). Once the help desk has added it, Cloudflare builds again by itself. |
-| The custom domain stays on **Verifying** (step 9) | An Access application already covers support.getgridcentral.com. Delete the **Grid Central support** application in Zero Trust, wait until the domain is **Active**, then make it again (step 10). |
+| The custom domain stays on **Verifying** (step 9) | An Access application already covers support.gridcentral.store. Delete the **Grid Central support** application in Zero Trust, wait until the domain is **Active**, then make it again (step 10). |
 | The form says "Sending from this page isn't available right now" | `TURNSTILE_SITE_KEY` or `TURNSTILE_SECRET` is missing, or you haven't pressed **Retry deployment** since adding them. |
 | The "are you human" box shows an error | The site's address isn't in the Turnstile widget's **Hostnames** (step 5). |
 | Sending says the "are you human" check "couldn't be confirmed on our side", every time | Usually `TURNSTILE_SECRET` isn't the widget's **Secret Key**. Copy it again (step 5) and **Retry deployment**. |

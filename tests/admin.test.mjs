@@ -18,7 +18,7 @@ import { ADMIN, AUD, PNG, ROOT, baseEnv, bugAnswers, context, installFetch, make
 
 const net = {};
 let key, otherKey;
-const SITE = 'https://support.getgridcentral.com';
+const SITE = 'https://support.gridcentral.store';
 
 before(async function () {
   key = await makeAccessKey('k1');
@@ -287,7 +287,7 @@ test('ticket detail, status change with an email to the customer, priority, note
   assert.equal(sent.to[0], 'driver@example.com');
   assert.equal(sent.subject, 'Re: [GC-1001] Spotter stops calling cars after pitting');
   assert.match(sent.text, /^Thanks, fixed in the next update\./);
-  assert.equal(sent.reply_to, 'support@getgridcentral.com');
+  assert.equal(sent.reply_to, 'support@gridcentral.store');
 
   net.resendDown = true;
   r = await call(reply, env, await req('/api/admin/tickets/GC-1001/reply', { method: 'POST', body: { body: 'Second try' } }), { id: 'GC-1001' });

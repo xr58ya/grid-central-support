@@ -87,7 +87,7 @@ export function makeR2() {
   };
 }
 
-// The fake internet: Turnstile accepts the token "good-token" (done on support.getgridcentral.com) and
+// The fake internet: Turnstile accepts the token "good-token" (done on support.gridcentral.store) and
 // "other-site-token" (done on another site); Resend records emails, refuses any request without a User-Agent
 // (as the real one does) and fails when told to.
 export function installFetch(state) {
@@ -102,7 +102,7 @@ export function installFetch(state) {
       const token = init.body.get('response');
       if (init.body.get('secret') !== 'test-turnstile-secret') return Response.json({ success: false, 'error-codes': ['invalid-input-secret'] });
       if (state.turnstileDown) return new Response('busy', { status: 503 });
-      if (token === 'good-token') return Response.json({ success: true, hostname: 'support.getgridcentral.com' });
+      if (token === 'good-token') return Response.json({ success: true, hostname: 'support.gridcentral.store' });
       if (token === 'other-site-token') return Response.json({ success: true, hostname: 'grid-central-support.pages.dev' });
       if (token === 'used-token') return Response.json({ success: false, 'error-codes': ['timeout-or-duplicate'] });
       return Response.json({ success: false, 'error-codes': ['invalid-input-response'] });
@@ -197,5 +197,5 @@ export function ticketRequest(opts) {
   fd.append('payload', JSON.stringify({ type: opts.type || 'bug', email: opts.email || 'driver@example.com', answers: opts.answers || bugAnswers() }));
   fd.append('turnstile', opts.token === undefined ? 'good-token' : opts.token);
   (opts.files || []).forEach(function (f) { fd.append('files', new File([f.bytes], f.name, { type: f.type || 'application/octet-stream' })); });
-  return new Request((opts.site || 'https://support.getgridcentral.com') + '/api/tickets', { method: 'POST', body: fd, headers: { 'CF-Connecting-IP': '203.0.113.9' } });
+  return new Request((opts.site || 'https://support.gridcentral.store') + '/api/tickets', { method: 'POST', body: fd, headers: { 'CF-Connecting-IP': '203.0.113.9' } });
 }

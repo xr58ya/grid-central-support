@@ -14,7 +14,7 @@ Prefer email, or need to share something privately (such as an account or beta c
 
 ## Own-domain version (Cloudflare Pages, not live yet)
 
-The same site can also run on Cloudflare Pages at support.getgridcentral.com, where the report form sends private
+The same site can also run on Cloudflare Pages at support.gridcentral.store, where the report form sends private
 tickets (with attachments) instead of opening GitHub, and there's an admin page for answering them. It isn't live:
 the owner's step-by-step setup is in [support/cloudflare-setup.md](support/cloudflare-setup.md). GitHub Pages
 (Jekyll) ignores these files.
@@ -23,7 +23,7 @@ the owner's step-by-step setup is in [support/cloudflare-setup.md](support/cloud
   pages and the admin and turns `guide/*.md` into HTML; it only needs the pinned `marked` package.
 - **API**: `functions/` (Cloudflare Pages Functions), with shared code in `lib/`. `POST /api/tickets` takes the form;
   `/api/admin/*` is the admin, behind Cloudflare Access and checked again in every function. The site only answers on
-  support.getgridcentral.com (and localhost): `functions/_middleware.js` forwards the `*.pages.dev` addresses there
+  support.gridcentral.store (and localhost): `functions/_middleware.js` forwards the `*.pages.dev` addresses there
   and closes their API, because Access doesn't cover them.
 - **Send limits** (`lib/tickets.js`): 5 tickets an hour per sender, 20 an hour and 35 a day in all, so Resend's free
   100 emails a day leave room for replies.

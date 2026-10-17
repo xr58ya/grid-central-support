@@ -71,7 +71,7 @@ test('no secrets, beta codes or private addresses in the files that get publishe
     assert.doesNotMatch(text.replace(/GC-XXXX-XXXX-XXXX/g, ''), /GC-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}/, f + ': beta code');
     const emails = Array.from(text.matchAll(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g)).map(function (m) { return m[0]; });
     for (const e of emails) {
-      assert.ok(/^(support\.gridcentral@gmail\.com|support@getgridcentral\.com|you@example\.com)$/.test(e), f + ': ' + e);
+      assert.ok(/^(support\.gridcentral@gmail\.com|support@gridcentral\.store|you@example\.com)$/.test(e), f + ': ' + e);
     }
   }
 });
